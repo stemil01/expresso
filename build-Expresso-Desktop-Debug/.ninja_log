@@ -1,9 +1,0 @@
-# ninja log v5
-3	477	1700335144129439813	Expresso_autogen/timestamp	ed68f9dd1af09f09
-3	477	1700335144129439813	Expresso_autogen/mocs_compilation.cpp	ed68f9dd1af09f09
-3	477	1700335144129439813	/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/Expresso_autogen/timestamp	ed68f9dd1af09f09
-3	477	1700335144129439813	/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/Expresso_autogen/mocs_compilation.cpp	ed68f9dd1af09f09
-477	3332	1700335146996119145	CMakeFiles/Expresso.dir/Expresso_autogen/mocs_compilation.cpp.o	4ad1c3441705fd10
-477	3455	1700335147119453023	CMakeFiles/Expresso.dir/main.cpp.o	8e85a905acbfbb76
-477	3496	1700335147159453199	CMakeFiles/Expresso.dir/mainwindow.cpp.o	b2192d458afb37a2
-3496	3935	1700335147599455143	Expresso	1f2c030961edba3f

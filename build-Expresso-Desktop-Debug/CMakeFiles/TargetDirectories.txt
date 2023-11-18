@@ -1,9 +1,0 @@
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/Expresso.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/edit_cache.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/rebuild_cache.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/list_install_components.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/install.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/install/local.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/install/strip.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/Expresso_autogen_timestamp_deps.dir
-/home/stefan/Documents/matf/razvoj-softvera/Expresso/build-Expresso-Desktop-Debug/CMakeFiles/Expresso_autogen.dir

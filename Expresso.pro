@@ -11,6 +11,7 @@ CONFIG += c++20
 SOURCES += \
     artikl.cpp \
     porudzbina.cpp \
+    src/help.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/unesiartikle.cpp
@@ -18,11 +19,13 @@ SOURCES += \
 HEADERS += \
     artikl.h \
     porudzbina.h \
+    src/help.h \
     src/mainwindow.h \
     src/unesiartikle.h
 
 FORMS += \
     mainwindow.ui \
+    src/help.ui \
     src/unesiartikle.ui
 
 # Default rules for deployment.

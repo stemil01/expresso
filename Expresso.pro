@@ -12,15 +12,18 @@ SOURCES += \
     artikl.cpp \
     porudzbina.cpp \
     src/main.cpp \
-    src/mainwindow.cpp
+    src/mainwindow.cpp \
+    src/unesiartikle.cpp
 
 HEADERS += \
     artikl.h \
     porudzbina.h \
-    src/mainwindow.h
+    src/mainwindow.h \
+    src/unesiartikle.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    src/unesiartikle.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

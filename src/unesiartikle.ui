@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>unesiartikle</class>
+ <widget class="QWidget" name="unesiartikle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>832</width>
+    <height>523</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <widget class="QWidget" name="formLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>100</y>
+     <width>331</width>
+     <height>111</height>
+    </rect>
+   </property>
+   <layout class="QFormLayout" name="formLayout">
+    <item row="0" column="0">
+     <widget class="QLabel" name="nAMELabel">
+      <property name="text">
+       <string>NAME</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="nAMELineEdit"/>
+    </item>
+    <item row="1" column="0">
+     <widget class="QLabel" name="pRICELabel">
+      <property name="text">
+       <string>PRICE</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="pRICELineEdit"/>
+    </item>
+    <item row="2" column="0">
+     <widget class="QLabel" name="tYPELabel">
+      <property name="text">
+       <string>TYPE</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QComboBox" name="tYPEComboBox">
+      <item>
+       <property name="text">
+        <string>COFFE AND HOT DRINKS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SOFT DRINKS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>WINE</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>COCTAILS</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>SHOTS</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>30</y>
+     <width>195</width>
+     <height>78</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>22</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>MAKE A MENU</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>360</x>
+     <y>220</y>
+     <width>89</width>
+     <height>25</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>ADD</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

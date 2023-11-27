@@ -9,18 +9,18 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    artikl.cpp \
-    porudzbina.cpp \
+    src/artikl.cpp \
     src/help.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/porudzbina.cpp \
     src/unesiartikle.cpp
 
 HEADERS += \
-    artikl.h \
-    porudzbina.h \
+    src/artikl.h \
     src/help.h \
     src/mainwindow.h \
+    src/porudzbina.h \
     src/unesiartikle.h
 
 FORMS += \

@@ -14,6 +14,9 @@ SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
     src/porudzbina.cpp \
+    src/stolovi.cpp \
+    src/stozaprikaz.cpp \
+    src/tabla.cpp \
     src/unesiartikle.cpp
 
 HEADERS += \
@@ -21,11 +24,15 @@ HEADERS += \
     src/help.h \
     src/mainwindow.h \
     src/porudzbina.h \
+    src/stolovi.h \
+    src/stozaprikaz.h \
+    src/tabla.h \
     src/unesiartikle.h
 
 FORMS += \
     mainwindow.ui \
     src/help.ui \
+    src/stolovi.ui \
     src/unesiartikle.ui
 
 # Default rules for deployment.

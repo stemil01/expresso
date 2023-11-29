@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
+    <width>760</width>
     <height>600</height>
    </rect>
   </property>
@@ -17,21 +17,21 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Tables</string>
   </property>
   <widget class="QGraphicsView" name="gvTabla">
    <property name="geometry">
     <rect>
      <x>25</x>
-     <y>11</y>
-     <width>700</width>
-     <height>400</height>
+     <y>20</y>
+     <width>710</width>
+     <height>410</height>
     </rect>
    </property>
    <property name="maximumSize">
     <size>
-     <width>700</width>
-     <height>400</height>
+     <width>800</width>
+     <height>500</height>
     </size>
    </property>
   </widget>
@@ -45,20 +45,20 @@
     </rect>
    </property>
    <property name="text">
-    <string>Dodaj sto</string>
+    <string>Add table</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pb2">
    <property name="geometry">
     <rect>
      <x>170</x>
-     <y>480</y>
+     <y>470</y>
      <width>101</width>
-     <height>51</height>
+     <height>61</height>
     </rect>
    </property>
    <property name="text">
-    <string>Idi nazad</string>
+    <string>Go back</string>
    </property>
   </widget>
  </widget>

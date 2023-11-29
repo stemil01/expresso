@@ -9,9 +9,8 @@ stolovi::stolovi(QWidget *parent)
     ,tabla(new Tabla(this))
 {
     ui->setupUi(this);
-    tabla->setSceneRect(0,0,600,300);
+    tabla->setSceneRect(-15,-15,700,400);
     ui->gvTabla->setScene(tabla);
-    ui->gvTabla->setAlignment(Qt::AlignLeft | Qt::AlignRight);
 
     connect(ui->pb1, &QPushButton::clicked, this, &stolovi::dodajNovSto);
     connect(ui->pb2, &QPushButton::clicked, this, &stolovi::closeWindow);

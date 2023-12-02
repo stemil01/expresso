@@ -25,6 +25,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    src/designeArrangement.ui \
     src/help.ui \
     src/unesiartikle.ui
 

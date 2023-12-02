@@ -1,6 +1,6 @@
 #ifndef UNESIARTIKLE_H
 #define UNESIARTIKLE_H
-#include<artikl.h>
+#include<src/artikl.h>
 #include <QWidget>
 
 namespace Ui {

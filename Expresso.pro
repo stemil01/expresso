@@ -9,24 +9,31 @@ CONFIG += c++20
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    artikl.cpp \
-    porudzbina.cpp \
+    src/artikl.cpp \
     src/help.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
+    src/porudzbina.cpp \
+    src/stolovi.cpp \
+    src/stozaprikaz.cpp \
+    src/tabla.cpp \
     src/unesiartikle.cpp
 
 HEADERS += \
-    artikl.h \
-    porudzbina.h \
+    src/artikl.h \
     src/help.h \
     src/mainwindow.h \
+    src/porudzbina.h \
+    src/stolovi.h \
+    src/stozaprikaz.h \
+    src/tabla.h \
     src/unesiartikle.h
 
 FORMS += \
     mainwindow.ui \
     src/designeArrangement.ui \
     src/help.ui \
+    src/stolovi.ui \
     src/unesiartikle.ui
 
 # Default rules for deployment.

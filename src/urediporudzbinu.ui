@@ -1,58 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>stolovi</class>
- <widget class="QWidget" name="stolovi">
+ <class>urediporudzbinu</class>
+ <widget class="QWidget" name="urediporudzbinu">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>852</width>
-    <height>592</height>
+    <width>510</width>
+    <height>413</height>
    </rect>
   </property>
-  <property name="maximumSize">
-   <size>
-    <width>852</width>
-    <height>600</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Tables</string>
+   <string>Form</string>
   </property>
-  <widget class="QGraphicsView" name="gvTabla">
+  <widget class="QListWidget" name="listWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
      <y>10</y>
-     <width>671</width>
-     <height>571</height>
+     <width>331</width>
+     <height>391</height>
     </rect>
    </property>
-   <property name="maximumSize">
-    <size>
-     <width>800</width>
-     <height>600</height>
-    </size>
-   </property>
   </widget>
-  <widget class="QPushButton" name="pb1">
+  <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>690</x>
+     <x>350</x>
      <y>10</y>
      <width>151</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Add table</string>
+    <string>Add Item</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pb2">
+  <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>540</y>
+     <x>350</x>
+     <y>60</y>
+     <width>151</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Remove Item</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>350</x>
+     <y>360</y>
      <width>151</width>
      <height>41</height>
     </rect>
@@ -61,43 +62,30 @@
     <string>Back</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_4">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>60</y>
+     <x>350</x>
+     <y>310</y>
      <width>151</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Remove Table</string>
+    <string>Get Receipt</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pushButton_5">
    <property name="geometry">
     <rect>
-     <x>690</x>
-     <y>440</y>
+     <x>350</x>
+     <y>260</y>
      <width>151</width>
      <height>41</height>
     </rect>
    </property>
    <property name="text">
-    <string>Clear All</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="pushButton_3">
-   <property name="geometry">
-    <rect>
-     <x>690</x>
-     <y>490</y>
-     <width>151</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Save</string>
+    <string>Clear</string>
    </property>
   </widget>
  </widget>

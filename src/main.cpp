@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "unesiartikle.h"
 #include <QApplication>
+#include "krenisaradom.h"
 
 int main(int argc, char *argv[])
 {
@@ -8,6 +9,8 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
     /*unesiartikle ua;
-    ua.show();*/
+    ua.show();
+    krenisaradom kr;
+    kr.show();*/
     return a.exec();
 }

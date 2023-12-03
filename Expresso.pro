@@ -11,32 +11,40 @@ CONFIG += c++20
 SOURCES += \
     src/artikl.cpp \
     src/help.cpp \
+    src/krenisaradom.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/porudzbina.cpp \
     src/stolovi.cpp \
     src/stozaprikaz.cpp \
     src/tabla.cpp \
-    src/unesiartikle.cpp
+    src/unesiartikle.cpp \
+    src/urediporudzbinu.cpp
 
 HEADERS += \
     src/artikl.h \
     src/help.h \
+    src/krenisaradom.h \
     src/mainwindow.h \
     src/porudzbina.h \
     src/stolovi.h \
     src/stozaprikaz.h \
     src/tabla.h \
-    src/unesiartikle.h
+    src/unesiartikle.h \
+    src/urediporudzbinu.h
 
 FORMS += \
     mainwindow.ui \
-    src/designeArrangement.ui \
     src/help.ui \
+    src/krenisaradom.ui \
     src/stolovi.ui \
-    src/unesiartikle.ui
+    src/unesiartikle.ui \
+    src/urediporudzbinu.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc

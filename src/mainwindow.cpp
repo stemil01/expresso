@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     //ui->buttonDesArrangment->setStyleSheet("border-image : url(:/resources/redbutton.png); color: white; background: transparent;");
     connect(ui->buttonQuit, SIGNAL(clicked()), this, SLOT(quitApplication()));
-    connect(ui->buttonDesArrangment, &QPushButton::clicked,this,&MainWindow::onDEClicked);
+    connect(ui->buttonDesArrangement, &QPushButton::clicked,this,&MainWindow::onDEClicked);
 
 }
 

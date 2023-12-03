@@ -9,6 +9,7 @@
     3. Konobar odabira opciju da se naplati račun za taj sto.
     4. Aplikacija prikazuje račun i nudi izbor za plaćanje gotovinom ili karticom:
         4.1 Konobar bira plaćanje gotovinom:
+
             4.1.1 Konobar unosi iznos koji je dobio od gosta.
                 4.1.1.1 Aplikacija provera unos konobara.
                     4.1.1.1.1 Ako je uneti iznos manji od računa, aplikacija obaveštava konobara o grešci.
@@ -17,6 +18,7 @@
                         4.1.1.1.2.1 Generiše se iznos kusura.
                             4.1.1.1.2.1.2 Konobar potvrđuje plaćanje.
         4.2 Konobar bira plaćanje karticom:
+        
             4.2.1 Konobar potvrđuje
     5. Aplikacija sto se postavlja na početno stanje, bez nardudžbina i troškova.
     6. Izveštaj o plaćanju se čuva zbog dnevnih/mesečnih izveštaja.

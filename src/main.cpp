@@ -11,6 +11,6 @@ int main(int argc, char *argv[])
     /*unesiartikle ua;
     ua.show();
     krenisaradom kr;
-    kr.show();*/
+    kr.show()*/
     return a.exec();
 }

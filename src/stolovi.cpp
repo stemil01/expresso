@@ -3,16 +3,18 @@
 #include "tabla.h"
 #include "stozaprikaz.h"
 
+qint32 id=0;
+
 stolovi::stolovi(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::stolovi)
     ,tabla(new Tabla(this))
 {
     ui->setupUi(this);
-    tabla->setSceneRect(-15,-15,700,400);
+    tabla->setSceneRect(-10,0,600,500);
     ui->gvTabla->setScene(tabla);
 
-    connect(ui->pb1, &QPushButton::clicked, this, &stolovi::dodajNovSto);
+    connect(ui->pbDodajSto, &QPushButton::clicked, this, &stolovi::dodajNovSto);
     connect(ui->pb2, &QPushButton::clicked, this, &stolovi::closeWindow);
     connect(this, &stolovi::dodatNovSto, dynamic_cast<Tabla *>(tabla), &Tabla::postaviSto);
 
@@ -20,7 +22,8 @@ stolovi::stolovi(QWidget *parent)
 
 void stolovi::dodajNovSto()
 {
-    const auto sto = new stozaprikaz();
+    id++;
+    const auto sto = new stozaprikaz(id);
 
     _stolovi.push_back(sto);
     tabla->addItem(sto);

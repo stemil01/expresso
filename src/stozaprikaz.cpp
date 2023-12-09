@@ -2,14 +2,16 @@
 #include <string.h>
 #include <QPainter>
 
-stozaprikaz::stozaprikaz()
-{
 
+stozaprikaz::stozaprikaz(qint32 id)
+    :QGraphicsObject(),
+    _id(id)
+{
 }
 
 QRectF stozaprikaz::boundingRect() const
 {
-    return QRectF(0,0,50,50);
+    return QRectF(0,0,80,80);
 }
 void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
@@ -21,7 +23,8 @@ void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
     painter->setPen(Qt::white);
 
 
-    const auto tekst = QString("sto");
-    painter->drawText(boundingRect(), Qt::AlignHCenter, tekst);
+    QString tekst;
+    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
 
 }
+

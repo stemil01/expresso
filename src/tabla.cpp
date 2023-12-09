@@ -10,16 +10,18 @@ Tabla::Tabla(QObject *parent)
 
 void Tabla::postaviSto(stozaprikaz *s)
 {
-    brStolova++;
-    positionTable(s);
+    if(brStolova<16){
+        brStolova++;
+        pozicionirajSto(s);
+    }
 }
 
-void Tabla::positionTable(stozaprikaz *s)
+void Tabla::pozicionirajSto(stozaprikaz *s)
 {
     const auto tableWidth = static_cast<int>(this->width());
 
-    const auto x = (100 * (brStolova-1)) % tableWidth;
-    const auto y = 100 * ((100 * (brStolova-1)) / tableWidth);
+    const auto x = (150 * (brStolova-1)) % tableWidth;
+    const auto y = 140 * ((150 * (brStolova-1)) / tableWidth);
 
     s->setPos(x,y);
 }

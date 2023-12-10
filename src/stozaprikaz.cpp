@@ -1,7 +1,8 @@
 #include "stozaprikaz.h"
 #include <string.h>
 #include <QPainter>
-
+#include <QGraphicsSceneMouseEvent>
+#include <QGraphicsScene>
 
 stozaprikaz::stozaprikaz(qint32 id)
     :QGraphicsObject(),
@@ -28,3 +29,19 @@ void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
+void stozaprikaz::mousePressEvent(QGraphicsSceneMouseEvent* event) {
+    _lastPos = event->pos();
+    QGraphicsItem::mousePressEvent(event);
+}
+
+void stozaprikaz::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
+    QPointF newPos = event->pos();
+    QPointF delta = newPos - _lastPos;
+    QPointF newPosScene = this->scenePos() + delta;
+    _lastPos = newPos;
+    QGraphicsItem::mouseMoveEvent(event);
+}
+
+void stozaprikaz::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
+    QGraphicsItem::mouseReleaseEvent(event);
+}

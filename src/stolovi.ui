@@ -82,7 +82,7 @@
     <string>Remove Table</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="pbObrisiSve">
    <property name="geometry">
     <rect>
      <x>690</x>

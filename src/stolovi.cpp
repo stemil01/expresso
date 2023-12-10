@@ -17,6 +17,7 @@ stolovi::stolovi(QWidget *parent)
     connect(ui->pbDodajSto, &QPushButton::clicked, this, &stolovi::dodajNovSto);
     connect(ui->pb2, &QPushButton::clicked, this, &stolovi::closeWindow);
     connect(this, &stolovi::dodatNovSto, dynamic_cast<Tabla *>(tabla), &Tabla::postaviSto);
+    connect(ui->pbObrisiSto, &QPushButton::clicked, this, &stolovi::obrisiSto);
 
 }
 
@@ -29,6 +30,13 @@ void stolovi::dodajNovSto()
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);
+}
+
+void stolovi::obrisiSto()
+{
+    QList<QGraphicsItem*> sto_za_brisanje = tabla->selectedItems();
+    if(sto_za_brisanje.length() == 1)
+        tabla->removeItem(sto_za_brisanje[0]);
 }
 
 void stolovi::closeWindow()

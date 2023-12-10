@@ -7,7 +7,7 @@ stozaprikaz::stozaprikaz(qint32 id)
     :QGraphicsObject(),
     _id(id)
 {
-    setFlags(GraphicsItemFlag::ItemIsSelectable);
+    setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
 QRectF stozaprikaz::boundingRect() const

@@ -13,6 +13,7 @@ void Tabla::postaviSto(stozaprikaz *s)
     if(brStolova<16){
         brStolova++;
         pozicionirajSto(s);
+         s->setFlag(QGraphicsItem::ItemIsMovable);
     }
 }
 
@@ -25,4 +26,5 @@ void Tabla::pozicionirajSto(stozaprikaz *s)
 
     s->setPos(x,y);
 }
+
 

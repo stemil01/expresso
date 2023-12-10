@@ -7,6 +7,7 @@ stozaprikaz::stozaprikaz(qint32 id)
     :QGraphicsObject(),
     _id(id)
 {
+    //setFlags(GraphicsItemFlag::ItemIsSelectable);
 }
 
 QRectF stozaprikaz::boundingRect() const
@@ -25,6 +26,14 @@ void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
     QString tekst;
     painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
+
+    if(this->isSelected())
+    {
+        painter->setPen(QPen(Qt::yellow, 3));
+        painter->setBrush(Qt::NoBrush);
+
+        painter->drawRect(boundingRect());
+    }
 
 }
 

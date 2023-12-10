@@ -10,6 +10,7 @@ CONFIG += c++20
 
 SOURCES += \
     src/artikl.cpp \
+    src/binaryserializer.cpp \
     src/help.cpp \
     src/krenisaradom.cpp \
     src/main.cpp \
@@ -23,10 +24,13 @@ SOURCES += \
 
 HEADERS += \
     src/artikl.h \
+    src/binaryserializer.h \
     src/help.h \
     src/krenisaradom.h \
     src/mainwindow.h \
     src/porudzbina.h \
+    src/serializable.h \
+    src/serializer.h \
     src/stolovi.h \
     src/stozaprikaz.h \
     src/tabla.h \

@@ -23,6 +23,7 @@ signals:
 private slots:
     void dodajNovSto();
     void obrisiSto();
+    void obrisiSve();
     void closeWindow();
 
 private:

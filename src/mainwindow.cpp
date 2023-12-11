@@ -23,8 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_buttonQuit_clicked()
 {
-
-
+    qApp -> quit();
 }
 void MainWindow::quitApplication()
 {

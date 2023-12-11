@@ -11,6 +11,7 @@ CONFIG += c++20
 SOURCES += \
     src/artikl.cpp \
     src/binaryserializer.cpp \
+    src/glavnimeni.cpp \
     src/help.cpp \
     src/krenisaradom.cpp \
     src/main.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 HEADERS += \
     src/artikl.h \
     src/binaryserializer.h \
+    src/glavnimeni.h \
     src/help.h \
     src/krenisaradom.h \
     src/mainwindow.h \
@@ -39,6 +41,7 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    src/glavnimeni.ui \
     src/help.ui \
     src/krenisaradom.ui \
     src/stolovi.ui \

@@ -3,7 +3,7 @@
 #include "tabla.h"
 #include "stozaprikaz.h"
 
-qint32 id=0;
+qint32 idd=0;
 
 stolovi::stolovi(QWidget *parent)
     : QWidget(parent)
@@ -24,8 +24,8 @@ stolovi::stolovi(QWidget *parent)
 
 void stolovi::dodajNovSto()
 {
-    id++;
-    const auto sto = new stozaprikaz(id);
+    idd++;
+    const auto sto = new stozaprikaz(idd);
 
     _stolovi.push_back(sto);
     tabla->addItem(sto);

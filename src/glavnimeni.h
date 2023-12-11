@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+class stozaprikaz;
+class QGraphicsScene;
+
 namespace Ui {
 class GlavniMeni;
 }
@@ -15,6 +18,9 @@ public:
     explicit GlavniMeni(QWidget *parent = nullptr);
     ~GlavniMeni();
 
+signals:
+    void dodatNovSto(stozaprikaz *);
+
 private:
     Ui::GlavniMeni *ui;
     void connectSlots();
@@ -23,10 +29,13 @@ private:
     void on_pbBackDTAMenu_clicked();
     void on_pbStartMainMenu_clicked();
     void on_pbBackStartMenu_clicked();
+    QGraphicsScene *tabla;
+    QVector<stozaprikaz *> _stolovi;
 
 private slots:
     void on_pbQuitMainMenu_clicked();
     void on_pbHelpMainMenu_clicked();
+    void dodajNovSto();
 };
 
 #endif // GLAVNIMENI_H

@@ -1,6 +1,6 @@
 #include "tabla.h"
 #include "stozaprikaz.h"
-#include "stolovi.h"
+#include "glavnimeni.h"
 
 Tabla::Tabla(QObject *parent)
     : QGraphicsScene(parent)

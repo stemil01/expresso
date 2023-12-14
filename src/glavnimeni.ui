@@ -20,6 +20,12 @@
    <layout class="QHBoxLayout" name="horizontalLayout_2">
     <item>
      <widget class="QStackedWidget" name="stackedWidget">
+      <property name="minimumSize">
+       <size>
+        <width>1500</width>
+        <height>800</height>
+       </size>
+      </property>
       <property name="currentIndex">
        <number>1</number>
       </property>
@@ -226,8 +232,8 @@ color: rgb(0, 0, 0);</string>
             </property>
             <property name="minimumSize">
              <size>
-              <width>0</width>
-              <height>0</height>
+              <width>800</width>
+              <height>600</height>
              </size>
             </property>
             <property name="styleSheet">
@@ -260,16 +266,6 @@ color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Remove Table</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="infoLabel">
-              <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>
@@ -366,7 +362,7 @@ color: rgb(0, 0, 0);</string>
            </layout>
           </item>
           <item row="0" column="0">
-           <widget class="QGraphicsView" name="graphicsView_2">
+           <widget class="QGraphicsView" name="gvMain">
             <property name="styleSheet">
              <string notr="true">background-color: rgb(255, 255, 255);</string>
             </property>

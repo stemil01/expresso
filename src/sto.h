@@ -11,6 +11,7 @@ public:
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
     qint32 getId();
+    void setId(qint32 id);
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;

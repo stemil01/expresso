@@ -17,8 +17,9 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     connectSlots();
     //setStyle();
 
-    tabla->setSceneRect(this->rect());
+    tabla->setSceneRect(ui->gvTabla->rect());
     ui->gvTabla->setScene(tabla);
+    ui->gvTabla->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 }
 
 GlavniMeni::~GlavniMeni()
@@ -37,6 +38,7 @@ void GlavniMeni::connectSlots() {
     connect(this, &GlavniMeni::dodatNovSto, dynamic_cast<Tabla *>(tabla), &Tabla::postaviSto);
     connect(ui->pbRemoveTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSto);
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
+    connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
 }
 
 void setStyle() {
@@ -75,12 +77,12 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 void GlavniMeni::dodajNovSto()
 {
     id++;
-    if(id > 2){
+    if(id > 15){
         QMessageBox* messageBox = new QMessageBox();
         messageBox->setText("No more tables available");
         messageBox->setWindowTitle("Error");
         messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
-                                  "QMessageBox QLabel {color:red}");
+                                   "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
         messageBox->exec();
         delete messageBox;
@@ -106,7 +108,7 @@ void GlavniMeni::obrisiSto()
         messageBox->setText("Select table to remove");
         messageBox->setWindowTitle("Error");
         messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
-                                  "QMessageBox QLabel {color:red}");
+                                   "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
         messageBox->exec();
         delete messageBox;
@@ -120,5 +122,31 @@ void GlavniMeni::obrisiSve()
     for(auto sto : _stolovi)
         tabla->removeItem(sto);
     id=0;
+}
+
+void GlavniMeni::sacuvajRaspored(){
+    QGraphicsScene *mainTabla = new Tabla(this);
+    mainTabla->setSceneRect(ui->gvMain->rect());
+    ui->gvMain->setScene(mainTabla);
+    ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    QList<QGraphicsItem*> raspored = tabla->items();
+
+    QMessageBox* messageBox = new QMessageBox();
+    messageBox->setText("Saved!");
+    messageBox->setWindowTitle("Success");
+    messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                              "QMessageBox QLabel {color:blue;min-width:200px;min-height:100px}");
+    messageBox->addButton(QMessageBox::Ok);
+    messageBox->setDefaultButton(QMessageBox::Ok);
+    int result = messageBox->exec();
+    if(result == QMessageBox::Ok){
+        ui -> stackedWidget -> setCurrentIndex(0);
+        delete messageBox;
+        for(auto item : raspored){
+            mainTabla->addItem(item);
+            tabla->removeItem(item);
+        }
+    }
 }
 

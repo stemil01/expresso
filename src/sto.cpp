@@ -59,3 +59,6 @@ qint32 sto::getId(){
     return _id;
 }
 
+void sto::setId(qint32 id){
+    _id = id;
+}

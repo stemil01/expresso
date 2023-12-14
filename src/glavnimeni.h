@@ -38,6 +38,7 @@ private slots:
     void dodajNovSto();
     void obrisiSto();
     void obrisiSve();
+    void sacuvajRaspored();
 };
 
 #endif // GLAVNIMENI_H

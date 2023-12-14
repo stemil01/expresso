@@ -13,6 +13,7 @@ SOURCES += \
     src/binaryserializer.cpp \
     src/glavnimeni.cpp \
     src/help.cpp \
+    src/izvestaj.cpp \
     src/krenisaradom.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     src/binaryserializer.h \
     src/glavnimeni.h \
     src/help.h \
+    src/izvestaj.h \
     src/krenisaradom.h \
     src/mainwindow.h \
     src/porudzbina.h \

@@ -22,6 +22,8 @@ private slots:
 private:
     Ui::unesiartikle *ui;
     std::vector<Artikl> skladisteArtikala;
+    void ucitajPodatkeIzTxt();
+    void sacuvajPodatkeUTxt();
 };
 
 #endif // UNESIARTIKLE_H

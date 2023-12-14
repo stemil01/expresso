@@ -1,6 +1,7 @@
 #include "unesiartikle.h"
 #include "ui_unesiartikle.h"
 #include <QMessageBox>
+#include <QFile>
 unesiartikle::unesiartikle(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::unesiartikle)
@@ -23,6 +24,7 @@ void unesiartikle::onSubmitClicked()
 {
     std::string ime=ui->nAMELineEdit->text().toStdString();
     double cena=ui->pRICELineEdit->text().toDouble();
+    QString kategorija=ui->tYPEComboBox->currentText();
 
     bool postojiArtikal=false;
     for(unsigned int i=0;i<skladisteArtikala.size();++i){
@@ -43,9 +45,58 @@ void unesiartikle::onSubmitClicked()
     }
 
     if(postojiArtikal==false){
-        Artikl noviArtikal(ime,cena);
+        Artikl noviArtikal(ime,cena,kategorija);
         skladisteArtikala.push_back(noviArtikal);
     }
     ui->nAMELineEdit->clear();
     ui->pRICELineEdit->clear();
+}
+
+void unesiartikle::ucitajPodatkeIzTxt()
+{
+    QFile file("podaci.txt");
+    if(!file.exists()){
+        if (!file.open(QIODevice::WriteOnly)) {
+            qDebug() << "Greska prilikom otvaranja datoteke za pisanje";
+                return;
+        }
+        file.close();
+    }
+
+    if(!file.open(QIODevice::ReadOnly)){
+        qDebug()<<"Greska prilikom citanja fajla";
+        return;
+
+    }
+
+    QTextStream in(&file);
+    skladisteArtikala.clear();
+
+    while(!in.atEnd()){
+        QString line=in.readLine();
+        QStringList tokens=line.split(" ");
+
+        if(tokens.size()==3){
+            std::string ime=tokens[0].toStdString();
+            double cena=tokens[1].toDouble();
+            QString kategorija=tokens[2];
+            skladisteArtikala.push_back(Artikl(ime, cena, kategorija));
+        }
+
+    }
+    file.close();
+}
+
+void unesiartikle::sacuvajPodatkeUTxt()
+{
+    QFile file("podaci.txt");
+    if (!file.open(QIODevice::WriteOnly)) {
+        qDebug() << "Greska prilikom otvaranja datoteke za pisanje";
+            return;
+    }
+
+    QTextStream out(&file);
+    for(const auto &a: skladisteArtikala){
+        out<<QString::fromStdString(a.getNaziv())<<" "<<a.getCena()<<" "<<a.getKategorija();
+    }
 }

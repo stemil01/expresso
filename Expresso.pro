@@ -18,8 +18,7 @@ SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
     src/porudzbina.cpp \
-    src/stolovi.cpp \
-    src/stozaprikaz.cpp \
+    src/sto.cpp \
     src/tabla.cpp \
     src/unesiartikle.cpp \
     src/urediporudzbinu.cpp
@@ -35,8 +34,7 @@ HEADERS += \
     src/porudzbina.h \
     src/serializable.h \
     src/serializer.h \
-    src/stolovi.h \
-    src/stozaprikaz.h \
+    src/sto.h \
     src/tabla.h \
     src/unesiartikle.h \
     src/urediporudzbinu.h
@@ -46,7 +44,6 @@ FORMS += \
     src/glavnimeni.ui \
     src/help.ui \
     src/krenisaradom.ui \
-    src/stolovi.ui \
     src/unesiartikle.ui \
     src/urediporudzbinu.ui
 

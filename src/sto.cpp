@@ -1,21 +1,21 @@
-#include "stozaprikaz.h"
+#include "sto.h"
 #include <string.h>
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 
-stozaprikaz::stozaprikaz(qint32 id)
+sto::sto(qint32 id)
     :QGraphicsObject(),
     _id(id)
 {
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
-QRectF stozaprikaz::boundingRect() const
+QRectF sto::boundingRect() const
 {
-    return QRectF(0,0,80,80);
+    return QRectF(0,0,150,150);
 }
-void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
@@ -38,12 +38,12 @@ void stozaprikaz::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 }
 
-void stozaprikaz::mousePressEvent(QGraphicsSceneMouseEvent* event) {
+void sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
     _lastPos = event->pos();
     QGraphicsItem::mousePressEvent(event);
 }
 
-void stozaprikaz::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
+void sto::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
     QPointF newPos = event->pos();
     QPointF delta = newPos - _lastPos;
     QPointF newPosScene = this->scenePos() + delta;
@@ -51,6 +51,11 @@ void stozaprikaz::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseMoveEvent(event);
 }
 
-void stozaprikaz::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
+void sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseReleaseEvent(event);
 }
+
+qint32 sto::getId(){
+    return _id;
+}
+

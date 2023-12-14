@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-class stozaprikaz;
+class sto;
 class QGraphicsScene;
 
 namespace Ui {
@@ -19,7 +19,7 @@ public:
     ~GlavniMeni();
 
 signals:
-    void dodatNovSto(stozaprikaz *);
+    void dodatNovSto(sto *);
 
 private:
     Ui::GlavniMeni *ui;
@@ -30,12 +30,14 @@ private:
     void on_pbStartMainMenu_clicked();
     void on_pbBackStartMenu_clicked();
     QGraphicsScene *tabla;
-    QVector<stozaprikaz *> _stolovi;
+    QVector<sto *> _stolovi;
 
 private slots:
     void on_pbQuitMainMenu_clicked();
     void on_pbHelpMainMenu_clicked();
     void dodajNovSto();
+    void obrisiSto();
+    void obrisiSve();
 };
 
 #endif // GLAVNIMENI_H

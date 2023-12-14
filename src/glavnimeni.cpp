@@ -2,7 +2,8 @@
 #include "src/help.h"
 #include "ui_glavnimeni.h"
 #include "tabla.h"
-#include "stozaprikaz.h"
+#include "sto.h"
+#include <QMessageBox>
 
 qint32 id=0;
 
@@ -16,7 +17,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     connectSlots();
     //setStyle();
 
-    tabla->setSceneRect(0,0,700,700);
+    tabla->setSceneRect(this->rect());
     ui->gvTabla->setScene(tabla);
 }
 
@@ -34,6 +35,8 @@ void GlavniMeni::connectSlots() {
     connect(ui -> pbStartMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbStartMainMenu_clicked);
     connect(ui->pbAddTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajNovSto);
     connect(this, &GlavniMeni::dodatNovSto, dynamic_cast<Tabla *>(tabla), &Tabla::postaviSto);
+    connect(ui->pbRemoveTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSto);
+    connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
 }
 
 void setStyle() {
@@ -72,11 +75,50 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 void GlavniMeni::dodajNovSto()
 {
     id++;
-    const auto sto = new stozaprikaz(id);
+    if(id > 2){
+        QMessageBox* messageBox = new QMessageBox();
+        messageBox->setText("No more tables available");
+        messageBox->setWindowTitle("Error");
+        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                  "QMessageBox QLabel {color:red}");
+        messageBox->addButton(QMessageBox::Ok);
+        messageBox->exec();
+        delete messageBox;
+        return;
+    }
+    const auto table = new sto(id);
 
-    _stolovi.push_back(sto);
-    tabla->addItem(sto);
+    _stolovi.push_back(table);
+    tabla->addItem(table);
 
-    emit dodatNovSto(sto);
+    emit dodatNovSto(table);
+}
+
+void GlavniMeni::obrisiSto()
+{
+    QList<QGraphicsItem*> sto_za_brisanje = tabla->selectedItems();
+    if(sto_za_brisanje.length() == 1){
+        tabla->removeItem(sto_za_brisanje[0]);
+        id--;
+    }
+    else if(sto_za_brisanje.length() == 0){
+        QMessageBox* messageBox = new QMessageBox();
+        messageBox->setText("Select table to remove");
+        messageBox->setWindowTitle("Error");
+        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                  "QMessageBox QLabel {color:red}");
+        messageBox->addButton(QMessageBox::Ok);
+        messageBox->exec();
+        delete messageBox;
+        return;
+    }
+
+}
+
+void GlavniMeni::obrisiSve()
+{
+    for(auto sto : _stolovi)
+        tabla->removeItem(sto);
+    id=0;
 }
 

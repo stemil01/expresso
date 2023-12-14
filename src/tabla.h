@@ -3,19 +3,18 @@
 
 #include <QGraphicsScene>
 
-class stozaprikaz;
+class sto;
 
 class Tabla : public QGraphicsScene
 {
 public:
     explicit Tabla(QObject *parent = nullptr);
-    void pozicionirajSto(stozaprikaz *s);
+    void pozicionirajSto(sto *s);
 
 public slots:
-    void postaviSto(stozaprikaz *s);
+    void postaviSto(sto *s);
 
-private:
-    qint32 brStolova=0;
+
 };
 
 #endif // TABLA_H

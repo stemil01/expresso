@@ -1,6 +1,7 @@
 #include "tabla.h"
-#include "stozaprikaz.h"
-#include "glavnimeni.h"
+#include "sto.h"
+
+class GlavniMeni;
 
 Tabla::Tabla(QObject *parent)
     : QGraphicsScene(parent)
@@ -8,21 +9,18 @@ Tabla::Tabla(QObject *parent)
 
 }
 
-void Tabla::postaviSto(stozaprikaz *s)
+void Tabla::postaviSto(sto *s)
 {
-    if(brStolova<16){
-        brStolova++;
-        pozicionirajSto(s);
-         s->setFlag(QGraphicsItem::ItemIsMovable);
-    }
+    pozicionirajSto(s);
+    s->setFlag(QGraphicsItem::ItemIsMovable);
 }
 
-void Tabla::pozicionirajSto(stozaprikaz *s)
+void Tabla::pozicionirajSto(sto *s)
 {
-    const auto tableWidth = static_cast<int>(this->width());
+    const auto sirina = 1250;
 
-    const auto x = (150 * (brStolova-1)) % tableWidth;
-    const auto y = 140 * ((150 * (brStolova-1)) / tableWidth);
+    const auto x = (250 * (s->getId()-1)) % sirina;
+    const auto y = 240 * ((250 * (s->getId()-1)) / sirina);
 
     s->setPos(x,y);
 }

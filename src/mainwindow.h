@@ -21,7 +21,7 @@ public slots:
 
 private slots:
     void on_buttonQuit_clicked();
-    void onDEClicked();
+    //void onDEClicked();
 
     void on_buttonHelp_clicked();
 

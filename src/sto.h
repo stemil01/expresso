@@ -1,15 +1,17 @@
-#ifndef STOZAPRIKAZ_H
-#define STOZAPRIKAZ_H
+#ifndef STO_H
+#define STO_H
 
 #include <QGraphicsObject>
 
-class stozaprikaz : public QGraphicsObject
+class sto : public QGraphicsObject
 {
 public:
-    stozaprikaz(qint32 id);
+    sto(qint32 id);
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    qint32 getId();
+
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
@@ -20,4 +22,4 @@ private:
 
 };
 
-#endif // STOZAPRIKAZ_H
+#endif // STO_H

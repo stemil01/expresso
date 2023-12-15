@@ -18,6 +18,7 @@ SOURCES += \
     src/main.cpp \
     src/mainwindow.cpp \
     src/porudzbina.cpp \
+    src/raspored.cpp \
     src/sto.cpp \
     src/tabla.cpp \
     src/unesiartikle.cpp \
@@ -32,6 +33,7 @@ HEADERS += \
     src/krenisaradom.h \
     src/mainwindow.h \
     src/porudzbina.h \
+    src/raspored.h \
     src/serializable.h \
     src/serializer.h \
     src/sto.h \

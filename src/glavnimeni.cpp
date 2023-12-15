@@ -3,23 +3,34 @@
 #include "ui_glavnimeni.h"
 #include "tabla.h"
 #include "sto.h"
+#include "raspored.h"
 #include <QMessageBox>
+#include <QLineEdit>
+//#include <QFormLayout>
+#include <QDialog>
 
 qint32 id=0;
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GlavniMeni),
-    tabla(new Tabla(this))
+    tabla(new Tabla(this)),
+    mainView(new Tabla(this))
 {
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);
     connectSlots();
     //setStyle();
 
+    //tabla za dizajn
     tabla->setSceneRect(ui->gvTabla->rect());
     ui->gvTabla->setScene(tabla);
     ui->gvTabla->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    //glavna tabla
+    mainView->setSceneRect(ui->gvMain->rect());
+    ui->gvMain->setScene(mainView);
+    ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 }
 
 GlavniMeni::~GlavniMeni()
@@ -39,6 +50,8 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbRemoveTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSto);
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
     connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
+    connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,this,&GlavniMeni::ucitajRaspored);
+    //connect(ui->pbStartMainMenu, &QPushButton::clicked, this, &GlavniMeni::ucitajRaspored);
 }
 
 void setStyle() {
@@ -125,28 +138,68 @@ void GlavniMeni::obrisiSve()
 }
 
 void GlavniMeni::sacuvajRaspored(){
-    QGraphicsScene *mainTabla = new Tabla(this);
-    mainTabla->setSceneRect(ui->gvMain->rect());
-    ui->gvMain->setScene(mainTabla);
-    ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
-    QList<QGraphicsItem*> raspored = tabla->items();
+    QString arrangementName;
 
-    QMessageBox* messageBox = new QMessageBox();
-    messageBox->setText("Saved!");
-    messageBox->setWindowTitle("Success");
-    messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
-                              "QMessageBox QLabel {color:blue;min-width:200px;min-height:100px}");
-    messageBox->addButton(QMessageBox::Ok);
-    messageBox->setDefaultButton(QMessageBox::Ok);
-    int result = messageBox->exec();
-    if(result == QMessageBox::Ok){
+    QDialog* saveInput = new QDialog();
+    QLineEdit* textInput = new QLineEdit();
+    QPushButton okButton("OK");
+    QPushButton cancelButton("Cancel");
+    saveInput->setWindowTitle("Saving");
+    saveInput->setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
+
+    QFormLayout* layout = new QFormLayout(saveInput);
+    //QLabel* label = new QLabel("Some text");
+    //label->setStyleSheet("font-weight:bold");
+
+    //layout->addWidget(label);
+    layout->addRow("Enter arrangement name:", textInput);
+    layout->addRow(&okButton, &cancelButton);
+    connect(&okButton, &QPushButton::clicked, saveInput, &QDialog::accept);
+    connect(&cancelButton, &QPushButton::clicked, saveInput, &QDialog::reject);
+
+    int result = saveInput->exec();
+    if(result == QDialog::Accepted){
+        //label->setText("Saved!");
         ui -> stackedWidget -> setCurrentIndex(0);
-        delete messageBox;
-        for(auto item : raspored){
-            mainTabla->addItem(item);
+        arrangementName = textInput->text();
+        ui->cbChooseArrangement->addItem(arrangementName);
+        const auto raspored = new Raspored(arrangementName,tabla->items());
+        _rasporedi.push_back(raspored);
+        for(auto item : raspored->getItems()){
             tabla->removeItem(item);
         }
+        id = 0;
     }
+    else if(result == QDialog::Rejected){
+        saveInput->close();
+    }
+
+    qint32 brojRasporeda;
+    brojRasporeda = _rasporedi.size();
+    if(brojRasporeda == 1){
+        for(auto item : _rasporedi[0]->getItems()){
+            mainView->addItem(item);
+        }
+    }
+}
+
+void GlavniMeni::ucitajRaspored(){
+    QString naziv = ui->cbChooseArrangement->currentText();
+    for(auto raspored : _rasporedi)
+        if(naziv == raspored->naziv){
+            this->ocistiTablu(mainView);
+            for(auto item : raspored->getItems()){
+                mainView->addItem(item);
+            }
+        }
+
+}
+
+void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
+            for(auto item : tabla->items()){
+                tabla->removeItem(item);
+            }
+            id = 0;
 }
 

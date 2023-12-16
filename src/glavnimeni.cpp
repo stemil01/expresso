@@ -6,10 +6,9 @@
 #include "raspored.h"
 #include <QMessageBox>
 #include <QLineEdit>
-//#include <QFormLayout>
+#include <QFormLayout>
 #include <QDialog>
 
-qint32 id=0;
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
@@ -89,8 +88,7 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 
 void GlavniMeni::dodajNovSto()
 {
-    id++;
-    if(id > 15){
+    if(sto::getNextId() > 15){
         QMessageBox* messageBox = new QMessageBox();
         messageBox->setText("No more tables available");
         messageBox->setWindowTitle("Error");
@@ -101,7 +99,7 @@ void GlavniMeni::dodajNovSto()
         delete messageBox;
         return;
     }
-    const auto table = new sto(id);
+    const auto table = new sto();
 
     _stolovi.push_back(table);
     tabla->addItem(table);
@@ -114,7 +112,6 @@ void GlavniMeni::obrisiSto()
     QList<QGraphicsItem*> sto_za_brisanje = tabla->selectedItems();
     if(sto_za_brisanje.length() == 1){
         tabla->removeItem(sto_za_brisanje[0]);
-        id--;
     }
     else if(sto_za_brisanje.length() == 0){
         QMessageBox* messageBox = new QMessageBox();
@@ -134,7 +131,7 @@ void GlavniMeni::obrisiSve()
 {
     for(auto sto : _stolovi)
         tabla->removeItem(sto);
-    id=0;
+    sto::resetNextId();
 }
 
 void GlavniMeni::sacuvajRaspored(){
@@ -160,7 +157,6 @@ void GlavniMeni::sacuvajRaspored(){
 
     int result = saveInput->exec();
     if(result == QDialog::Accepted){
-        //label->setText("Saved!");
         ui -> stackedWidget -> setCurrentIndex(0);
         arrangementName = textInput->text();
         ui->cbChooseArrangement->addItem(arrangementName);
@@ -169,7 +165,7 @@ void GlavniMeni::sacuvajRaspored(){
         for(auto item : raspored->getItems()){
             tabla->removeItem(item);
         }
-        id = 0;
+        sto::resetNextId();
     }
     else if(result == QDialog::Rejected){
         saveInput->close();
@@ -197,9 +193,9 @@ void GlavniMeni::ucitajRaspored(){
 }
 
 void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
-            for(auto item : tabla->items()){
-                tabla->removeItem(item);
-            }
-            id = 0;
+     for(auto item : tabla->items()){
+          tabla->removeItem(item);
+     }
+     sto::resetNextId();
 }
 

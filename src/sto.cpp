@@ -4,10 +4,12 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 
-sto::sto(qint32 id)
-    :QGraphicsObject(),
-    _id(id)
+qint32 sto::_nextId = 1;
+
+sto::sto()
+    :QGraphicsObject()
 {
+    _id = _nextId++;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
@@ -55,10 +57,14 @@ void sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
+qint32 sto::getNextId(){
+    return _nextId;
+}
+
 qint32 sto::getId(){
     return _id;
 }
 
-void sto::setId(qint32 id){
-    _id = id;
+void sto::resetNextId(){
+    _nextId = 1;
 }

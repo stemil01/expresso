@@ -34,6 +34,7 @@ private:
     QGraphicsScene *mainView;
     QVector<sto *> _stolovi;
     QList<Raspored*> _rasporedi;
+    qint32 brojStolova = 0;
     void ocistiTablu(QGraphicsScene*);
 
 private slots:

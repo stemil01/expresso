@@ -5,13 +5,16 @@
 
 class sto : public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
-    sto(qint32 id);
+    sto();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    static qint32 getNextId();
     qint32 getId();
-    void setId(qint32 id);
+    static void resetNextId();
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
@@ -19,6 +22,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
 private:
     qint32 _id;
+    static qint32 _nextId;
     QPointF _lastPos;
 
 };

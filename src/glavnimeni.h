@@ -5,6 +5,7 @@
 
 class sto;
 class QGraphicsScene;
+class Raspored;
 
 namespace Ui {
 class GlavniMeni;
@@ -30,7 +31,11 @@ private:
     void on_pbStartMainMenu_clicked();
     void on_pbBackStartMenu_clicked();
     QGraphicsScene *tabla;
+    QGraphicsScene *mainView;
     QVector<sto *> _stolovi;
+    QList<Raspored*> _rasporedi;
+    qint32 brojStolova = 0;
+    void ocistiTablu(QGraphicsScene*);
 
 private slots:
     void on_pbQuitMainMenu_clicked();
@@ -39,6 +44,7 @@ private slots:
     void obrisiSto();
     void obrisiSve();
     void sacuvajRaspored();
+    void ucitajRaspored();
 };
 
 #endif // GLAVNIMENI_H

@@ -8,12 +8,12 @@
 class Raspored
 {
 public:
-    Raspored(QString,QList<sto*>);
+    Raspored(QString,QList<Sto*>);
     QString naziv;
-    QList<sto*> getItems();
+    QList<Sto*> getItems();
 
 private:
-    QList<sto*> _raspored;
+    QList<Sto*> _raspored;
 };
 
 #endif // RASPORED_H

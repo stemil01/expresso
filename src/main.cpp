@@ -15,7 +15,7 @@ int main(int argc, char *argv[])
     krenisaradom kr;
     kr.show()*/
     GlavniMeni gl;
-    //gl.setWindowState(Qt::WindowFullScreen);
+    gl.setWindowState(Qt::WindowFullScreen);
     gl.show();
     return a.exec();
 }

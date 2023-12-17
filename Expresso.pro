@@ -20,8 +20,7 @@ SOURCES += \
     src/raspored.cpp \
     src/sto.cpp \
     src/tabla.cpp \
-    src/unesiartikle.cpp \
-    src/urediporudzbinu.cpp
+    src/unesiartikle.cpp
 
 HEADERS += \
     src/artikl.h \
@@ -36,15 +35,13 @@ HEADERS += \
     src/serializer.h \
     src/sto.h \
     src/tabla.h \
-    src/unesiartikle.h \
-    src/urediporudzbinu.h
+    src/unesiartikle.h
 
 FORMS += \
     mainwindow.ui \
     src/glavnimeni.ui \
     src/help.ui \
-    src/unesiartikle.ui \
-    src/urediporudzbinu.ui
+    src/unesiartikle.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

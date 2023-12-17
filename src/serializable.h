@@ -4,6 +4,8 @@
 #include <QVariant>
 #include <QString>
 
+// this comment is just for testing purposes
+
 class Serializable
 {
 public:

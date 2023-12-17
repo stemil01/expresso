@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 
-class sto;
+class Sto;
 class QGraphicsScene;
 class Raspored;
 
@@ -20,7 +20,7 @@ public:
     ~GlavniMeni();
 
 signals:
-    void dodatNovSto(sto *);
+    void dodatNovSto(Sto *);
 
 private:
     Ui::GlavniMeni *ui;
@@ -36,7 +36,7 @@ private:
     void on_pbFinishEMMenu_clicked();
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
-    QVector<sto *> _stolovi;
+    QVector<Sto *> _stolovi;
     QList<Raspored*> _rasporedi;
     qint32 brojStolova = 0;
     void ocistiTablu(QGraphicsScene*);

@@ -4,20 +4,20 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
 
-qint32 sto::_nextId = 1;
+qint32 Sto::_nextId = 1;
 
-sto::sto()
+Sto::Sto()
     :QGraphicsObject()
 {
     _id = _nextId++;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
-QRectF sto::boundingRect() const
+QRectF Sto::boundingRect() const
 {
     return QRectF(0,0,150,150);
 }
-void sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
@@ -40,12 +40,12 @@ void sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 
 }
 
-void sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
+void Sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
     _lastPos = event->pos();
     QGraphicsItem::mousePressEvent(event);
 }
 
-void sto::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
+void Sto::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
     QPointF newPos = event->pos();
     QPointF delta = newPos - _lastPos;
     QPointF newPosScene = this->scenePos() + delta;
@@ -53,18 +53,18 @@ void sto::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseMoveEvent(event);
 }
 
-void sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
+void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseReleaseEvent(event);
 }
 
-qint32 sto::getNextId(){
+qint32 Sto::getNextId(){
     return _nextId;
 }
 
-qint32 sto::getId(){
+qint32 Sto::getId(){
     return _id;
 }
 
-void sto::resetNextId(){
+void Sto::resetNextId(){
     _nextId = 1;
 }

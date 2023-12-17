@@ -9,13 +9,13 @@ Tabla::Tabla(QObject *parent)
 
 }
 
-void Tabla::postaviSto(sto *s)
+void Tabla::postaviSto(Sto *s)
 {
     pozicionirajSto(s);
     s->setFlag(QGraphicsItem::ItemIsMovable);
 }
 
-void Tabla::pozicionirajSto(sto *s)
+void Tabla::pozicionirajSto(Sto *s)
 {
     const auto sirina = static_cast<int>(this->width());
     //const auto sirina = 1250;

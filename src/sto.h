@@ -3,12 +3,12 @@
 
 #include <QGraphicsObject>
 
-class sto : public QGraphicsObject
+class Sto : public QGraphicsObject
 {
     Q_OBJECT
 
 public:
-    sto();
+    Sto();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;

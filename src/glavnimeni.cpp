@@ -98,7 +98,7 @@ void GlavniMeni::on_pbFinishEMMenu_clicked() {
 
 void GlavniMeni::dodajNovSto()
 {
-    if(sto::getNextId() > 15){
+    if(Sto::getNextId() > 15){
         QMessageBox* messageBox = new QMessageBox();
         messageBox->setText("No more tables available");
         messageBox->setWindowTitle("Error");
@@ -109,7 +109,7 @@ void GlavniMeni::dodajNovSto()
         delete messageBox;
         return;
     }
-    const auto table = new sto();
+    const auto table = new Sto();
 
     _stolovi.push_back(table);
     tabla->addItem(table);
@@ -141,7 +141,7 @@ void GlavniMeni::obrisiSve()
 {
     for(auto sto : _stolovi)
         tabla->removeItem(sto);
-    sto::resetNextId();
+    Sto::resetNextId();
 }
 
 void GlavniMeni::sacuvajRaspored(){
@@ -171,11 +171,11 @@ void GlavniMeni::sacuvajRaspored(){
         arrangementName = textInput->text();
         ui->cbChooseArrangement->addItem(arrangementName);
 
-        QList<sto*> stolovi;
+        QList<Sto*> stolovi;
         for(auto item : tabla->items()){
-            sto* Sto = dynamic_cast<sto*>(item);
-            if(Sto){
-                stolovi.append(Sto);
+            Sto* sto = dynamic_cast<Sto*>(item);
+            if(sto){
+                stolovi.append(sto);
             }
         }
         const auto raspored = new Raspored(arrangementName,stolovi);
@@ -183,7 +183,7 @@ void GlavniMeni::sacuvajRaspored(){
         for(auto item : raspored->getItems()){
             tabla->removeItem(item);
         }
-        sto::resetNextId();
+        Sto::resetNextId();
     }
     else if(result == QDialog::Rejected){
         saveInput->close();
@@ -214,6 +214,6 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
      for(auto item : tabla->items()){
           tabla->removeItem(item);
      }
-     sto::resetNextId();
+     Sto::resetNextId();
 }
 

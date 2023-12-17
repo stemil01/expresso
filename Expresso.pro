@@ -14,7 +14,6 @@ SOURCES += \
     src/glavnimeni.cpp \
     src/help.cpp \
     src/izvestaj.cpp \
-    src/krenisaradom.cpp \
     src/main.cpp \
     src/mainwindow.cpp \
     src/porudzbina.cpp \
@@ -30,7 +29,6 @@ HEADERS += \
     src/glavnimeni.h \
     src/help.h \
     src/izvestaj.h \
-    src/krenisaradom.h \
     src/mainwindow.h \
     src/porudzbina.h \
     src/raspored.h \
@@ -45,7 +43,6 @@ FORMS += \
     mainwindow.ui \
     src/glavnimeni.ui \
     src/help.ui \
-    src/krenisaradom.ui \
     src/unesiartikle.ui \
     src/urediporudzbinu.ui
 

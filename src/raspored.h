@@ -2,18 +2,18 @@
 #define RASPORED_H
 
 #include <QString>
-#include <QGraphicsObject>
+#include "sto.h"
 
 
 class Raspored
 {
 public:
-    Raspored(QString,QList<QGraphicsItem*>);
+    Raspored(QString,QList<sto*>);
     QString naziv;
-    QList<QGraphicsItem*> getItems();
+    QList<sto*> getItems();
 
 private:
-    QList<QGraphicsItem*> _raspored;
+    QList<sto*> _raspored;
 };
 
 #endif // RASPORED_H

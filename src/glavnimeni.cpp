@@ -160,7 +160,15 @@ void GlavniMeni::sacuvajRaspored(){
         ui -> stackedWidget -> setCurrentIndex(0);
         arrangementName = textInput->text();
         ui->cbChooseArrangement->addItem(arrangementName);
-        const auto raspored = new Raspored(arrangementName,tabla->items());
+
+        QList<sto*> stolovi;
+        for(auto item : tabla->items()){
+            sto* Sto = dynamic_cast<sto*>(item);
+            if(Sto){
+                stolovi.append(Sto);
+            }
+        }
+        const auto raspored = new Raspored(arrangementName,stolovi);
         _rasporedi.push_back(raspored);
         for(auto item : raspored->getItems()){
             tabla->removeItem(item);

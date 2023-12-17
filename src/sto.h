@@ -5,6 +5,8 @@
 
 class sto : public QGraphicsObject
 {
+    Q_OBJECT
+
 public:
     sto();
 

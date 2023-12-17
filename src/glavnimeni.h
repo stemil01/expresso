@@ -34,6 +34,10 @@ private:
     void on_pbBackDTAMenu_clicked();
     void on_pbStartMainMenu_clicked();
     void on_pbBackStartMenu_clicked();
+    void on_pbEditMenuMainMenu_clicked();
+    void on_pbQuitMainMenu_clicked();
+    void on_pbHelpMainMenu_clicked();
+    void on_pbFinishEMMenu_clicked();
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
     QVector<Sto *> _stolovi;
@@ -42,8 +46,6 @@ private:
     void ocistiTablu(QGraphicsScene*);
 
 private slots:
-    void on_pbQuitMainMenu_clicked();
-    void on_pbHelpMainMenu_clicked();
     void dodajNovSto();
     void obrisiSto();
     void obrisiSve();

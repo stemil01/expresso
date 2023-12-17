@@ -66,8 +66,8 @@ void GlavniMeni::fromVariant(const QVariant &variant)
 }
 
 void GlavniMeni::connectSlots() {
-    connect(ui -> pbQuitMainMenu, SIGNAL(clicked()), this, SLOT(on_pbHelpMainMenu_clicked()));
-    connect(ui -> pbHelpMainMenu, SIGNAL(clicked()), this, SLOT(on_pbQuitMainMenu_clicked()));
+    connect(ui -> pbQuitMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbQuitMainMenu_clicked);
+    connect(ui -> pbHelpMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbHelpMainMenu_clicked);
     connect(ui -> pbDTAMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbDTAMainMenu_clicked);
     connect(ui -> pbBackDTAMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbBackDTAMenu_clicked);
     connect(ui -> pbBackStartMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbBackStartMenu_clicked);
@@ -78,6 +78,8 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
     connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,this,&GlavniMeni::ucitajRaspored);
+    connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
+    connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     //connect(ui->pbStartMainMenu, &QPushButton::clicked, this, &GlavniMeni::ucitajRaspored);
 }
 
@@ -112,6 +114,14 @@ void GlavniMeni::on_pbBackStartMenu_clicked() {
 
 void GlavniMeni::on_pbStartMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(2);
+}
+
+void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
+    ui -> stackedWidget -> setCurrentIndex(4);
+}
+
+void GlavniMeni::on_pbFinishEMMenu_clicked() {
+    ui -> stackedWidget -> setCurrentIndex(0);
 }
 
 void GlavniMeni::dodajNovSto()

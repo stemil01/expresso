@@ -15,7 +15,6 @@ SOURCES += \
     src/help.cpp \
     src/izvestaj.cpp \
     src/main.cpp \
-    src/mainwindow.cpp \
     src/porudzbina.cpp \
     src/raspored.cpp \
     src/sto.cpp \
@@ -28,7 +27,6 @@ HEADERS += \
     src/glavnimeni.h \
     src/help.h \
     src/izvestaj.h \
-    src/mainwindow.h \
     src/porudzbina.h \
     src/raspored.h \
     src/serializable.h \
@@ -38,7 +36,6 @@ HEADERS += \
     src/unesiartikle.h
 
 FORMS += \
-    mainwindow.ui \
     src/glavnimeni.ui \
     src/help.ui \
     src/unesiartikle.ui

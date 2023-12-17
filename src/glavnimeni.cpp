@@ -114,6 +114,14 @@ void GlavniMeni::on_pbBackStartMenu_clicked() {
 
 void GlavniMeni::on_pbStartMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(2);
+
+    BinarySerializer binarySerializer;
+    binarySerializer.load(*this, "arrangements");
+
+    ui->cbChooseArrangement->clear();
+    for (const auto& raspored : _rasporedi) {
+        ui->cbChooseArrangement->addItem(raspored->naziv);
+    }
 }
 
 void GlavniMeni::on_pbEditMenuMainMenu_clicked() {

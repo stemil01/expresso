@@ -18,6 +18,7 @@ QList<Sto*> Raspored::getItems(){
 QVariant Raspored::toVariant() const
 {
     QVariantMap map;
+    map.insert("naziv", naziv);
     QVariantList raspored;
     for (const auto& sto : _raspored) {
         raspored.append(sto->toVariant());
@@ -29,6 +30,8 @@ QVariant Raspored::toVariant() const
 void Raspored::fromVariant(const QVariant& variant)
 {
     const auto map = variant.toMap();
+    naziv = map.value("naziv").toString();
+
     qDeleteAll(_raspored);
     _raspored.clear();
 

@@ -4,6 +4,7 @@
 #include "tabla.h"
 #include "sto.h"
 #include "raspored.h"
+#include "binaryserializer.h"
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QFormLayout>
@@ -11,7 +12,6 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>
-
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
@@ -208,6 +208,11 @@ void GlavniMeni::sacuvajRaspored(){
         }
         const auto raspored = new Raspored(arrangementName,stolovi);
         _rasporedi.push_back(raspored);
+
+        // saving data to a file
+        BinarySerializer binarySerializer;
+        binarySerializer.save(*this, "arrangements");
+
         for(auto item : raspored->getItems()){
             tabla->removeItem(item);
         }

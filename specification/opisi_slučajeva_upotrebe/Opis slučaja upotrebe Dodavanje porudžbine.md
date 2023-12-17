@@ -26,7 +26,7 @@
     3. Aplikacija kreira novu porudžbinu.
     4. Sve dok konobar ne odabere opciju "Potvrdi", ponavljaju se naredni koraci:
 
-        4.1. Konobar bira artikl iz menija klikom na ikonicu željenog artikla.
+        4.1. Konobar bira artikl iz menija klikom na naziv željenog artikla.
 
         4.2. Odabrani artikl se dodaje u porudžbinu.
 
@@ -42,12 +42,12 @@
 
 
     6. Nakon što je konobar zatražio račun, prelazi se na slučaj upotrebe "Izdavanje računa". Po završetku, prelazi se na korak 7.
-    7. Aplikacija prikazuje račun kkonobaru.
+    7. Aplikacija prikazuje račun konobaru.
     8. Aplikacija prikazuje glavni meni.
 
 
 
-- __Alternativni tokovi__:/
+- __Alternativni tokovi__:A1: Ukoliko se u nekom od koraka zatvori aplikacija,sve promene do klika na dugme "Potvrdi"  se ne čuvaju.
 
 
 

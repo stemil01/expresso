@@ -2,8 +2,9 @@
 #define STO_H
 
 #include <QGraphicsObject>
+#include "serializable.h"
 
-class Sto : public QGraphicsObject
+class Sto : public QGraphicsObject, public Serializable
 {
     Q_OBJECT
 
@@ -15,6 +16,9 @@ public:
     static qint32 getNextId();
     qint32 getId();
     static void resetNextId();
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant& variant) override;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;

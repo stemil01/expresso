@@ -3,12 +3,13 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
+#include <QVariant>
+#include <QVariantMap>
 
 qint32 Sto::_nextId = 1;
 
 Sto::Sto()
-    :QGraphicsObject()
-{
+    :QGraphicsObject() {
     _id = _nextId++;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
@@ -67,4 +68,21 @@ qint32 Sto::getId(){
 
 void Sto::resetNextId(){
     _nextId = 1;
+}
+
+QVariant Sto::toVariant() const
+{
+    QVariantMap map;
+    map.insert("id", _id);
+    map.insert("nextId", _nextId);
+    map.insert("lastPos", _lastPos);
+    return map;
+}
+
+void Sto::fromVariant(const QVariant& variant)
+{
+    const auto map = variant.toMap();
+    _id = map.value("id").toInt();
+    _nextId = map.value("nextId").toInt();
+    _lastPos = map.value("lastPos").toPointF();
 }

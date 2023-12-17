@@ -8,6 +8,9 @@
 #include <QLineEdit>
 #include <QFormLayout>
 #include <QDialog>
+#include <QVariant>
+#include <QVariantMap>
+#include <QVariantList>
 
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
@@ -35,6 +38,31 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
 GlavniMeni::~GlavniMeni()
 {
     delete ui;
+}
+
+QVariant GlavniMeni::toVariant() const
+{
+    QVariantMap map;
+    QVariantList rasporedi;
+    for (const auto& raspored : _rasporedi) {
+        rasporedi.append(raspored->toVariant());
+    }
+    map.insert("rasporedi", rasporedi);
+    return map;
+}
+
+void GlavniMeni::fromVariant(const QVariant &variant)
+{
+    const auto map = variant.toMap();
+    qDeleteAll(_rasporedi);
+    _rasporedi.clear();
+
+    const auto rasporedi = map.value("rasporedi").toList();
+    for (const auto& rasporedVariant : rasporedi) {
+        const auto raspored = new Raspored();
+        raspored->fromVariant(rasporedVariant);
+        _rasporedi.append(raspored);
+    }
 }
 
 void GlavniMeni::connectSlots() {

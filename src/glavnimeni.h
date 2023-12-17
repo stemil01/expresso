@@ -2,6 +2,7 @@
 #define GLAVNIMENI_H
 
 #include <QMainWindow>
+#include "serializable.h"
 
 class Sto;
 class QGraphicsScene;
@@ -11,13 +12,16 @@ namespace Ui {
 class GlavniMeni;
 }
 
-class GlavniMeni : public QMainWindow
+class GlavniMeni : public QMainWindow, public Serializable
 {
     Q_OBJECT
 
 public:
     explicit GlavniMeni(QWidget *parent = nullptr);
     ~GlavniMeni();
+
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant& variant) override;
 
 signals:
     void dodatNovSto(Sto *);

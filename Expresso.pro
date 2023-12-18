@@ -15,6 +15,7 @@ SOURCES += \
     src/help.cpp \
     src/izvestaj.cpp \
     src/main.cpp \
+    src/naruci.cpp \
     src/porudzbina.cpp \
     src/raspored.cpp \
     src/sto.cpp \
@@ -27,6 +28,7 @@ HEADERS += \
     src/glavnimeni.h \
     src/help.h \
     src/izvestaj.h \
+    src/naruci.h \
     src/porudzbina.h \
     src/raspored.h \
     src/serializable.h \
@@ -38,6 +40,7 @@ HEADERS += \
 FORMS += \
     src/glavnimeni.ui \
     src/help.ui \
+    src/naruci.ui \
     src/unesiartikle.ui
 
 # Default rules for deployment.

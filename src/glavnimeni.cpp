@@ -5,6 +5,7 @@
 #include "sto.h"
 #include "raspored.h"
 #include "binaryserializer.h"
+#include "naruci.h"
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QFormLayout>
@@ -89,10 +90,15 @@ void setStyle() {
 
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
-    help *helpOpen = new help(this);
+    Naruci *dialogNarudzbine = new Naruci(this);
+    dialogNarudzbine -> setModal(true);
+    dialogNarudzbine -> exec();
+    delete dialogNarudzbine;
+
+   /* help *helpOpen = new help(this);
     helpOpen -> setModal(true);
     helpOpen -> exec();
-    delete helpOpen;
+    delete helpOpen;*/
 }
 
 void GlavniMeni::on_pbQuitMainMenu_clicked()

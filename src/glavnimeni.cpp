@@ -15,6 +15,7 @@
 #include <QVariantList>
 #include <QGraphicsItem>
 
+
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GlavniMeni),
@@ -82,6 +83,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,this,&GlavniMeni::ucitajRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
+    connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
 }
 
 void setStyle() {
@@ -186,30 +188,18 @@ void GlavniMeni::obrisiSve()
 
 void GlavniMeni::sacuvajRaspored(){
 
-    QString arrangementName;
+    QMessageBox* messageBox = new QMessageBox();
+    messageBox->setText("Saved succesfully!");
+    messageBox->setWindowTitle("Saved");
+    messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                              "QMessageBox QLabel {color:green;min-width:200px;min-height:100px}");
+    messageBox->addButton(QMessageBox::Ok);
 
-    QDialog* saveInput = new QDialog();
-    QLineEdit* textInput = new QLineEdit();
-    QPushButton okButton("OK");
-    QPushButton cancelButton("Cancel");
-    saveInput->setWindowTitle("Saving");
-    saveInput->setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
-
-    QFormLayout* layout = new QFormLayout(saveInput);
-    //QLabel* label = new QLabel("Some text");
-    //label->setStyleSheet("font-weight:bold");
-
-    //layout->addWidget(label);
-    layout->addRow("Enter arrangement name:", textInput);
-    layout->addRow(&okButton, &cancelButton);
-    connect(&okButton, &QPushButton::clicked, saveInput, &QDialog::accept);
-    connect(&cancelButton, &QPushButton::clicked, saveInput, &QDialog::reject);
-
-    int result = saveInput->exec();
-    if(result == QDialog::Accepted){
+    int result = messageBox->exec();
+    if(result == QMessageBox::Ok){
         ui -> stackedWidget -> setCurrentIndex(0);
-        arrangementName = textInput->text();
         ui->cbChooseArrangement->addItem(arrangementName);
+        ui->cbDesign->addItem(arrangementName);
 
         QList<Sto*> stolovi;
         for(auto item : tabla->items()){
@@ -230,8 +220,8 @@ void GlavniMeni::sacuvajRaspored(){
         }
         Sto::resetNextId();
     }
-    else if(result == QDialog::Rejected){
-        saveInput->close();
+    else if(result == QMessageBox::Cancel){
+        messageBox->close();
     }
 
     qint32 brojRasporeda;
@@ -242,6 +232,7 @@ void GlavniMeni::sacuvajRaspored(){
             mainView->addItem(item);
         }
     }
+    return;
 }
 
 void GlavniMeni::ucitajRaspored(){
@@ -255,6 +246,31 @@ void GlavniMeni::ucitajRaspored(){
             }
         }
 
+}
+
+void GlavniMeni::dodajRaspored(){
+
+    QDialog* saveInput = new QDialog();
+    QLineEdit* textInput = new QLineEdit();
+    QPushButton okButton("OK");
+    QPushButton cancelButton("Cancel");
+    saveInput->setWindowTitle("New Arrangement");
+    saveInput->setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
+
+    QFormLayout* layout = new QFormLayout(saveInput);
+
+    layout->addRow("Enter arrangement name:", textInput);
+    layout->addRow(&okButton, &cancelButton);
+    connect(&okButton, &QPushButton::clicked, saveInput, &QDialog::accept);
+    connect(&cancelButton, &QPushButton::clicked, saveInput, &QDialog::reject);
+
+    int result = saveInput->exec();
+    if(result == QDialog::Accepted){
+        arrangementName = textInput->text();
+    }
+    else if(result == QDialog::Rejected){
+        saveInput->close();
+    }
 }
 
 void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){

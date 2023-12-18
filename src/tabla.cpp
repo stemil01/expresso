@@ -17,7 +17,7 @@ void Tabla::postaviSto(Sto *s)
 void Tabla::pozicionirajSto(Sto *s)
 {
     const auto sirina = static_cast<int>(this->width());
-    //const auto sirina = 1250;
+
     const auto xOffset = 50;
     const auto yOffset = 50;
 

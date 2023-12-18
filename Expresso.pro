@@ -17,6 +17,7 @@ SOURCES += \
     src/main.cpp \
     src/porudzbina.cpp \
     src/raspored.cpp \
+    src/rasporeddata.cpp \
     src/sto.cpp \
     src/tabla.cpp \
     src/unesiartikle.cpp
@@ -29,6 +30,7 @@ HEADERS += \
     src/izvestaj.h \
     src/porudzbina.h \
     src/raspored.h \
+    src/rasporeddata.h \
     src/serializable.h \
     src/serializer.h \
     src/sto.h \

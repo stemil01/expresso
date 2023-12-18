@@ -13,6 +13,7 @@
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>
+#include <QGraphicsItem>
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
@@ -81,7 +82,6 @@ void GlavniMeni::connectSlots() {
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,this,&GlavniMeni::ucitajRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
-    //connect(ui->pbStartMainMenu, &QPushButton::clicked, this, &GlavniMeni::ucitajRaspored);
 }
 
 void setStyle() {
@@ -148,7 +148,6 @@ void GlavniMeni::dodajNovSto()
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
         messageBox->exec();
-        delete messageBox;
         return;
     }
     const auto table = new Sto();
@@ -173,7 +172,6 @@ void GlavniMeni::obrisiSto()
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
         messageBox->exec();
-        delete messageBox;
         return;
     }
 
@@ -240,6 +238,7 @@ void GlavniMeni::sacuvajRaspored(){
     brojRasporeda = _rasporedi.size();
     if(brojRasporeda == 1){
         for(auto item : _rasporedi[0]->getItems()){
+            item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
             mainView->addItem(item);
         }
     }
@@ -251,6 +250,7 @@ void GlavniMeni::ucitajRaspored(){
         if(naziv == raspored->naziv){
             this->ocistiTablu(mainView);
             for(auto item : raspored->getItems()){
+                item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
                 mainView->addItem(item);
             }
         }

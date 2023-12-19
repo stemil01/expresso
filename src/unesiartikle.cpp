@@ -22,7 +22,7 @@ void unesiartikle::dodajArtikal(const Artikl &artikal)
 
 void unesiartikle::onSubmitClicked()
 {
-    std::string ime=ui->nAMELineEdit->text().toStdString();
+    QString ime=ui->nAMELineEdit->text();
     double cena=ui->pRICELineEdit->text().toDouble();
     QString kategorija=ui->tYPEComboBox->currentText();
 
@@ -77,7 +77,7 @@ void unesiartikle::ucitajPodatkeIzTxt()
         QStringList tokens=line.split(" ");
 
         if(tokens.size()==3){
-            std::string ime=tokens[0].toStdString();
+            QString ime=tokens[0];
             double cena=tokens[1].toDouble();
             QString kategorija=tokens[2];
             skladisteArtikala.push_back(Artikl(ime, cena, kategorija));
@@ -97,6 +97,6 @@ void unesiartikle::sacuvajPodatkeUTxt()
 
     QTextStream out(&file);
     for(const auto &a: skladisteArtikala){
-        out<<QString::fromStdString(a.getNaziv())<<" "<<a.getCena()<<" "<<a.getKategorija();
+        out<<a.getNaziv()<<" "<<a.getCena()<<" "<<a.getKategorija();
     }
 }

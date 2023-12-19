@@ -2,30 +2,31 @@
 #define ARTIKL_H
 
 #include <iostream>
-#include <string>
 #include <QString>
 
 class Artikl{
 
 public:
 
-    Artikl( std::string& _naziv, double _cena,QString& _kategorija);
-
-    std::string getNaziv() const;
+    Artikl(const QString& _naziv, double _cena,const QString& _kategorija, int _kolicina=1);
+    ~Artikl();
+    QString getNaziv() const;
     double getCena() const;
+    int getKolicina() const;
 
-
-    void setNaziv(const std::string _naziv);
+    void setNaziv(const QString _naziv);
     void setCena(double _cena);
-
+    void setKolicina(int _kolicina);
 
     QString getKategorija() const;
     void setKategorija(const QString _kategorija);
 
+    bool operator==(const Artikl& a) const;
 private:
-    std::string naziv;
+    QString naziv;
     double cena;
     QString kategorija;
+    int kolicina;
 
 };
 

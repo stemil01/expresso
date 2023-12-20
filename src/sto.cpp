@@ -75,7 +75,7 @@ QVariant Sto::toVariant() const
     QVariantMap map;
     map.insert("id", _id);
     map.insert("nextId", _nextId);
-    map.insert("lastPos", _lastPos);
+    map.insert("position", pos());
     return map;
 }
 
@@ -84,5 +84,5 @@ void Sto::fromVariant(const QVariant& variant)
     const auto map = variant.toMap();
     _id = map.value("id").toInt();
     _nextId = map.value("nextId").toInt();
-    _lastPos = map.value("lastPos").toPointF();
+    setPos(map.value("position").toPointF());
 }

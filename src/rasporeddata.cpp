@@ -55,3 +55,13 @@ void RasporedData::executeSave() const
         m_binarySerializer->save(*raspored, raspored->naziv + ".bin");
     }
 }
+
+void RasporedData::loadRaspored(GlavniMeni *ui, QGraphicsScene *mainView) const
+{
+    QString naziv = ui->cbChooseArrangement->currentText();
+    this->ocistiTablu(mainView);
+    for(auto item : m_rasporedi[naziv]->getItems()){
+        item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
+        mainView->addItem(item);
+    }
+}

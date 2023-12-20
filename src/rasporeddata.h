@@ -3,6 +3,7 @@
 
 #include "raspored.h"
 #include "serializer.h"
+#include "glavnimeni.h"
 
 #include <QMap>
 #include <QString>
@@ -20,9 +21,13 @@ public:
     void executeLoad();
     void executeSave() const;
 
+public slots:
+    void loadRaspored(GlavniMeni *ui, QGraphicsScene *mainView) const;
+
 private:
     QMap<QString, Raspored*> m_rasporedi;
     Serializer *m_binarySerializer;
+
 };
 
 #endif // RASPOREDDATA_H

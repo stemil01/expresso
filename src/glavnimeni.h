@@ -14,16 +14,13 @@ namespace Ui {
 class GlavniMeni;
 }
 
-class GlavniMeni : public QMainWindow, public Serializable
+class GlavniMeni : public QMainWindow
 {
     Q_OBJECT
 
 public:
     explicit GlavniMeni(QWidget *parent = nullptr);
     ~GlavniMeni();
-
-    QVariant toVariant() const override;
-    void fromVariant(const QVariant& variant) override;
 
 signals:
     void dodatNovSto(Sto *);
@@ -52,7 +49,7 @@ private slots:
     void obrisiSto();
     void obrisiSve();
     void sacuvajRaspored();
-    void ucitajRaspored();
+    // void ucitajRaspored();
     void dodajRaspored();
 };
 

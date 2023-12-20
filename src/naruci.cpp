@@ -11,16 +11,16 @@ Naruci::Naruci(QWidget *parent) :
     connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbAddItemOrderDialog_clicked);
     connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbReceiptOrderDialog_clicked);
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
-    //connect(ui->tableWidget, &QTableWidget::itemChanged, this, &Naruci::on_tableWidget_itemChanged);
+    //connect(ui->twOrderOrderDialog, &QTableWidget::itemChanged, this, &Naruci::on_tableWidget_itemChanged);
 
 
-   // QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
+    QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
     // Set the resizing mode for each column to Stretch
-    //int columnCount = ui->twOrderOrderDialog->columnCount();
-    //for (int i = 0; i < columnCount; ++i) {
-    //    header->setSectionResizeMode(i, QHeaderView::Stretch);
-    //}
-    //ui->twOrderOrderDialog->setShowGrid(false);
+    int columnCount = ui->twOrderOrderDialog->columnCount();
+    for (int i = 0; i < columnCount; ++i) {
+        header->setSectionResizeMode(i, QHeaderView::Stretch);
+    }
+    ui->twOrderOrderDialog->setShowGrid(false);
 
 }
 
@@ -33,7 +33,7 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
 
     ui->teReceiptOrderDialog->clear();
 
-    QString kategorija=ui->comboBox->currentText();
+    QString kategorija=ui->cbTypeOrderDialog->currentText();
 \
     auto selectedItems = ui->lwMenuOrderDialog->selectedItems();
 
@@ -55,18 +55,18 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
             QTableWidgetItem* itemCena = new QTableWidgetItem();
             itemCena->setText(QString::number(artikl.getCena()));
 
-            int row=ui->tableWidget->rowCount();
-            ui->tableWidget->insertRow(row);
-            ui->tableWidget->setItem(row,0,itemNaziv);
-            ui->tableWidget->setItem(row,1,itemKolicina);
-            ui->tableWidget->setItem(row,2,itemCena);
+            int row=ui->twOrderOrderDialog->rowCount();
+            ui->twOrderOrderDialog->insertRow(row);
+            ui->twOrderOrderDialog->setItem(row,0,itemNaziv);
+            ui->twOrderOrderDialog->setItem(row,1,itemKolicina);
+            ui->twOrderOrderDialog->setItem(row,2,itemCena);
         }else{
-            QList<QTableWidgetItem *> foundItems = ui->tableWidget->findItems(naziv, Qt::MatchExactly);
+            QList<QTableWidgetItem *> foundItems = ui->twOrderOrderDialog->findItems(naziv, Qt::MatchExactly);
 
             if (!foundItems.isEmpty()) {
                 QTableWidgetItem *foundItem = foundItems.first();
                 int row = foundItem->row();
-                QTableWidgetItem* itemChange=ui->tableWidget->item(row,1);
+                QTableWidgetItem* itemChange=ui->twOrderOrderDialog->item(row,1);
                 int kolicina=(itemChange->text()).toInt();
                 kolicina++;
                 itemChange->setText(QString::number(kolicina));
@@ -78,24 +78,24 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
 
 void Naruci::on_pbReceiptOrderDialog_clicked(){
     ui->teReceiptOrderDialog->setText(p.racun());
-    ui->tableWidget->clearContents();
-    ui->tableWidget->model()->removeRows(0, ui->tableWidget->rowCount());
+    ui->twOrderOrderDialog->clearContents();
+    ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
     p.obrisiArtikle();
 }
 
 void Naruci::deleteSelectedRow() {
-    auto selectedRanges = ui->tableWidget->selectedRanges();
+    auto selectedRanges = ui->twOrderOrderDialog->selectedRanges();
 
     for (const auto& range : selectedRanges) {
         int startRow = range.topRow();
         int endRow = range.bottomRow();
 
         for (int row = endRow; row >= startRow; --row) {
-            QTableWidgetItem *item = ui->tableWidget->item(row, 0);
+            QTableWidgetItem *item = ui->twOrderOrderDialog->item(row, 0);
             if (item) {
                 QString naziv = item->text();
                 p.obrisiPoNazivu(naziv);
-                ui->tableWidget->removeRow(row);
+                ui->twOrderOrderDialog->removeRow(row);
             }
         }
     }

@@ -190,12 +190,13 @@ void GlavniMeni::sacuvajRaspored(){
             }
         }
 
-        for(auto item : raspored->getItems()){
+        Raspored raspored(arrangementName, stolovi);
+        m_rasporedData.addRaspored(raspored);
+
+        for(auto item : raspored.getItems()){
             tabla->removeItem(item);
         }
         Sto::resetNextId();
-
-        delete raspored;
     }
     else if(result == QMessageBox::Cancel){
         messageBox->close();
@@ -214,11 +215,11 @@ void GlavniMeni::sacuvajRaspored(){
 
 void GlavniMeni::ucitajRaspored(){
     QString naziv = ui->cbChooseArrangement->currentText();
-    const Raspored *raspored = m_rasporedData.getRaspored(naziv);
+    Raspored *raspored = m_rasporedData.getRaspored(naziv);
 
     if (raspored == nullptr) {
         // TODO: obrada greske
-        std::cout << "no raspored with name'" << naziv.toStdSting() << "'" << std::endl;
+        std::cout << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
         return;
     }
 

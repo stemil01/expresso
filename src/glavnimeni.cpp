@@ -123,9 +123,6 @@ void GlavniMeni::on_pbBackStartMenu_clicked() {
 void GlavniMeni::on_pbStartMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(2);
 
-    BinarySerializer binarySerializer;
-    binarySerializer.load(*this, "arrangements");
-
     ui->cbChooseArrangement->clear();
     for (const auto& raspored : _rasporedi) {
         ui->cbChooseArrangement->addItem(raspored->naziv);
@@ -208,30 +205,29 @@ void GlavniMeni::sacuvajRaspored(){
                 stolovi.append(sto);
             }
         }
-        const auto raspored = new Raspored(arrangementName,stolovi);
-        _rasporedi.push_back(raspored);
 
-        // saving data to a file
-        BinarySerializer binarySerializer;
-        binarySerializer.save(*this, "arrangements");
+        const auto raspored = new Raspored(arrangementName,stolovi);
+        m_rasporedData.addRaspored(*raspored);
 
         for(auto item : raspored->getItems()){
             tabla->removeItem(item);
         }
         Sto::resetNextId();
+
+        delete raspored;
     }
     else if(result == QMessageBox::Cancel){
         messageBox->close();
     }
 
-    qint32 brojRasporeda;
-    brojRasporeda = _rasporedi.size();
-    if(brojRasporeda == 1){
-        for(auto item : _rasporedi[0]->getItems()){
-            item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
-            mainView->addItem(item);
-        }
-    }
+    // qint32 brojRasporeda;
+    // brojRasporeda = _rasporedi.size();
+    // if(brojRasporeda == 1){
+    //     for(auto item : _rasporedi[0]->getItems()){
+    //         item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
+    //         mainView->addItem(item);
+    //     }
+    // }
     return;
 }
 

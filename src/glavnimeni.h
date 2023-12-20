@@ -1,8 +1,10 @@
 #ifndef GLAVNIMENI_H
 #define GLAVNIMENI_H
 
-#include <QMainWindow>
 #include "serializable.h"
+#include "rasporeddata.h"
+
+#include <QMainWindow>
 
 class Sto;
 class QGraphicsScene;
@@ -41,7 +43,7 @@ private:
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
     QVector<Sto *> _stolovi;
-    QList<Raspored*> _rasporedi;
+    RasporedData m_rasporedData;
     QString arrangementName;
     void ocistiTablu(QGraphicsScene*);
 

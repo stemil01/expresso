@@ -10,14 +10,15 @@
 class RasporedData
 {
 public:
-    RasporedData() = default;
+    RasporedData(const QString& dirPath);
+    ~RasporedData();
 
     void addRaspored(const Raspored& raspored);
     void updateRaspored(const Raspored& raspored);
     void removeRaspored(const QString& rasporedName);
 
-    void executeLoad(const QString& dir);
-    void executeSave(const QString& dir) const;
+    void executeLoad();
+    void executeSave() const;
 
 private:
     QMap<QString, Raspored*> m_rasporedi;

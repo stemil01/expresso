@@ -2,23 +2,23 @@
 #define PORUDZBINA_H
 
 #include "artikl.h"
-
+#include "sto.h"
 #include <vector>
 
 class Porudzbina{
 
 public:
-    Porudzbina(int _n);
+    Porudzbina();
 
 
-    void dodajArtikl(Artikl& s);
-
-    double racun();
-
+    int dodajArtikl(Artikl& a);
+    void obrisiArtikle();
+    QString racun();
+    void obrisiPoNazivu(const QString& naziv);
 
 private:
     std::vector<Artikl> artikli;
-    int br_artikala;
+    Sto* sto;
 };
 
 

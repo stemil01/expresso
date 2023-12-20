@@ -42,7 +42,7 @@ private:
     QGraphicsScene *mainView;
     QVector<Sto *> _stolovi;
     QList<Raspored*> _rasporedi;
-    qint32 brojStolova = 0;
+    QString arrangementName;
     void ocistiTablu(QGraphicsScene*);
 
 private slots:
@@ -51,6 +51,7 @@ private slots:
     void obrisiSve();
     void sacuvajRaspored();
     void ucitajRaspored();
+    void dodajRaspored();
 };
 
 #endif // GLAVNIMENI_H

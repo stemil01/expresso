@@ -37,6 +37,8 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     mainView->setSceneRect(ui->gvMain->rect());
     ui->gvMain->setScene(mainView);
     ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    // TODO: UCITAVANJE RASPOREDA
 }
 
 GlavniMeni::~GlavniMeni()
@@ -59,6 +61,8 @@ void GlavniMeni::connectSlots() {
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,m_rasporedData,&RasporedData::loadRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
+
+    // dodaj novi prazni raspored
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
 }
 
@@ -86,6 +90,8 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
+
+    // TODO: popunjava combobox
 }
 
 void GlavniMeni::on_pbBackDTAMenu_clicked() {

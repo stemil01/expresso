@@ -16,18 +16,18 @@ RasporedData::~RasporedData()
 
 void RasporedData::addRaspored(const Raspored &raspored)
 {
-    if (m_rasporedi.contains(raspored.naziv)) {
+    if (m_rasporedi.contains(raspored.getNaziv())) {
         // TODO: add pop-up that says this
         std::cout << "arrangement with the same name already exists" << std::endl;
     }
     else {
-        m_rasporedi[raspored.naziv] = new Raspored(raspored);
+        m_rasporedi[raspored.getNaziv()] = new Raspored(raspored);
     }
 }
 
 void RasporedData::updateRaspored(const Raspored &raspored)
 {
-    if (!m_rasporedi.contains(raspored.naziv)) {
+    if (!m_rasporedi.contains(raspored.getNaziv())) {
         // TODO: add pop-up that says this
         std::cout << "arrangement with the same name doesn't exist" << std::endl;
     }

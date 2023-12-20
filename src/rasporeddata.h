@@ -23,11 +23,11 @@ public:
 
 public slots:
     void loadRaspored(GlavniMeni *ui, QGraphicsScene *mainView) const;
+    void clearRaspored();
 
 private:
     QMap<QString, Raspored*> m_rasporedi;
     Serializer *m_binarySerializer;
-
 };
 
 #endif // RASPOREDDATA_H

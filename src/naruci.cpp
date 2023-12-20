@@ -13,6 +13,15 @@ Naruci::Naruci(QWidget *parent) :
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
     //connect(ui->tableWidget, &QTableWidget::itemChanged, this, &Naruci::on_tableWidget_itemChanged);
 
+
+   // QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
+    // Set the resizing mode for each column to Stretch
+    //int columnCount = ui->twOrderOrderDialog->columnCount();
+    //for (int i = 0; i < columnCount; ++i) {
+    //    header->setSectionResizeMode(i, QHeaderView::Stretch);
+    //}
+    //ui->twOrderOrderDialog->setShowGrid(false);
+
 }
 
 Naruci::~Naruci()

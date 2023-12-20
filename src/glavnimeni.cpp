@@ -133,7 +133,7 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 }
 
 void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
-    ui -> stackedWidget -> setCurrentIndex(4);
+    ui -> stackedWidget -> setCurrentIndex(3);
 }
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {

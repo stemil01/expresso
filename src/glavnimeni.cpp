@@ -40,7 +40,8 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     ui->gvMain->setScene(mainView);
     ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
-    // TODO: UCITAVANJE RASPOREDA
+    // ucitavanje rasporeda
+    m_rasporedData.executeLoad();
 }
 
 GlavniMeni::~GlavniMeni()
@@ -63,8 +64,6 @@ void GlavniMeni::connectSlots() {
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged, this, &GlavniMeni::ucitajRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
-
-    // dodaj novi prazni raspored
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
 }
 
@@ -93,7 +92,9 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
 
-    // TODO: popunjava combobox
+    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+        ui->cbChooseArrangement->addItem(raspored->getNaziv());
+    }
 }
 
 void GlavniMeni::on_pbBackDTAMenu_clicked() {
@@ -133,12 +134,11 @@ void GlavniMeni::dodajNovSto()
         messageBox->exec();
         return;
     }
-    const auto table = new Sto();
 
-    _stolovi.push_back(table);
-    tabla->addItem(table);
+    Sto *sto = currentRaspored->addSto();
+    tabla->addItem(sto);
 
-    emit dodatNovSto(table);
+    emit dodatNovSto(sto);
 }
 
 void GlavniMeni::obrisiSto()
@@ -157,14 +157,14 @@ void GlavniMeni::obrisiSto()
         messageBox->exec();
         return;
     }
-
 }
 
 void GlavniMeni::obrisiSve()
 {
-    for(auto sto : _stolovi)
+    for(auto sto : currentRaspored->getItems()) {
         tabla->removeItem(sto);
-    Sto::resetNextId();
+    }
+    currentRaspored->clearSto();
 }
 
 void GlavniMeni::sacuvajRaspored(){
@@ -182,18 +182,10 @@ void GlavniMeni::sacuvajRaspored(){
         ui->cbChooseArrangement->addItem(arrangementName);
         ui->cbDesign->addItem(arrangementName);
 
-        QList<Sto*> stolovi;
-        for(auto item : tabla->items()){
-            Sto* sto = dynamic_cast<Sto*>(item);
-            if(sto){
-                stolovi.append(sto);
-            }
-        }
+        m_rasporedData.addRaspored(currentRaspored);
+        m_rasporedData.executeSave(currentRaspored->getNaziv());
 
-        Raspored raspored(arrangementName, stolovi);
-        m_rasporedData.addRaspored(raspored);
-
-        for(auto item : raspored.getItems()){
+        for(auto item : currentRaspored->getItems()){
             tabla->removeItem(item);
         }
         Sto::resetNextId();
@@ -215,16 +207,16 @@ void GlavniMeni::sacuvajRaspored(){
 
 void GlavniMeni::ucitajRaspored(){
     QString naziv = ui->cbChooseArrangement->currentText();
-    Raspored *raspored = m_rasporedData.getRaspored(naziv);
+    currentRaspored = m_rasporedData.getRaspored(naziv);
 
-    if (raspored == nullptr) {
+    if (currentRaspored == nullptr) {
         // TODO: obrada greske
-        std::cout << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
+        std::cerr << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
         return;
     }
 
     this->ocistiTablu(mainView);
-    for(auto item : raspored->getItems()){
+    for(auto item : currentRaspored->getItems()){
         item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
         mainView->addItem(item);
     }
@@ -248,17 +240,8 @@ void GlavniMeni::dodajRaspored(){
 
     int result = saveInput->exec();
     if(result == QDialog::Accepted){
-        arrangementName = textInput->text();
-
-        QList<Sto*> stolovi;
-        for(auto item : tabla->items()){
-            Sto* sto = dynamic_cast<Sto*>(item);
-            if(sto){
-                stolovi.append(sto);
-            }
-        }
-
-        m_rasporedData.addRaspored(Raspored(arrangementName, stolovi));
+        delete currentRaspored;
+        currentRaspored = new Raspored(textInput->text());
     }
     else if(result == QDialog::Rejected){
         saveInput->close();

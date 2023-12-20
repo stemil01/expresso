@@ -9,20 +9,23 @@ class Raspored : public Serializable
 {
 public:
     Raspored() = default;
-    Raspored(QString,QList<Sto*>);
+    Raspored(const QString& rasporedName);
+    ~Raspored();
+
     QList<Sto*> getItems();
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
 
-    inline QString getNaziv() const { return naziv; }
+    inline QString getNaziv() const { return m_naziv; }
 
+    Sto* addSto();
     // TODO: Implement these
-    void addSto(const Sto& sto);
     void removeSto(qint32 idStola);
+    void clearSto();
 private:
-    QString naziv;
-    QList<Sto*> _raspored;
+    QString m_naziv;
+    QList<Sto*> m_raspored;
 };
 
 #endif // RASPORED_H

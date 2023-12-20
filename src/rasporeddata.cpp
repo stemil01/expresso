@@ -17,18 +17,18 @@ RasporedData::~RasporedData()
     delete m_binarySerializer;
 }
 
-void RasporedData::addRaspored(const Raspored &raspored)
+void RasporedData::addRaspored(Raspored *raspored)
 {
-    if (m_rasporedi->contains(raspored.getNaziv())) {
+    if (m_rasporedi->contains(raspored->getNaziv())) {
         // TODO: add pop-up that says this
         std::cout << "arrangement with the same name already exists" << std::endl;
     }
     else {
-        (*m_rasporedi)[raspored.getNaziv()] = new Raspored(raspored);
+        (*m_rasporedi)[raspored->getNaziv()] = raspored;
     }
 }
 
-void RasporedData::updateRaspored(const Raspored &raspored)
+void RasporedData::updateRaspored(const Raspored& raspored)
 {
     if (!m_rasporedi->contains(raspored.getNaziv())) {
         // TODO: add pop-up that says this
@@ -57,9 +57,7 @@ void RasporedData::executeLoad()
 
 }
 
-void RasporedData::executeSave() const
+void RasporedData::executeSave(const QString& rasporedName) const
 {
-    for (const auto& raspored : *m_rasporedi) {
-        m_binarySerializer->save(*raspored, raspored->getNaziv() + ".bin");
-    }
+    m_binarySerializer->save(*(m_rasporedi->value(rasporedName)), rasporedName + ".bin");
 }

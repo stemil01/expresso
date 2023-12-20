@@ -15,7 +15,7 @@ public:
     RasporedData(const QString& dirPath);
     ~RasporedData();
 
-    void addRaspored(const Raspored& raspored);
+    void addRaspored(Raspored *raspored);
     void updateRaspored(const Raspored& raspored);
     void removeRaspored(const QString& rasporedName);
     Raspored* getRaspored(const QString& name) const;
@@ -23,7 +23,7 @@ public:
     inline QMap<QString, Raspored*>* getRasporedi() const { return m_rasporedi; }
 
     void executeLoad();
-    void executeSave() const;
+    void executeSave(const QString& rasporedName) const;
 
 private:
     QMap<QString, Raspored*>* m_rasporedi;

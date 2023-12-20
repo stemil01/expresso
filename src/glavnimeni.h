@@ -1,13 +1,17 @@
 #ifndef GLAVNIMENI_H
 #define GLAVNIMENI_H
 
-#include "serializable.h"
-
 #include <QMainWindow>
+#include "serializable.h"
+#include "rasporeddata.h"
 
 class Sto;
 class QGraphicsScene;
-class RasporedData;
+class Raspored;
+
+namespace Ui {
+class GlavniMeni;
+}
 
 class GlavniMeni : public QMainWindow
 {
@@ -21,7 +25,7 @@ signals:
     void dodatNovSto(Sto *);
 
 private:
-    GlavniMeni *ui;
+    Ui::GlavniMeni *ui;
     void connectSlots();
     void setStyle();
     void on_pbDTAMainMenu_clicked();
@@ -35,7 +39,7 @@ private:
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
     QVector<Sto *> _stolovi;
-    RasporedData *m_rasporedData;
+    RasporedData m_rasporedData;
     QString arrangementName;
     void ocistiTablu(QGraphicsScene*);
 
@@ -44,7 +48,7 @@ private slots:
     void obrisiSto();
     void obrisiSve();
     void sacuvajRaspored();
-    // void ucitajRaspored();
+    void ucitajRaspored();
     void dodajRaspored();
 };
 

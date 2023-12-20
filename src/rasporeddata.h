@@ -3,12 +3,11 @@
 
 #include "raspored.h"
 #include "serializer.h"
-#include "glavnimeni.h"
 
 #include <QMap>
 #include <QString>
 
-class QGraphicsScene;
+class GlavniMeni;
 
 class RasporedData
 {
@@ -19,16 +18,15 @@ public:
     void addRaspored(const Raspored& raspored);
     void updateRaspored(const Raspored& raspored);
     void removeRaspored(const QString& rasporedName);
+    Raspored* getRaspored(const QString& name) const;
+
+    inline QMap<QString, Raspored*>* getRasporedi() const { return m_rasporedi; }
 
     void executeLoad();
     void executeSave() const;
 
-public slots:
-    void loadRaspored(GlavniMeni *ui, QGraphicsScene *mainView) const;
-    void clearRaspored();
-
 private:
-    QMap<QString, Raspored*> m_rasporedi;
+    QMap<QString, Raspored*>* m_rasporedi;
     Serializer *m_binarySerializer;
 };
 

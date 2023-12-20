@@ -6,6 +6,8 @@
 #include "raspored.h"
 #include "binaryserializer.h"
 #include "naruci.h"
+#include "rasporeddata.h"
+
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QFormLayout>
@@ -18,10 +20,10 @@
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::GlavniMeni),
+    ui(new GlavniMeni),
     tabla(new Tabla(this)),
     mainView(new Tabla(this)),
-    m_rasporedData("data")
+    m_rasporedData(new RasporedData("data"))
 {
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);
@@ -58,7 +60,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbRemoveTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSto);
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
     connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
-    connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,m_rasporedData,&RasporedData::loadRaspored);
+    connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,&m_rasporedData,&RasporedData::loadRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
 

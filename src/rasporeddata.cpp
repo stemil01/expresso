@@ -33,8 +33,8 @@ void RasporedData::updateRaspored(const Raspored &raspored)
     }
     else {
         // check if this is necessary
-        delete m_rasporedi[raspored.naziv];
-        m_rasporedi[raspored.naziv] = new Raspored(raspored);
+        delete m_rasporedi[raspored.getNaziv()];
+        m_rasporedi[raspored.getNaziv()] = new Raspored(raspored);
     }
 }
 
@@ -52,7 +52,7 @@ void RasporedData::executeLoad()
 void RasporedData::executeSave() const
 {
     for (const auto& raspored : m_rasporedi) {
-        m_binarySerializer->save(*raspored, raspored->naziv + ".bin");
+        m_binarySerializer->save(*raspored, raspored->getNaziv() + ".bin");
     }
 }
 

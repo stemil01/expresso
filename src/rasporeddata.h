@@ -8,6 +8,8 @@
 #include <QMap>
 #include <QString>
 
+class QGraphicsScene;
+
 class RasporedData
 {
 public:

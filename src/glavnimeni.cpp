@@ -63,6 +63,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
     connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
     connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged, this, &GlavniMeni::ucitajRaspored);
+    connect(ui->cbDesign,&QComboBox::currentIndexChanged, this, &GlavniMeni::ucitajRasporedDTA);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
@@ -129,9 +130,20 @@ void GlavniMeni::dodajNovSto()
     if(Sto::getNextId() > 15){
         QMessageBox* messageBox = new QMessageBox();
         messageBox->setText("No more tables available");
-        messageBox->setWindowTitle("Error");
+        messageBox->setWindowTitle("Info");
         messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox->addButton(QMessageBox::Ok);
+        messageBox->exec();
+        return;
+    }
+
+    if(!m_currentRaspored){
+        QMessageBox* messageBox = new QMessageBox();
+        messageBox->setText("Add arrangement");
+        messageBox->setWindowTitle("Info");
+        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                  "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
         messageBox->exec();
         return;
@@ -152,7 +164,7 @@ void GlavniMeni::obrisiSto()
     else if(sto_za_brisanje.length() == 0){
         QMessageBox* messageBox = new QMessageBox();
         messageBox->setText("Select table to remove");
-        messageBox->setWindowTitle("Error");
+        messageBox->setWindowTitle("Info");
         messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox->addButton(QMessageBox::Ok);
@@ -217,6 +229,18 @@ void GlavniMeni::ucitajRaspored(){
     for(auto item : m_currentRaspored->getItems()){
         item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
         mainView->addItem(item);
+    }
+}
+
+void GlavniMeni::ucitajRasporedDTA(){
+    QString naziv = ui->cbDesign->currentText();
+
+    Raspored* raspored = m_rasporedData.getRaspored(naziv);
+
+
+    this->ocistiTablu(tabla);
+    for(auto item : raspored->getItems()){
+        tabla->addItem(item);
     }
 }
 

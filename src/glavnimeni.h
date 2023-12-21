@@ -38,6 +38,7 @@ private slots:
     void obrisiSve();
     void sacuvajRaspored();
     void ucitajRaspored();
+    void ucitajRasporedDTA();
     void dodajRaspored();
 
 private:

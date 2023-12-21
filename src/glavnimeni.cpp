@@ -42,7 +42,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
 
     // ucitavanje rasporeda
     m_rasporedData.executeLoad();
-    currentRaspored = nullptr;
+    m_currentRaspored = nullptr;
 }
 
 GlavniMeni::~GlavniMeni()
@@ -137,7 +137,7 @@ void GlavniMeni::dodajNovSto()
         return;
     }
 
-    Sto *sto = currentRaspored->addSto();
+    Sto *sto = m_currentRaspored->addSto();
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);
@@ -163,10 +163,10 @@ void GlavniMeni::obrisiSto()
 
 void GlavniMeni::obrisiSve()
 {
-    for(auto sto : currentRaspored->getItems()) {
+    for(auto sto : m_currentRaspored->getItems()) {
         tabla->removeItem(sto);
     }
-    currentRaspored->clearSto();
+    m_currentRaspored->clearSto();
 }
 
 void GlavniMeni::sacuvajRaspored(){
@@ -183,7 +183,7 @@ void GlavniMeni::sacuvajRaspored(){
 
         m_rasporedData.executeSave();
 
-        for(auto item : currentRaspored->getItems()){
+        for(auto item : m_currentRaspored->getItems()){
             tabla->removeItem(item);
         }
         Sto::resetNextId();
@@ -205,16 +205,16 @@ void GlavniMeni::sacuvajRaspored(){
 
 void GlavniMeni::ucitajRaspored(){
     QString naziv = ui->cbChooseArrangement->currentText();
-    currentRaspored = m_rasporedData.getRaspored(naziv);
+    m_currentRaspored = m_rasporedData.getRaspored(naziv);
 
-    if (currentRaspored == nullptr) {
+    if (m_currentRaspored == nullptr) {
         // TODO: obrada greske
         std::cerr << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
         return;
     }
 
     this->ocistiTablu(mainView);
-    for(auto item : currentRaspored->getItems()){
+    for(auto item : m_currentRaspored->getItems()){
         item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
         mainView->addItem(item);
     }
@@ -238,11 +238,11 @@ void GlavniMeni::dodajRaspored(){
 
     int result = saveInput->exec();
     if(result == QDialog::Accepted){
-        delete currentRaspored;
-        currentRaspored = new Raspored(textInput->text());
-        m_rasporedData.addRaspored(currentRaspored);
+        delete m_currentRaspored;
+        m_currentRaspored = new Raspored(textInput->text());
+        m_rasporedData.addRaspored(m_currentRaspored);
 
-        ui->cbDesign->addItem(currentRaspored->getNaziv());
+        ui->cbDesign->addItem(m_currentRaspored->getNaziv());
     }
     else if(result == QDialog::Rejected){
         saveInput->close();

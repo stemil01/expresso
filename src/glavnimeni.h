@@ -50,7 +50,7 @@ private:
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
     RasporedData m_rasporedData;
-    Raspored *currentRaspored;
+    Raspored *m_currentRaspored;
 };
 
 #endif // GLAVNIMENI_H

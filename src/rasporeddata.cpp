@@ -3,9 +3,12 @@
 #include "glavnimeni.h"
 
 #include <iostream>
+#include <QDir>
+#include <QFileInfo>
 
 RasporedData::RasporedData(const QString &dirPath)
 {
+    m_dirPath = dirPath;
     m_rasporedi = new QMap<QString, Raspored*>();
     m_binarySerializer = new BinarySerializer(dirPath);
 }
@@ -54,10 +57,18 @@ Raspored* RasporedData::getRaspored(const QString& name) const
 
 void RasporedData::executeLoad()
 {
+    QDir dir(m_dirPath);
+    QStringList nameFilters;
+    nameFilters << "*.bin";
 
+    for (const auto& fileInfo : dir.entryInfoList(nameFilters)) {
+        m_binarySerializer->load((*m_rasporedi)[fileInfo.baseName()], fileInfo.fileName());
+    }
 }
 
-void RasporedData::executeSave(const QString& rasporedName) const
+void RasporedData::executeSave() const
 {
-    m_binarySerializer->save(*(m_rasporedi->value(rasporedName)), rasporedName + ".bin");
+    for (const auto raspored : *m_rasporedi) {
+        m_binarySerializer->save(*raspored, raspored->getNaziv() + ".bin");
+    }
 }

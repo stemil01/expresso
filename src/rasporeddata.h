@@ -23,9 +23,10 @@ public:
     inline QMap<QString, Raspored*>* getRasporedi() const { return m_rasporedi; }
 
     void executeLoad();
-    void executeSave(const QString& rasporedName) const;
+    void executeSave() const;
 
 private:
+    QString m_dirPath;
     QMap<QString, Raspored*>* m_rasporedi;
     Serializer *m_binarySerializer;
 };

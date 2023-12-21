@@ -42,6 +42,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
 
     // ucitavanje rasporeda
     m_rasporedData.executeLoad();
+    currentRaspored = nullptr;
 }
 
 GlavniMeni::~GlavniMeni()
@@ -168,7 +169,6 @@ void GlavniMeni::obrisiSve()
 }
 
 void GlavniMeni::sacuvajRaspored(){
-
     QMessageBox* messageBox = new QMessageBox();
     messageBox->setText("Saved succesfully!");
     messageBox->setWindowTitle("Saved");
@@ -179,11 +179,10 @@ void GlavniMeni::sacuvajRaspored(){
     int result = messageBox->exec();
     if(result == QMessageBox::Ok){
         ui -> stackedWidget -> setCurrentIndex(0);
-        ui->cbChooseArrangement->addItem(arrangementName);
-        ui->cbDesign->addItem(arrangementName);
+        ui->cbChooseArrangement->addItem(currentRaspored->getNaziv());
+        ui->cbDesign->addItem(currentRaspored->getNaziv());
 
-        m_rasporedData.addRaspored(currentRaspored);
-        m_rasporedData.executeSave(currentRaspored->getNaziv());
+        m_rasporedData.executeSave();
 
         for(auto item : currentRaspored->getItems()){
             tabla->removeItem(item);
@@ -242,6 +241,7 @@ void GlavniMeni::dodajRaspored(){
     if(result == QDialog::Accepted){
         delete currentRaspored;
         currentRaspored = new Raspored(textInput->text());
+        m_rasporedData.addRaspored(currentRaspored);
     }
     else if(result == QDialog::Rejected){
         saveInput->close();
@@ -254,4 +254,3 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
      }
      Sto::resetNextId();
 }
-

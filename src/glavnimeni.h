@@ -38,10 +38,8 @@ private:
     void on_pbFinishEMMenu_clicked();
     QGraphicsScene *tabla;
     QGraphicsScene *mainView;
-    QVector<Sto *> _stolovi;
     RasporedData m_rasporedData;
     Raspored *currentRaspored;
-    QString arrangementName;
     void ocistiTablu(QGraphicsScene*);
 
 private slots:

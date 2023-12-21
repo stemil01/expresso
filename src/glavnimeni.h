@@ -24,10 +24,7 @@ public:
 signals:
     void dodatNovSto(Sto *);
 
-private:
-    Ui::GlavniMeni *ui;
-    void connectSlots();
-    void setStyle();
+private slots:
     void on_pbDTAMainMenu_clicked();
     void on_pbBackDTAMenu_clicked();
     void on_pbStartMainMenu_clicked();
@@ -36,19 +33,24 @@ private:
     void on_pbQuitMainMenu_clicked();
     void on_pbHelpMainMenu_clicked();
     void on_pbFinishEMMenu_clicked();
-    QGraphicsScene *tabla;
-    QGraphicsScene *mainView;
-    RasporedData m_rasporedData;
-    Raspored *currentRaspored;
-    void ocistiTablu(QGraphicsScene*);
-
-private slots:
     void dodajNovSto();
     void obrisiSto();
     void obrisiSve();
     void sacuvajRaspored();
     void ucitajRaspored();
     void dodajRaspored();
+
+private:
+    void ocistiTablu(QGraphicsScene*);
+
+private:
+    Ui::GlavniMeni *ui;
+    void connectSlots();
+    void setStyle();
+    QGraphicsScene *tabla;
+    QGraphicsScene *mainView;
+    RasporedData m_rasporedData;
+    Raspored *currentRaspored;
 };
 
 #endif // GLAVNIMENI_H

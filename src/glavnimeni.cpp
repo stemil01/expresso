@@ -93,8 +93,9 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
 
+    ui->cbDesign->clear();
     for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
-        ui->cbChooseArrangement->addItem(raspored->getNaziv());
+        ui->cbDesign->addItem(raspored->getNaziv());
     }
 }
 
@@ -179,8 +180,6 @@ void GlavniMeni::sacuvajRaspored(){
     int result = messageBox->exec();
     if(result == QMessageBox::Ok){
         ui -> stackedWidget -> setCurrentIndex(0);
-        ui->cbChooseArrangement->addItem(currentRaspored->getNaziv());
-        ui->cbDesign->addItem(currentRaspored->getNaziv());
 
         m_rasporedData.executeSave();
 
@@ -242,6 +241,8 @@ void GlavniMeni::dodajRaspored(){
         delete currentRaspored;
         currentRaspored = new Raspored(textInput->text());
         m_rasporedData.addRaspored(currentRaspored);
+
+        ui->cbDesign->addItem(currentRaspored->getNaziv());
     }
     else if(result == QDialog::Rejected){
         saveInput->close();

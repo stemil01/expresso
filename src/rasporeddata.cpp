@@ -62,7 +62,9 @@ void RasporedData::executeLoad()
     nameFilters << "*.bin";
 
     for (const auto& fileInfo : dir.entryInfoList(nameFilters)) {
-        m_binarySerializer->load((*m_rasporedi)[fileInfo.baseName()], fileInfo.fileName());
+        Raspored *raspored = new Raspored();
+        m_binarySerializer->load(*raspored, fileInfo.fileName());
+        m_rasporedi->insert(raspored->getNaziv(), raspored);
     }
 }
 

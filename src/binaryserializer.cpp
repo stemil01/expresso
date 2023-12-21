@@ -33,7 +33,8 @@ void BinarySerializer::load(Serializable& serializable, const QString& fileName)
     // Qt automatically resolves separators for different OSs
     QDir dir;
     if (!dir.exists(m_dirPath)) {
-        dir.mkpath(m_dirPath);
+        std::cerr << "directory doesn't exist" << std::endl;
+        return;
     }
 
     QFile file(m_dirPath + "/" + fileName);

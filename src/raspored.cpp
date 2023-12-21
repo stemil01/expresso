@@ -1,5 +1,6 @@
 #include "raspored.h"
 #include "sto.h"
+
 #include <QVariant>
 #include <QVariantMap>
 #include <QVariantList>

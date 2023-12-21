@@ -6,6 +6,8 @@
 #include "raspored.h"
 #include "binaryserializer.h"
 #include "naruci.h"
+#include "rasporeddata.h"
+
 #include <QMessageBox>
 #include <QLineEdit>
 #include <QFormLayout>
@@ -20,7 +22,8 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::GlavniMeni),
     tabla(new Tabla(this)),
-    mainView(new Tabla(this))
+    mainView(new Tabla(this)),
+    m_rasporedData("data")
 {
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);
@@ -36,36 +39,15 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     mainView->setSceneRect(ui->gvMain->rect());
     ui->gvMain->setScene(mainView);
     ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
+
+    // ucitavanje rasporeda
+    m_rasporedData.executeLoad();
+    currentRaspored = nullptr;
 }
 
 GlavniMeni::~GlavniMeni()
 {
     delete ui;
-}
-
-QVariant GlavniMeni::toVariant() const
-{
-    QVariantMap map;
-    QVariantList rasporedi;
-    for (const auto& raspored : _rasporedi) {
-        rasporedi.append(raspored->toVariant());
-    }
-    map.insert("rasporedi", rasporedi);
-    return map;
-}
-
-void GlavniMeni::fromVariant(const QVariant &variant)
-{
-    const auto map = variant.toMap();
-    qDeleteAll(_rasporedi);
-    _rasporedi.clear();
-
-    const auto rasporedi = map.value("rasporedi").toList();
-    for (const auto& rasporedVariant : rasporedi) {
-        const auto raspored = new Raspored();
-        raspored->fromVariant(rasporedVariant);
-        _rasporedi.append(raspored);
-    }
 }
 
 void GlavniMeni::connectSlots() {
@@ -80,7 +62,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbRemoveTableDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSto);
     connect(ui->pbClearAllDTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiSve);
     connect(ui->pbSaveDTAMenu, &QPushButton::clicked, this, &GlavniMeni::sacuvajRaspored);
-    connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged,this,&GlavniMeni::ucitajRaspored);
+    connect(ui->cbChooseArrangement,&QComboBox::currentIndexChanged, this, &GlavniMeni::ucitajRaspored);
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
@@ -110,6 +92,11 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
+
+    ui->cbDesign->clear();
+    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+        ui->cbDesign->addItem(raspored->getNaziv());
+    }
 }
 
 void GlavniMeni::on_pbBackDTAMenu_clicked() {
@@ -123,12 +110,9 @@ void GlavniMeni::on_pbBackStartMenu_clicked() {
 void GlavniMeni::on_pbStartMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(2);
 
-    BinarySerializer binarySerializer;
-    binarySerializer.load(*this, "arrangements");
-
     ui->cbChooseArrangement->clear();
-    for (const auto& raspored : _rasporedi) {
-        ui->cbChooseArrangement->addItem(raspored->naziv);
+    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+        ui->cbChooseArrangement->addItem(raspored->getNaziv());
     }
 }
 
@@ -152,12 +136,11 @@ void GlavniMeni::dodajNovSto()
         messageBox->exec();
         return;
     }
-    const auto table = new Sto();
 
-    _stolovi.push_back(table);
-    tabla->addItem(table);
+    Sto *sto = currentRaspored->addSto();
+    tabla->addItem(sto);
 
-    emit dodatNovSto(table);
+    emit dodatNovSto(sto);
 }
 
 void GlavniMeni::obrisiSto()
@@ -176,18 +159,17 @@ void GlavniMeni::obrisiSto()
         messageBox->exec();
         return;
     }
-
 }
 
 void GlavniMeni::obrisiSve()
 {
-    for(auto sto : _stolovi)
+    for(auto sto : currentRaspored->getItems()) {
         tabla->removeItem(sto);
-    Sto::resetNextId();
+    }
+    currentRaspored->clearSto();
 }
 
 void GlavniMeni::sacuvajRaspored(){
-
     QMessageBox* messageBox = new QMessageBox();
     messageBox->setText("Saved succesfully!");
     messageBox->setWindowTitle("Saved");
@@ -198,24 +180,10 @@ void GlavniMeni::sacuvajRaspored(){
     int result = messageBox->exec();
     if(result == QMessageBox::Ok){
         ui -> stackedWidget -> setCurrentIndex(0);
-        ui->cbChooseArrangement->addItem(arrangementName);
-        ui->cbDesign->addItem(arrangementName);
 
-        QList<Sto*> stolovi;
-        for(auto item : tabla->items()){
-            Sto* sto = dynamic_cast<Sto*>(item);
-            if(sto){
-                stolovi.append(sto);
-            }
-        }
-        const auto raspored = new Raspored(arrangementName,stolovi);
-        _rasporedi.push_back(raspored);
+        m_rasporedData.executeSave();
 
-        // saving data to a file
-        BinarySerializer binarySerializer;
-        binarySerializer.save(*this, "arrangements");
-
-        for(auto item : raspored->getItems()){
+        for(auto item : currentRaspored->getItems()){
             tabla->removeItem(item);
         }
         Sto::resetNextId();
@@ -224,10 +192,10 @@ void GlavniMeni::sacuvajRaspored(){
         messageBox->close();
     }
 
-    qint32 brojRasporeda;
-    brojRasporeda = _rasporedi.size();
+    const auto rasporedi = m_rasporedData.getRasporedi();
+    qint32 brojRasporeda = rasporedi->size();
     if(brojRasporeda == 1){
-        for(auto item : _rasporedi[0]->getItems()){
+        for(auto item : (rasporedi->values())[0]->getItems()){
             item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
             mainView->addItem(item);
         }
@@ -237,15 +205,19 @@ void GlavniMeni::sacuvajRaspored(){
 
 void GlavniMeni::ucitajRaspored(){
     QString naziv = ui->cbChooseArrangement->currentText();
-    for(auto raspored : _rasporedi)
-        if(naziv == raspored->naziv){
-            this->ocistiTablu(mainView);
-            for(auto item : raspored->getItems()){
-                item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
-                mainView->addItem(item);
-            }
-        }
+    currentRaspored = m_rasporedData.getRaspored(naziv);
 
+    if (currentRaspored == nullptr) {
+        // TODO: obrada greske
+        std::cerr << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
+        return;
+    }
+
+    this->ocistiTablu(mainView);
+    for(auto item : currentRaspored->getItems()){
+        item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
+        mainView->addItem(item);
+    }
 }
 
 void GlavniMeni::dodajRaspored(){
@@ -266,7 +238,11 @@ void GlavniMeni::dodajRaspored(){
 
     int result = saveInput->exec();
     if(result == QDialog::Accepted){
-        arrangementName = textInput->text();
+        delete currentRaspored;
+        currentRaspored = new Raspored(textInput->text());
+        m_rasporedData.addRaspored(currentRaspored);
+
+        ui->cbDesign->addItem(currentRaspored->getNaziv());
     }
     else if(result == QDialog::Rejected){
         saveInput->close();
@@ -279,4 +255,3 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
      }
      Sto::resetNextId();
 }
-

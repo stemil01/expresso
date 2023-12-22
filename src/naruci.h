@@ -13,11 +13,10 @@ class Naruci : public QDialog
     Q_OBJECT
 
 public:
-    explicit Naruci(QWidget *parent = nullptr);
+    explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr);
     ~Naruci();
 
-    void setPorudzbina(Porudzbina* p);
-
+    Porudzbina* getPorudzbina();
 
 //private slots:
 //    void on_tableWidget_itemChanged(QTableWidgetItem *item);

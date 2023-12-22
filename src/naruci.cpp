@@ -2,9 +2,10 @@
 #include "ui_naruci.h"
 #include "porudzbina.h"
 
-Naruci::Naruci(QWidget *parent) :
+Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina) :
     QDialog(parent),
-    ui(new Ui::Naruci)
+    ui(new Ui::Naruci),
+    p(porudzbina)
 {
     ui->setupUi(this);
 
@@ -27,10 +28,6 @@ Naruci::Naruci(QWidget *parent) :
 Naruci::~Naruci()
 {
     delete ui;
-}
-
-void Naruci::setPorudzbina(Porudzbina* porudzbina){
-    p = porudzbina;
 }
 
 void Naruci::on_pbAddItemOrderDialog_clicked(){
@@ -106,6 +103,9 @@ void Naruci::deleteSelectedRow() {
 }
 
 
+Porudzbina* Naruci::getPorudzbina(){
+    return p;
+}
 
 //void Naruci::on_tableWidget_itemChanged(QTableWidgetItem *item)
 //{

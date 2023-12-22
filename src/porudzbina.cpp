@@ -6,10 +6,6 @@
 
 Porudzbina::Porudzbina(){}
 
-Porudzbina::Porudzbina(Sto* sto)
-    :_sto(sto)
-{}
-
 int Porudzbina::dodajArtikl(Artikl&a){
     int promena=0;
     bool postoji=false;

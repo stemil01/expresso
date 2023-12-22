@@ -4,13 +4,11 @@
 #include "artikl.h"
 #include <vector>
 
-class Sto;
-
-class Porudzbina{
+class Porudzbina
+{
 
 public:
     Porudzbina();
-    Porudzbina(Sto* sto);
 
 
     int dodajArtikl(Artikl& a);
@@ -21,7 +19,6 @@ public:
 
 private:
     std::vector<Artikl> artikli;
-    Sto* _sto;
 };
 
 

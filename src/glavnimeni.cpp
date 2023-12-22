@@ -75,15 +75,10 @@ void setStyle() {
 
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
-    Naruci *dialogNarudzbine = new Naruci(this);
-    dialogNarudzbine -> setModal(true);
-    dialogNarudzbine -> exec();
-    delete dialogNarudzbine;
-
-   /* help *helpOpen = new help(this);
+    help *helpOpen = new help(this);
     helpOpen -> setModal(true);
     helpOpen -> exec();
-    delete helpOpen;*/
+    delete helpOpen;
 }
 
 void GlavniMeni::on_pbQuitMainMenu_clicked()
@@ -221,7 +216,7 @@ void GlavniMeni::ucitajRaspored(){
 
     if (m_currentRaspored == nullptr) {
         // TODO: obrada greske
-        std::cerr << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
+        //std::cerr << "no raspored with name '" << naziv.toStdString() << "'" << std::endl;
         return;
     }
 

@@ -1,4 +1,6 @@
 #include "sto.h"
+#include "naruci.h"
+#include "porudzbina.h"
 #include <string.h>
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
@@ -31,6 +33,7 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     QString tekst;
     painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
 
+
     if(this->isSelected())
     {
         painter->setPen(QPen(Qt::yellow, 3));
@@ -56,6 +59,14 @@ void Sto::mouseMoveEvent(QGraphicsSceneMouseEvent* event) {
 
 void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
     QGraphicsItem::mouseReleaseEvent(event);
+}
+
+void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
+    Naruci *dialogNarudzbine = new Naruci();
+    Porudzbina* porudzbina = new Porudzbina(this);
+    dialogNarudzbine->setPorudzbina(porudzbina);
+    dialogNarudzbine->exec();
+    delete porudzbina;
 }
 
 qint32 Sto::getNextId(){

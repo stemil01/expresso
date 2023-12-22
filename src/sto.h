@@ -16,6 +16,7 @@ public:
     static qint32 getNextId();
     qint32 getId();
     static void resetNextId();
+    bool zauzet = false;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
@@ -24,6 +25,7 @@ protected:
     void mousePressEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseMoveEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
+    void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 private:
     qint32 _id;
     static qint32 _nextId;

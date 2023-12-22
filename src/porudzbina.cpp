@@ -1,9 +1,14 @@
 #include "porudzbina.h"
+#include "sto.h"
 #include <vector>
 #include <iostream>
 #include <QString>
 
 Porudzbina::Porudzbina(){}
+
+Porudzbina::Porudzbina(Sto* sto)
+    :_sto(sto)
+{}
 
 int Porudzbina::dodajArtikl(Artikl&a){
     int promena=0;

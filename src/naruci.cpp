@@ -29,6 +29,10 @@ Naruci::~Naruci()
     delete ui;
 }
 
+void Naruci::setPorudzbina(Porudzbina* porudzbina){
+    p = porudzbina;
+}
+
 void Naruci::on_pbAddItemOrderDialog_clicked(){
 
     ui->teReceiptOrderDialog->clear();
@@ -45,7 +49,7 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
 
         double cena=0;
         Artikl artikl(naziv,cena,kategorija);
-        int promena=p.dodajArtikl(artikl);
+        int promena=p->dodajArtikl(artikl);
 
         if(!promena){
             QTableWidgetItem* itemNaziv = new QTableWidgetItem();
@@ -77,10 +81,10 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
 }
 
 void Naruci::on_pbReceiptOrderDialog_clicked(){
-    ui->teReceiptOrderDialog->setText(p.racun());
+    ui->teReceiptOrderDialog->setText(p->racun());
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
-    p.obrisiArtikle();
+    p->obrisiArtikle();
 }
 
 void Naruci::deleteSelectedRow() {
@@ -94,7 +98,7 @@ void Naruci::deleteSelectedRow() {
             QTableWidgetItem *item = ui->twOrderOrderDialog->item(row, 0);
             if (item) {
                 QString naziv = item->text();
-                p.obrisiPoNazivu(naziv);
+                p->obrisiPoNazivu(naziv);
                 ui->twOrderOrderDialog->removeRow(row);
             }
         }

@@ -1,7 +1,8 @@
 #ifndef NARUCI_H
 #define NARUCI_H
-#include "porudzbina.h"
 #include <QDialog>
+
+class Porudzbina;
 
 namespace Ui {
 class Naruci;
@@ -15,12 +16,14 @@ public:
     explicit Naruci(QWidget *parent = nullptr);
     ~Naruci();
 
+    void setPorudzbina(Porudzbina* p);
+
 
 //private slots:
 //    void on_tableWidget_itemChanged(QTableWidgetItem *item);
 private:
     Ui::Naruci *ui;
-    Porudzbina p;
+    Porudzbina* p;
     void on_pbAddItemOrderDialog_clicked();
     void on_pbReceiptOrderDialog_clicked();
     void deleteSelectedRow();

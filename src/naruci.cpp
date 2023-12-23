@@ -103,10 +103,6 @@ void Naruci::deleteSelectedRow() {
 }
 
 
-Porudzbina* Naruci::getPorudzbina(){
-    return p;
-}
-
 //void Naruci::on_tableWidget_itemChanged(QTableWidgetItem *item)
 //{
 

@@ -16,7 +16,6 @@ public:
     explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr);
     ~Naruci();
 
-    Porudzbina* getPorudzbina();
 
 //private slots:
 //    void on_tableWidget_itemChanged(QTableWidgetItem *item);

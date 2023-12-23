@@ -19,7 +19,9 @@ public:
     qint32 getId();
     static void resetNextId();
     void setPorudzbina(Porudzbina* p);
+    Porudzbina* getPorudzbina();
     bool zauzet = false;
+    bool usable = false;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

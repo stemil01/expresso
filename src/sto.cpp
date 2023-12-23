@@ -62,11 +62,16 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 }
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
-    Porudzbina* porudzbina = new Porudzbina();
-    this->setPorudzbina(porudzbina);
-    Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina);
-    dialogNarudzbine->exec();
-    delete porudzbina;
+    if(usable){
+        Porudzbina* porudzbina = new Porudzbina();
+        this->setPorudzbina(porudzbina);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina);
+        dialogNarudzbine->exec();
+        qDebug()<<this->getPorudzbina()->racun();
+    }
+    else{
+        QGraphicsItem::mouseDoubleClickEvent(event);
+    }
 }
 
 qint32 Sto::getNextId(){
@@ -100,4 +105,8 @@ void Sto::fromVariant(const QVariant& variant)
 
 void Sto::setPorudzbina(Porudzbina* porudzbina){
     _p = porudzbina;
+}
+
+Porudzbina* Sto::getPorudzbina(){
+    return _p;
 }

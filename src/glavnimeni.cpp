@@ -89,10 +89,10 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
 
-    ui->cbDesign->clear();
-    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
-        ui->cbDesign->addItem(raspored->getNaziv());
-    }
+//    ui->cbDesign->clear();
+//    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+//        ui->cbDesign->addItem(raspored->getNaziv());
+//    }
 }
 
 void GlavniMeni::on_pbBackDTAMenu_clicked() {
@@ -223,6 +223,7 @@ void GlavniMeni::ucitajRaspored(){
     this->ocistiTablu(mainView);
     for(auto item : m_currentRaspored->getItems()){
         item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
+        item->usable = true;
         mainView->addItem(item);
     }
 }

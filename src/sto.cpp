@@ -5,6 +5,10 @@
 #include <QPainter>
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsScene>
+#include <QLineEdit>
+#include <QFormLayout>
+#include <QDialog>
+#include <QPushButton>
 #include <QVariant>
 #include <QVariantMap>
 
@@ -18,30 +22,25 @@ Sto::Sto()
 
 QRectF Sto::boundingRect() const
 {
-    return QRectF(0,0,150,150);
+    return QRectF(0,0,this->width,this->height);
 }
 void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
-
-    painter->fillRect(boundingRect(), QColor::fromRgb(128, 128, 128));
+    painter->fillRect(boundingRect(), this->color);
     painter->setPen(Qt::white);
 
-
     QString tekst;
-    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
+    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(broj_mesta));
 
-
-    if(this->isSelected())
-    {
+    if(this->isSelected() && !this->moze_da_se_koristi){
         painter->setPen(QPen(Qt::yellow, 3));
         painter->setBrush(Qt::NoBrush);
 
         painter->drawRect(boundingRect());
     }
-
 }
 
 void Sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
@@ -62,15 +61,38 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 }
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
-    if(usable){
+    if(moze_da_se_koristi){
         Porudzbina* porudzbina = new Porudzbina();
         this->setPorudzbina(porudzbina);
         Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina);
-        dialogNarudzbine->exec();
-        qDebug()<<this->getPorudzbina()->racun();
+        int result = dialogNarudzbine->exec();
+        if(result == QDialog::Accepted){
+            this->color = QColor::fromRgb(144,238,144);
+        }
+        delete dialogNarudzbine;
     }
     else{
-        QGraphicsItem::mouseDoubleClickEvent(event);
+        QDialog numOfSeatsInput;
+        QPushButton okButton("OK");
+        QPushButton cancelButton("Cancel");
+        numOfSeatsInput.setWindowTitle("Number of seats");
+        numOfSeatsInput.setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
+
+        QFormLayout layout(&numOfSeatsInput);
+        QLineEdit textInput(&numOfSeatsInput);
+
+        layout.addRow("Enter number of seats:", &textInput);
+        layout.addRow(&okButton, &cancelButton);
+        connect(&okButton, &QPushButton::clicked, &numOfSeatsInput, &QDialog::accept);
+        connect(&cancelButton, &QPushButton::clicked, &numOfSeatsInput, &QDialog::reject);
+
+        int result = numOfSeatsInput.exec();
+        if(result == QDialog::Accepted){
+            this->broj_mesta = textInput.text().toInt();
+        }
+        else if(result == QDialog::Rejected){
+            numOfSeatsInput.close();
+        }
     }
 }
 

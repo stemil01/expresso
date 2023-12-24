@@ -12,6 +12,7 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina) :
     connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbAddItemOrderDialog_clicked);
     connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbReceiptOrderDialog_clicked);
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
+    connect(ui->pbBackOrderDialog,&QPushButton::clicked,this,&QDialog::accept);
     //connect(ui->twOrderOrderDialog, &QTableWidget::itemChanged, this, &Naruci::on_tableWidget_itemChanged);
 
 

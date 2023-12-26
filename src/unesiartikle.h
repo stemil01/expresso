@@ -24,6 +24,7 @@ private:
     std::vector<Artikl> skladisteArtikala;
     void ucitajPodatkeIzTxt();
     void sacuvajPodatkeUTxt();
+    void ispisiPoKategorijama(const QString& odabranaKategorija);
 };
 
 #endif // UNESIARTIKLE_H

@@ -1,7 +1,11 @@
 #include "unesiartikle.h"
 #include "ui_unesiartikle.h"
+#include "glavnimeni.h"
 #include <QMessageBox>
 #include <QFile>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+
 unesiartikle::unesiartikle(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::unesiartikle)
@@ -98,5 +102,32 @@ void unesiartikle::sacuvajPodatkeUTxt()
     QTextStream out(&file);
     for(const auto &a: skladisteArtikala){
         out<<a.getNaziv()<<" "<<a.getCena()<<" "<<a.getKategorija();
+    }
+}
+
+void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
+{
+    ui->twOrderOrderDialog->clearContents();
+    ui->twOrderOrderDialog->setRowCount(0);
+
+    int row=0;
+
+    for(const auto& artikal: skladisteArtikala){
+        if(artikal.getKategorija()==odabranaKategorija){
+            QTableWidgetItem* naziv=new QTableWidgetItem (artikal.getNaziv());
+            QTableWidgetItem* cena=new QTableWidgetItem(QString::number(artikal.getCena()));
+
+
+
+            ui->twOrderOrderDialog->insertRow(row);
+            ui->twOrderOrderDialog->setItem(row,0,naziv);
+            ui->twOrderOrderDialog->setItem(row,1,cena);
+
+            ++row;
+        }
+
+
+
+
     }
 }

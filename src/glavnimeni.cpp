@@ -128,24 +128,24 @@ void GlavniMeni::on_pbFinishEMMenu_clicked() {
 void GlavniMeni::dodajNovSto()
 {
     if(Sto::getNextId() > 15){
-        QMessageBox* messageBox = new QMessageBox();
-        messageBox->setText("No more tables available");
-        messageBox->setWindowTitle("Info");
-        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+        QMessageBox messageBox;
+        messageBox.setText("No more tables available");
+        messageBox.setWindowTitle("Info");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
-        messageBox->addButton(QMessageBox::Ok);
-        messageBox->exec();
+        messageBox.addButton(QMessageBox::Ok);
+        messageBox.exec();
         return;
     }
 
     if(!m_currentRaspored){
-        QMessageBox* messageBox = new QMessageBox();
-        messageBox->setText("Add arrangement");
-        messageBox->setWindowTitle("Info");
-        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+        QMessageBox messageBox;
+        messageBox.setText("Add arrangement");
+        messageBox.setWindowTitle("Info");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                   "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
-        messageBox->addButton(QMessageBox::Ok);
-        messageBox->exec();
+        messageBox.addButton(QMessageBox::Ok);
+        messageBox.exec();
         return;
     }
 
@@ -162,14 +162,13 @@ void GlavniMeni::obrisiSto()
         tabla->removeItem(sto_za_brisanje[0]);
     }
     else if(sto_za_brisanje.length() == 0){
-        QMessageBox* messageBox = new QMessageBox();
-        messageBox->setText("Select table to remove");
-        messageBox->setWindowTitle("Info");
-        messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+        QMessageBox messageBox;
+        messageBox.setText("Select table to remove");
+        messageBox.setWindowTitle("Info");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
-        messageBox->addButton(QMessageBox::Ok);
-        messageBox->exec();
-        return;
+        messageBox.addButton(QMessageBox::Ok);
+        messageBox.exec();
     }
 }
 
@@ -182,14 +181,14 @@ void GlavniMeni::obrisiSve()
 }
 
 void GlavniMeni::sacuvajRaspored(){
-    QMessageBox* messageBox = new QMessageBox();
-    messageBox->setText("Saved succesfully!");
-    messageBox->setWindowTitle("Saved");
-    messageBox->setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+    QMessageBox messageBox;
+    messageBox.setText("Saved succesfully!");
+    messageBox.setWindowTitle("Saved");
+    messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                               "QMessageBox QLabel {color:green;min-width:200px;min-height:100px}");
-    messageBox->addButton(QMessageBox::Ok);
+    messageBox.addButton(QMessageBox::Ok);
 
-    int result = messageBox->exec();
+    int result = messageBox.exec();
     if(result == QMessageBox::Ok){
         ui -> stackedWidget -> setCurrentIndex(0);
 
@@ -201,7 +200,7 @@ void GlavniMeni::sacuvajRaspored(){
         Sto::resetNextId();
     }
     else if(result == QMessageBox::Cancel){
-        messageBox->close();
+        messageBox.close();
     }
 
     const auto rasporedi = m_rasporedData.getRasporedi();
@@ -212,7 +211,6 @@ void GlavniMeni::sacuvajRaspored(){
             mainView->addItem(item);
         }
     }
-    return;
 }
 
 void GlavniMeni::ucitajRaspored(){
@@ -226,10 +224,10 @@ void GlavniMeni::ucitajRaspored(){
     }
 
     this->ocistiTablu(mainView);
-    for(auto item : m_currentRaspored->getItems()){
-        item->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
-        item->usable = true;
-        mainView->addItem(item);
+    for(auto sto : m_currentRaspored->getItems()){
+        sto->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
+        sto->moze_da_se_koristi = true;
+        mainView->addItem(sto);
     }
 }
 
@@ -247,30 +245,30 @@ void GlavniMeni::ucitajRasporedDTA(){
 
 void GlavniMeni::dodajRaspored(){
 
-    QDialog* saveInput = new QDialog();
-    QLineEdit* textInput = new QLineEdit();
+    QDialog saveInput;
     QPushButton okButton("OK");
     QPushButton cancelButton("Cancel");
-    saveInput->setWindowTitle("New Arrangement");
-    saveInput->setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
+    saveInput.setWindowTitle("New Arrangement");
+    saveInput.setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
 
-    QFormLayout* layout = new QFormLayout(saveInput);
+    QFormLayout layout(&saveInput);
+    QLineEdit textInput(&saveInput);
 
-    layout->addRow("Enter arrangement name:", textInput);
-    layout->addRow(&okButton, &cancelButton);
-    connect(&okButton, &QPushButton::clicked, saveInput, &QDialog::accept);
-    connect(&cancelButton, &QPushButton::clicked, saveInput, &QDialog::reject);
+    layout.addRow("Enter arrangement name:", &textInput);
+    layout.addRow(&okButton, &cancelButton);
+    connect(&okButton, &QPushButton::clicked, &saveInput, &QDialog::accept);
+    connect(&cancelButton, &QPushButton::clicked, &saveInput, &QDialog::reject);
 
-    int result = saveInput->exec();
+    int result = saveInput.exec();
     if(result == QDialog::Accepted){
         delete m_currentRaspored;
-        m_currentRaspored = new Raspored(textInput->text());
+        m_currentRaspored = new Raspored(textInput.text());
         m_rasporedData.addRaspored(m_currentRaspored);
 
         ui->cbDesign->addItem(m_currentRaspored->getNaziv());
     }
     else if(result == QDialog::Rejected){
-        saveInput->close();
+        saveInput.close();
     }
 }
 
@@ -280,3 +278,5 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
      }
      Sto::resetNextId();
 }
+
+

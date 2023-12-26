@@ -5,7 +5,7 @@ Aplikacija namenjena za upotrebu u kaficima. Korisnik moze da modelira raspored 
 Članovi:
  - <a href="https://gitlab.com/Zicko01">Vladan Kozić 024/2020</a>
  - <a href="https://gitlab.com/stemil01">Stefan Milenković 007/2020</a>
- - <a href="https://gitlab.com/ivanadj">Ivana Đoković 114/2020</a>
+ - <a href="https://gitlab.com/ivanadj">~~Ivana Đoković 114/2020~~</a>
  - <a href="https://gitlab.com/jelenab">Jelena Bulajić 061/2019</a>
  - <a href="https://gitlab.com/ivanoviccjelenaa">Jelena Ivanović 365/2019</a>
  - <a href="https://gitlab.com/dragan777">Dragan Mladenović 181/2018</a>

@@ -12,7 +12,10 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina) :
     connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::onPbAddItemOrderDialogClicked);
     connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::onPbReceiptOrderDialogClicked);
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
-    connect(ui->twOrderOrderDialog,&QTableWidget::itemActivated, this,&Naruci::twItemActivated);
+    //connect(ui->twOrderOrderDialog,&QTableWidget::itemActivated, this,&Naruci::twItemActivated);
+    connect(ui->pbBackOrderDialog,&QPushButton::clicked,this,&QDialog::accept);
+
+
 
     QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
     // Set the resizing mode for each column to Stretch

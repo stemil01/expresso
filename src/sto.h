@@ -21,7 +21,11 @@ public:
     void setPorudzbina(Porudzbina* p);
     Porudzbina* getPorudzbina();
     bool zauzet = false;
-    bool usable = false;
+    qint32 broj_mesta = 2;
+    bool moze_da_se_koristi = false;
+    QColor color = QColor::fromRgb(128,128,128);
+    qreal width = 150;
+    qreal height = 150;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

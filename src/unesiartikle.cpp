@@ -107,8 +107,9 @@ void unesiartikle::sacuvajPodatkeUTxt()
 
 void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 {
-    ui->twOrderOrderDialog->clearContents();
-    ui->twOrderOrderDialog->setRowCount(0);
+
+    ui->twMenuEMMenu->clearContents();
+    ui->twMenuEMMenu->setRowCount(0);
 
     int row=0;
 
@@ -119,9 +120,9 @@ void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 
 
 
-            ui->twOrderOrderDialog->insertRow(row);
-            ui->twOrderOrderDialog->setItem(row,0,naziv);
-            ui->twOrderOrderDialog->setItem(row,1,cena);
+            ui->twMenuEMMenu->insertRow(row);
+            ui->twMenuEMMenu->setItem(row,0,naziv);
+            ui->twMenuEMMenu->setItem(row,1,cena);
 
             ++row;
         }

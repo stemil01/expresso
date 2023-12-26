@@ -2,8 +2,10 @@
 #define NARUCI_H
 #include <QDialog>
 
-class Porudzbina;
+#include <QTableWidgetItem>
 
+class Porudzbina;
+class Artikl;
 namespace Ui {
 class Naruci;
 }
@@ -17,14 +19,17 @@ public:
     ~Naruci();
 
 
-//private slots:
-//    void on_tableWidget_itemChanged(QTableWidgetItem *item);
+public slots:
+    void onPbAddItemOrderDialogClicked();
+    void onPbReceiptOrderDialogClicked();
+    void deleteSelectedRow();
+    void twItemActivated(QTableWidgetItem* item);
+
 private:
     Ui::Naruci *ui;
     Porudzbina* p;
-    void on_pbAddItemOrderDialog_clicked();
-    void on_pbReceiptOrderDialog_clicked();
-    void deleteSelectedRow();
+    void addItemInTW(Artikl* a);
+    void updateItemInTW(const QString& str);
 
 };
 

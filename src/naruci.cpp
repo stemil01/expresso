@@ -9,11 +9,10 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina) :
 {
     ui->setupUi(this);
 
-    connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbAddItemOrderDialog_clicked);
-    connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::on_pbReceiptOrderDialog_clicked);
+    connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::onPbAddItemOrderDialogClicked);
+    connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::onPbReceiptOrderDialogClicked);
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
-    //connect(ui->twOrderOrderDialog, &QTableWidget::itemChanged, this, &Naruci::on_tableWidget_itemChanged);
-
+    connect(ui->twOrderOrderDialog,&QTableWidget::itemActivated, this,&Naruci::twItemActivated);
 
     QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
     // Set the resizing mode for each column to Stretch
@@ -30,7 +29,7 @@ Naruci::~Naruci()
     delete ui;
 }
 
-void Naruci::on_pbAddItemOrderDialog_clicked(){
+void Naruci::onPbAddItemOrderDialogClicked(){
 
     ui->teReceiptOrderDialog->clear();
 
@@ -41,27 +40,39 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
     for(const auto& item :selectedItems){ //postavljena mogucnost za multiselection
         QString naziv=item->text();
 
-        //izvuci cenu iz skladista artikala kad bude tu ucitan meni
-
+        //izvuci cenu iz skladista artikala
 
         double cena=0;
-        Artikl artikl(naziv,cena,kategorija);
+        Artikl* artikl=new Artikl(naziv,cena,kategorija);
         int promena=p->dodajArtikl(artikl);
-
         if(!promena){
-            QTableWidgetItem* itemNaziv = new QTableWidgetItem();
-            itemNaziv->setText(artikl.getNaziv());
-            QTableWidgetItem* itemKolicina = new QTableWidgetItem();
-            itemKolicina->setText(QString::number(artikl.getKolicina()));
-            QTableWidgetItem* itemCena = new QTableWidgetItem();
-            itemCena->setText(QString::number(artikl.getCena()));
-
-            int row=ui->twOrderOrderDialog->rowCount();
-            ui->twOrderOrderDialog->insertRow(row);
-            ui->twOrderOrderDialog->setItem(row,0,itemNaziv);
-            ui->twOrderOrderDialog->setItem(row,1,itemKolicina);
-            ui->twOrderOrderDialog->setItem(row,2,itemCena);
+            addItemInTW(artikl);
         }else{
+            updateItemInTW(naziv);
+        }
+
+    }
+}
+void Naruci::addItemInTW(Artikl* artikl){
+    QTableWidgetItem* itemNaziv = new QTableWidgetItem();
+    itemNaziv->setText(artikl->getNaziv());
+    itemNaziv->setFlags(itemNaziv->flags() & ~Qt::ItemIsEditable);
+
+    QTableWidgetItem* itemKolicina = new QTableWidgetItem();
+    itemKolicina->setText(QString::number(artikl->getKolicina()));
+    itemKolicina->setFlags(itemKolicina->flags() | Qt::ItemIsEditable);
+
+    QTableWidgetItem* itemCena = new QTableWidgetItem();
+    itemCena->setText(QString::number(artikl->getCena()));
+    itemCena->setFlags(itemCena->flags() & ~Qt::ItemIsEditable);
+
+    int row=ui->twOrderOrderDialog->rowCount();
+    ui->twOrderOrderDialog->insertRow(row);
+    ui->twOrderOrderDialog->setItem(row,0,itemNaziv);
+    ui->twOrderOrderDialog->setItem(row,1,itemKolicina);
+    ui->twOrderOrderDialog->setItem(row,2,itemCena);
+}
+void Naruci::updateItemInTW(const QString& naziv){
             QList<QTableWidgetItem *> foundItems = ui->twOrderOrderDialog->findItems(naziv, Qt::MatchExactly);
 
             if (!foundItems.isEmpty()) {
@@ -69,15 +80,11 @@ void Naruci::on_pbAddItemOrderDialog_clicked(){
                 int row = foundItem->row();
                 QTableWidgetItem* itemChange=ui->twOrderOrderDialog->item(row,1);
                 int kolicina=(itemChange->text()).toInt();
-                kolicina++;
-                itemChange->setText(QString::number(kolicina));
+                itemChange->setText(QString::number(++kolicina));
             }
-        }
-    }
-
 }
 
-void Naruci::on_pbReceiptOrderDialog_clicked(){
+void Naruci::onPbReceiptOrderDialogClicked(){
     ui->teReceiptOrderDialog->setText(p->racun());
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
@@ -102,9 +109,22 @@ void Naruci::deleteSelectedRow() {
     }
 }
 
+void Naruci::twItemActivated(QTableWidgetItem *item) {
+    qDebug()<<"item activated";
+    if (item) {
+        qDebug() << "Nova vrijednost:" << item->text();
+        int kolicina = (item->text()).toInt();
+        int row = item->row();
 
-//void Naruci::on_tableWidget_itemChanged(QTableWidgetItem *item)
-//{
+        QTableWidgetItem *itemNaziv = ui->twOrderOrderDialog->item(row, 0);
+        if (itemNaziv) {
+            QString naziv = itemNaziv->text();
+            qDebug() << "Naziv:" << naziv;
+            //p->sacuvajPromenu(naziv, kolicina);
+        }
+    }
 
-//}
+
+}
+
 

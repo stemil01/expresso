@@ -2,23 +2,23 @@
 #define PORUDZBINA_H
 
 #include "artikl.h"
-#include <vector>
+#include <QVector>
 
 class Porudzbina
 {
-
 public:
     Porudzbina();
+    ~Porudzbina();
 
 
-    int dodajArtikl(Artikl& a);
+    int dodajArtikl(Artikl* a);
     void obrisiArtikle();
-
+    void sacuvajPromenu(const QString& naziv, int kolicina);
     QString racun();
     void obrisiPoNazivu(const QString& naziv);
 
 private:
-    std::vector<Artikl> artikli;
+    QVector<Artikl*> artikli;
 };
 
 

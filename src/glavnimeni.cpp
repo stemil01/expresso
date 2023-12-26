@@ -16,7 +16,7 @@
 #include <QVariantMap>
 #include <QVariantList>
 #include <QGraphicsItem>
-
+#include "porudzbina.h"
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
@@ -75,10 +75,15 @@ void setStyle() {
 
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
-    help *helpOpen = new help(this);
-    helpOpen -> setModal(true);
-    helpOpen -> exec();
-    delete helpOpen;
+    //help *helpOpen = new help(this);
+    //helpOpen -> setModal(true);
+    //helpOpen -> exec();
+    //delete helpOpen;
+    Porudzbina* porudzbina = new Porudzbina();
+    Naruci *naruci=new Naruci(this,porudzbina);
+    naruci->setModal(true);
+    naruci->exec();
+    delete naruci;
 }
 
 void GlavniMeni::on_pbQuitMainMenu_clicked()

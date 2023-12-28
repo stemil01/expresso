@@ -82,3 +82,7 @@ void Porudzbina::sacuvajPromenu(const QString& _naziv, int _kolicina){
     }
 }
 
+QVector<Artikl*> Porudzbina::getArtikli(){
+    return artikli;
+}
+

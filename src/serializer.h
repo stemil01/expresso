@@ -1,7 +1,7 @@
 #ifndef SERIALIZER_H
 #define SERIALIZER_H
 
-#include <src/serializable.h>
+#include "serializable.h"
 
 class Serializer
 {

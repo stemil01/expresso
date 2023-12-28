@@ -1,5 +1,5 @@
 #include "glavnimeni.h"
-#include "src/help.h"
+//#include "src/help.h"
 #include "ui_glavnimeni.h"
 #include "tabla.h"
 #include "sto.h"

@@ -14,6 +14,7 @@ SOURCES += \
     artikl_test.cpp \
     main.cpp \
     porudzbina_test.cpp \
+    sto_glmeni_test.cpp \
     sto_test.cpp \
     ../src/artikl.cpp \
     ../src/binaryserializer.cpp \
@@ -43,8 +44,7 @@ HEADERS += \
     ../src/serializer.h \
     ../src/sto.h \
     ../src/tabla.h \
-    ../src/unesiartikle.h \
-    unesiartikle_test.h
+    ../src/unesiartikle.h
 
 FORMS += \
     ../src/glavnimeni.ui \

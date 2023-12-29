@@ -12,6 +12,7 @@ class Sto : public QGraphicsObject, public Serializable
 
 public:
     Sto();
+    ~Sto();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
@@ -36,7 +37,7 @@ protected:
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* event) override;
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 private:
-    Porudzbina* _p;
+    Porudzbina* _p = nullptr;
     qint32 _id;
     static qint32 _nextId;
     QPointF _lastPos;

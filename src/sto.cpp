@@ -20,6 +20,10 @@ Sto::Sto()
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
+Sto::~Sto(){
+    delete _p;
+}
+
 QRectF Sto::boundingRect() const
 {
     return QRectF(0,0,this->width,this->height);

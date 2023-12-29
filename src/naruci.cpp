@@ -117,7 +117,7 @@ void Naruci::twItemActivated(QTableWidgetItem *item) {
     qDebug()<<"item activated";
     if (item) {
         qDebug() << "Nova vrijednost:" << item->text();
-        int kolicina = (item->text()).toInt();
+        //int kolicina = (item->text()).toInt();
         int row = item->row();
 
         QTableWidgetItem *itemNaziv = ui->twOrderOrderDialog->item(row, 0);

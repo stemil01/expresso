@@ -16,6 +16,7 @@ public:
     void sacuvajPromenu(const QString& naziv, int kolicina);
     QString racun();
     void obrisiPoNazivu(const QString& naziv);
+    QVector<Artikl*> getArtikli();
 
 private:
     QVector<Artikl*> artikli;

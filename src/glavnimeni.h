@@ -52,6 +52,8 @@ private:
     QGraphicsScene *mainView;
     RasporedData m_rasporedData;
     Raspored *m_currentRaspored;
+
+friend class GlavniMeniTest;
 };
 
 #endif // GLAVNIMENI_H

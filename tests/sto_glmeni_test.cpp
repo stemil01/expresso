@@ -3,7 +3,6 @@
 #include "../src/porudzbina.h"
 #include "../src/artikl.h"
 #include "../src/glavnimeni.h"
-//#include "../src/raspored.h"
 #include <QGraphicsScene>
 
 class GlavniMeniTest : public GlavniMeni

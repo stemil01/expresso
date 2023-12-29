@@ -1,5 +1,5 @@
 #include "glavnimeni.h"
-//#include "src/help.h"
+#include "help.h"
 #include "ui_glavnimeni.h"
 #include "tabla.h"
 #include "sto.h"
@@ -227,7 +227,7 @@ void GlavniMeni::ucitajRaspored(){
     this->ocistiTablu(mainView);
     for(auto sto : m_currentRaspored->getItems()){
         sto->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,false);
-        sto->moze_da_se_koristi = true;
+        sto->za_raspored = false;
         mainView->addItem(sto);
     }
 }

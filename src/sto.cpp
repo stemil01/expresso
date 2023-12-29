@@ -37,9 +37,10 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     painter->setPen(Qt::white);
 
     QString tekst;
-    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(broj_mesta));
+    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
+    painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, tekst.number(broj_mesta) + QString(" seats"));
 
-    if(this->isSelected() && !this->moze_da_se_koristi){
+    if(this->isSelected() && this->za_raspored){
         painter->setPen(QPen(Qt::yellow, 3));
         painter->setBrush(Qt::NoBrush);
 
@@ -65,13 +66,14 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 }
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
-    if(moze_da_se_koristi){
+    if(!za_raspored){
         Porudzbina* porudzbina = new Porudzbina();
         this->setPorudzbina(porudzbina);
         Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina);
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
             this->color = QColor::fromRgb(144,238,144);
+            this->currentStatus = OCCUPIED;
         }
         delete dialogNarudzbine;
     }

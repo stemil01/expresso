@@ -21,12 +21,17 @@ public:
     static void resetNextId();
     void setPorudzbina(Porudzbina* p);
     Porudzbina* getPorudzbina();
-    bool zauzet = false;
-    qint32 broj_mesta = 2;
-    bool moze_da_se_koristi = false;
+    qint32 broj_mesta = 4;
+    bool za_raspored = false;
     QColor color = QColor::fromRgb(128,128,128);
     qreal width = 150;
     qreal height = 150;
+    enum Status{
+        AVAILABLE,
+        OCCUPIED,
+        RESERVED
+    };
+    Status currentStatus;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

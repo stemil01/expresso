@@ -1,6 +1,8 @@
 #include "naruci.h"
 #include "ui_naruci.h"
 
+#include "porudzbina.h"
+#include <QWidget>
 
 Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtikle) :
     QDialog(parent),
@@ -13,7 +15,7 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtik
     connect(ui->pbAddItemOrderDialog,&QPushButton::clicked,this,&Naruci::onPbAddItemOrderDialogClicked);
     connect(ui->pbReceiptOrderDialog,&QPushButton::clicked,this,&Naruci::onPbReceiptOrderDialogClicked);
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
-    //connect(ui->twOrderOrderDialog,&QTableWidget::itemActivated, this,&Naruci::twItemActivated);
+    connect(ui->twOrderOrderDialog,&QTableWidget::itemActivated, this,&Naruci::twItemActivated);
     connect(ui->pbBackOrderDialog,&QPushButton::clicked,this,&QDialog::accept);
     connect(ui->cbTypeOrderDialog,&QComboBox::currentTextChanged,this,&Naruci::comboBoxTextChanged);
 
@@ -25,7 +27,7 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtik
         header->setSectionResizeMode(i, QHeaderView::Stretch);
     }
     ui->twOrderOrderDialog->setShowGrid(false);
-
+    ui->cbTypeOrderDialog->setCurrentIndex(-1);
 }
 
 Naruci::~Naruci()
@@ -48,12 +50,12 @@ void Naruci::onPbAddItemOrderDialogClicked(){
 
         double cena=0;
         Artikl* artikl=new Artikl(naziv,cena,kategorija);
-        //int promena=p->dodajArtikl(artikl);
-        //if(!promena){
-        //    addItemInTW(artikl);
-        //}else{
-        //    updateItemInTW(naziv);
-        //}
+        int promena=p->dodajArtikl(artikl);
+        if(!promena){
+            addItemInTW(artikl);
+        }else{
+            updateItemInTW(naziv);
+        }
 
     }
 }
@@ -89,10 +91,10 @@ void Naruci::updateItemInTW(const QString& naziv){
 }
 
 void Naruci::onPbReceiptOrderDialogClicked(){
-    //ui->teReceiptOrderDialog->setText(p->racun());
+    ui->teReceiptOrderDialog->setText(p->racun());
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
-    //p->obrisiArtikle();
+    p->obrisiArtikle();
 }
 
 void Naruci::deleteSelectedRow() {
@@ -106,7 +108,7 @@ void Naruci::deleteSelectedRow() {
             QTableWidgetItem *item = ui->twOrderOrderDialog->item(row, 0);
             if (item) {
                 QString naziv = item->text();
-                //p->obrisiPoNazivu(naziv);
+                p->obrisiPoNazivu(naziv);
                 ui->twOrderOrderDialog->removeRow(row);
             }
         }

@@ -13,6 +13,7 @@ isEmpty(CATCH_INCLUDE_DIR): {
 SOURCES += \
     artikl_test.cpp \
     main.cpp \
+    naruci_test.cpp \
     porudzbina_test.cpp \
     sto_glmeni_test.cpp \
     sto_test.cpp \

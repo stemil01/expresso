@@ -2,6 +2,7 @@
 #include <QVector>
 #include <QString>
 #include <QDebug>
+
 Porudzbina::Porudzbina(){
     artikli = QVector<Artikl*>();
 }

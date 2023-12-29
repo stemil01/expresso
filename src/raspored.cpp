@@ -58,7 +58,13 @@ Sto* Raspored::addSto()
 
 void Raspored::removeSto(qint32 idStola)
 {
-
+    for(auto sto : m_raspored){
+        if(sto->getId() == idStola){
+            m_raspored.removeOne(sto);
+            this->currentNumOfTables -= 1;
+            delete sto;
+        }
+    }
 }
 
 void Raspored::clearSto()
@@ -66,4 +72,12 @@ void Raspored::clearSto()
     qDeleteAll(m_raspored);
     m_raspored.clear();
     Sto::resetNextId();
+}
+
+void Raspored::setMaxTables(qint32 num){
+    m_max_tables = num;
+}
+
+qint32 Raspored::getMaxTables(){
+    return m_max_tables;
 }

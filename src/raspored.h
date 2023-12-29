@@ -16,6 +16,9 @@ public:
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
+    void setMaxTables(qint32 num);
+    qint32 getMaxTables();
+    qint32 currentNumOfTables = 0;
 
     inline QString getNaziv() const { return m_naziv; }
 
@@ -25,6 +28,7 @@ public:
     void clearSto();
 private:
     QString m_naziv;
+    qint32 m_max_tables;
     QList<Sto*> m_raspored;
 };
 

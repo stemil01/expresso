@@ -56,6 +56,17 @@ void unesiartikle::onSubmitClicked()
     ui->pRICELineEdit->clear();
 }
 
+std::vector<Artikl> unesiartikle::getSkladisteArtikala() const
+{
+    return skladisteArtikala;
+}
+
+void unesiartikle::setSkladisteArtikala(const std::vector<Artikl> &newSkladisteArtikala)
+{
+    skladisteArtikala = newSkladisteArtikala;
+}
+
+
 void unesiartikle::ucitajPodatkeIzTxt()
 {
     QFile file("podaci.txt");

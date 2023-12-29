@@ -15,16 +15,22 @@ public:
     explicit unesiartikle(QWidget *parent = nullptr);
     ~unesiartikle();
 
+
+
+    void setSkladisteArtikala(const std::vector<Artikl> &newSkladisteArtikala);
+    std::vector<Artikl> getSkladisteArtikala() const;
     void dodajArtikal(const Artikl& artikal);
+    void ucitajPodatkeIzTxt();
+    void sacuvajPodatkeUTxt();
+    void ispisiPoKategorijama(const QString& odabranaKategorija);
+
 private slots:
     void onSubmitClicked();
 
 private:
     Ui::unesiartikle *ui;
     std::vector<Artikl> skladisteArtikala;
-    void ucitajPodatkeIzTxt();
-    void sacuvajPodatkeUTxt();
-    void ispisiPoKategorijama(const QString& odabranaKategorija);
+
 };
 
 #endif // UNESIARTIKLE_H

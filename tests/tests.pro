@@ -11,7 +11,9 @@ isEmpty(CATCH_INCLUDE_DIR): {
 }
 
 SOURCES += \
+    artikl_test.cpp \
     main.cpp \
+    porudzbina_test.cpp \
     sto_test.cpp \
     ../src/artikl.cpp \
     ../src/binaryserializer.cpp \
@@ -24,7 +26,8 @@ SOURCES += \
     ../src/rasporeddata.cpp \
     ../src/sto.cpp \
     ../src/tabla.cpp \
-    ../src/unesiartikle.cpp
+    ../src/unesiartikle.cpp \
+    unesiartikle_test.cpp
 
 HEADERS += \
     ../src/artikl.h \
@@ -40,7 +43,8 @@ HEADERS += \
     ../src/serializer.h \
     ../src/sto.h \
     ../src/tabla.h \
-    ../src/unesiartikle.h
+    ../src/unesiartikle.h \
+    unesiartikle_test.h
 
 FORMS += \
     ../src/glavnimeni.ui \

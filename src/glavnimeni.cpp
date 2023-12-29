@@ -162,6 +162,8 @@ void GlavniMeni::obrisiSto()
     QList<QGraphicsItem*> sto_za_brisanje = tabla->selectedItems();
     if(sto_za_brisanje.length() == 1){
         tabla->removeItem(sto_za_brisanje[0]);
+        Sto* sto = dynamic_cast<Sto*>(sto_za_brisanje[0]);
+        m_currentRaspored->removeSto(sto->getId());
     }
     else if(sto_za_brisanje.length() == 0){
         QMessageBox messageBox;

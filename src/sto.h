@@ -22,7 +22,7 @@ public:
     void setPorudzbina(Porudzbina* p);
     Porudzbina* getPorudzbina();
     qint32 broj_mesta = 4;
-    bool za_raspored = false;
+    bool za_raspored = true;
     QColor color = QColor::fromRgb(128,128,128);
     qreal width = 150;
     qreal height = 150;

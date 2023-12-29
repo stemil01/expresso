@@ -58,7 +58,13 @@ Sto* Raspored::addSto()
 
 void Raspored::removeSto(qint32 idStola)
 {
-
+    for(auto sto : m_raspored){
+        if(sto->getId() == idStola){
+            m_raspored.removeOne(sto);
+            this->currentNumOfTables -= 1;
+            delete sto;
+        }
+    }
 }
 
 void Raspored::clearSto()

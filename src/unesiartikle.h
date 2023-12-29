@@ -2,6 +2,7 @@
 #define UNESIARTIKLE_H
 #include<src/artikl.h>
 #include <QWidget>
+#include <QListWidget>
 
 namespace Ui {
 class unesiartikle;
@@ -16,6 +17,10 @@ public:
     ~unesiartikle();
 
     void dodajArtikal(const Artikl& artikal);
+    double cenaArtikla(const QString& _kategorija, const QString& _naziv);
+    void ispisiPoKategorijiListWidget(QListWidget* lw,const QString &odabranaKategorija);
+
+
 private slots:
     void onSubmitClicked();
 

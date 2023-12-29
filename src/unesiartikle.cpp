@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QTableWidget>
 #include <QTableWidgetItem>
+#include <QListWidget>
 
 unesiartikle::unesiartikle(QWidget *parent)
     : QWidget(parent)
@@ -108,8 +109,8 @@ void unesiartikle::sacuvajPodatkeUTxt()
 void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 {
 
-    ui->twMenuEMMenu->clearContents();
-    ui->twMenuEMMenu->setRowCount(0);
+    //ui->twMenuEMMenu->clearContents();
+    //ui->twMenuEMMenu->setRowCount(0);
 
     int row=0;
 
@@ -120,9 +121,9 @@ void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 
 
 
-            ui->twMenuEMMenu->insertRow(row);
-            ui->twMenuEMMenu->setItem(row,0,naziv);
-            ui->twMenuEMMenu->setItem(row,1,cena);
+           // ui->twMenuEMMenu->insertRow(row);
+           // ui->twMenuEMMenu->setItem(row,0,naziv);
+           // ui->twMenuEMMenu->setItem(row,1,cena);
 
             ++row;
         }
@@ -130,5 +131,22 @@ void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 
 
 
+    }
+}
+void unesiartikle::ispisiPoKategorijiListWidget(QListWidget* lw,const QString &odabranaKategorija){
+    if(lw){
+        for(const auto& artikl: skladisteArtikala){
+            if(artikl.getKategorija()==odabranaKategorija){
+                QListWidgetItem* item=new QListWidgetItem(artikl.getNaziv());
+                lw->addItem(item);
+            }
+        }
+    }
+}
+double unesiartikle::cenaArtikla(const QString& _kategorija, const QString& _naziv){
+    for(const auto& artikl : skladisteArtikala){
+        if(artikl.getKategorija()==_kategorija && artikl.getNaziv()==_naziv){
+            return artikl.getCena();
+        }
     }
 }

@@ -8,6 +8,9 @@ help::help(QWidget *parent) :
     ui->setupUi(this);
 }
 
+
+
+
 /*void help(QCloseEvent *event) {
     QDialog::closeEvent(event);
 }*/

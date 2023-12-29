@@ -128,9 +128,9 @@ void GlavniMeni::on_pbFinishEMMenu_clicked() {
 
 void GlavniMeni::dodajNovSto()
 {
-    if(Sto::getNextId() > 15){
+    if(m_currentRaspored->currentNumOfTables >= m_currentRaspored->getMaxTables()){
         QMessageBox messageBox;
-        messageBox.setText("No more tables available");
+        messageBox.setText("Maximum number of tables is " + QString::number(m_currentRaspored->getMaxTables()));
         messageBox.setWindowTitle("Info");
         messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
@@ -151,6 +151,7 @@ void GlavniMeni::dodajNovSto()
     }
 
     Sto *sto = m_currentRaspored->addSto();
+    m_currentRaspored->currentNumOfTables += 1;
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);
@@ -254,8 +255,10 @@ void GlavniMeni::dodajRaspored(){
 
     QFormLayout layout(&saveInput);
     QLineEdit textInput(&saveInput);
+    QLineEdit numOfTablesInput(&saveInput);
 
     layout.addRow("Enter arrangement name:", &textInput);
+    layout.addRow("Enter maximum number of tables:",&numOfTablesInput);
     layout.addRow(&okButton, &cancelButton);
     connect(&okButton, &QPushButton::clicked, &saveInput, &QDialog::accept);
     connect(&cancelButton, &QPushButton::clicked, &saveInput, &QDialog::reject);
@@ -264,6 +267,7 @@ void GlavniMeni::dodajRaspored(){
     if(result == QDialog::Accepted){
         delete m_currentRaspored;
         m_currentRaspored = new Raspored(textInput.text());
+        m_currentRaspored->setMaxTables(numOfTablesInput.text().toInt());
         m_rasporedData.addRaspored(m_currentRaspored);
 
         ui->cbDesign->addItem(m_currentRaspored->getNaziv());

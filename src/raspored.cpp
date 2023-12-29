@@ -67,3 +67,11 @@ void Raspored::clearSto()
     m_raspored.clear();
     Sto::resetNextId();
 }
+
+void Raspored::setMaxTables(qint32 num){
+    m_max_tables = num;
+}
+
+qint32 Raspored::getMaxTables(){
+    return m_max_tables;
+}

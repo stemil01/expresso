@@ -53,6 +53,7 @@ Sto* Raspored::addSto()
 {
     Sto *sto = new Sto();
     m_raspored.append(sto);
+    currentNumOfTables += 1;
     return sto;
 }
 

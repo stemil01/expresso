@@ -151,7 +151,6 @@ void GlavniMeni::dodajNovSto()
     }
 
     Sto *sto = m_currentRaspored->addSto();
-    m_currentRaspored->currentNumOfTables += 1;
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);

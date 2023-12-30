@@ -3,6 +3,11 @@
 
 #include "artikl.h"
 #include <QVector>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QListWidget>>
+#include <QListWidgetItem>>
+
 
 class Porudzbina : public Serializable
 {
@@ -17,6 +22,8 @@ public:
     QString racun();
     void obrisiPoNazivu(const QString& naziv);
     QVector<Artikl*> getArtikli();
+    //void printInListWidget(QListWidget& lw)
+    void printInTableWidget(QTableWidget *tw);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

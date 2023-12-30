@@ -52,7 +52,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
 }
 
 void GlavniMeni::setStyle() {
-   /* QHeaderView* header = ui -> twMenuEMMenu -> horizontalHeader();
+    QHeaderView* header = ui -> twMenuEMMenu -> horizontalHeader();
 
     int columnCount = ui -> twMenuEMMenu -> columnCount();
     for (int i = 0; i < columnCount; ++i) {
@@ -66,7 +66,7 @@ void GlavniMeni::setStyle() {
 
     ui -> twMenuEMMenu -> setSelectionMode(QAbstractItemView::SingleSelection);
     ui -> twMenuEMMenu -> setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui -> twMenuEMMenu -> setEditTriggers(QAbstractItemView::NoEditTriggers);*/
+    ui -> twMenuEMMenu -> setEditTriggers(QAbstractItemView::NoEditTriggers);
     //-------------------------------------------------------------------------
 }
 
@@ -95,7 +95,8 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
     connect(ui->pbRemovearrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiRaspored);
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
-    connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
+    connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
+    connect(ui->pbAddItemEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
 
 }
 //------------------------------------------------------------------
@@ -142,7 +143,9 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
     menu -> getMeni() -> remove(kategorija);
     ui -> cbTypeEMMenu -> removeItem(ui -> cbTypeEMMenu -> findText(kategorija));
 }
-/*
+
+
+
 void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     QString naziv = ui -> leNameEMMenu -> text();
     double cena = (ui -> lePriceEMMenu -> text()).toDouble();
@@ -152,30 +155,13 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
 
     QString kategorija = ui -> cbTypeEMMenu -> currentText();
 
+    Artikl *pom = new Artikl(naziv, cena, kategorija);
+    int res = (*(menu -> getMeni()))[kategorija] -> dodajArtikl(pom);
+    if(res == 0)
+        std::cout << "Postoji" << std::endl;
 
-    if(!(*(meni -> getMeni()))[kategorija] -> dodajArtikal(new Artikl(naziv, cena))) {
-        std::cout << "Vec postoji ime" << std::endl;
-        return;
-    }
-
-    int newRow = ui -> twMenuEMMenu->rowCount();
-    ui ->twMenuEMMenu->insertRow(newRow);
-
-    QFont itemFont;
-    itemFont.setPointSize(20);
-
-    QTableWidgetItem *itemNaziv = new QTableWidgetItem(naziv);
-    itemNaziv -> setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
-    itemNaziv ->setFont(itemFont);
-    ui->twMenuEMMenu->setItem(newRow, 0, itemNaziv);
-    //delete itemNaziv;
-    QTableWidgetItem *itemCena = new QTableWidgetItem(QString::number(cena));
-    itemCena -> setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
-    itemCena ->setFont(itemFont);
-    ui->twMenuEMMenu->setItem(newRow, 1, itemCena);
-    //delete itemCena;
+    (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
 }
-*/
 
 //----------------------------------------------------------------
 void GlavniMeni::on_pbHelpMainMenu_clicked()

@@ -40,6 +40,7 @@ private slots:
     void on_pbFinishEMMenu_clicked();
     void on_pbAddCategoryEMMenu_clicked();
     void on_pbRemoveCategoryEMMenu_clicked();
+    void on_pbAddItemEMMenu_clicked();
     void dodajNovSto();
     void obrisiSto();
     void obrisiSve();

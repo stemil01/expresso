@@ -13,7 +13,9 @@ SOURCES += \
     ../help.cpp \
     ../izvestaj.cpp \
     ../main.cpp \
+    ../meni.cpp \
     ../naruci.cpp \
+    ../nizartikala.cpp \
     ../porudzbina.cpp \
     ../raspored.cpp \
     ../rasporeddata.cpp \
@@ -27,7 +29,9 @@ HEADERS += \
     ../glavnimeni.h \
     ../help.h \
     ../izvestaj.h \
+    ../meni.h \
     ../naruci.h \
+    ../nizartikala.h \
     ../porudzbina.h \
     ../raspored.h \
     ../rasporeddata.h \

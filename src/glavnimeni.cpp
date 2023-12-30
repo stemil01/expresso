@@ -67,6 +67,7 @@ void GlavniMeni::connectSlots() {
     connect(ui -> pbEditMenuMainMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbEditMenuMainMenu_clicked);
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
+    connect(ui->pbRemovearrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiRaspored);
 }
 
 void setStyle() {
@@ -95,10 +96,15 @@ void GlavniMeni::on_pbQuitMainMenu_clicked()
 void GlavniMeni::on_pbDTAMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(1);
 
-//    ui->cbDesign->clear();
-//    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
-//        ui->cbDesign->addItem(raspored->getNaziv());
-//    }
+    ui->cbDesign->clear();
+    bool addedFirst = false;
+    for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+        if (!addedFirst) {
+            m_currentRaspored = raspored;
+            addedFirst = true;
+        }
+        ui->cbDesign->addItem(raspored->getNaziv());
+    }
 }
 
 void GlavniMeni::on_pbBackDTAMenu_clicked() {
@@ -113,7 +119,12 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(2);
 
     ui->cbChooseArrangement->clear();
+    bool addedFirst = false;
     for (const auto& raspored : *(m_rasporedData.getRasporedi())) {
+        if (!addedFirst) {
+            m_currentRaspored = raspored;
+            addedFirst = true;
+        }
         ui->cbChooseArrangement->addItem(raspored->getNaziv());
     }
 }
@@ -128,17 +139,6 @@ void GlavniMeni::on_pbFinishEMMenu_clicked() {
 
 void GlavniMeni::dodajNovSto()
 {
-    if(m_currentRaspored->currentNumOfTables >= m_currentRaspored->getMaxTables()){
-        QMessageBox messageBox;
-        messageBox.setText("Maximum number of tables is " + QString::number(m_currentRaspored->getMaxTables()));
-        messageBox.setWindowTitle("Info");
-        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
-                                   "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
-        messageBox.addButton(QMessageBox::Ok);
-        messageBox.exec();
-        return;
-    }
-
     if(!m_currentRaspored){
         QMessageBox messageBox;
         messageBox.setText("Add arrangement");
@@ -150,8 +150,18 @@ void GlavniMeni::dodajNovSto()
         return;
     }
 
+    if(m_currentRaspored->currentNumOfTables >= m_currentRaspored->getMaxTables()){
+        QMessageBox messageBox;
+        messageBox.setText("Maximum number of tables is " + QString::number(m_currentRaspored->getMaxTables()));
+        messageBox.setWindowTitle("Info");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                   "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox.addButton(QMessageBox::Ok);
+        messageBox.exec();
+        return;
+    }
+
     Sto *sto = m_currentRaspored->addSto();
-    m_currentRaspored->currentNumOfTables += 1;
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);
@@ -237,12 +247,15 @@ void GlavniMeni::ucitajRaspored(){
 
 void GlavniMeni::ucitajRasporedDTA(){
     QString naziv = ui->cbDesign->currentText();
+    m_currentRaspored = m_rasporedData.getRaspored(naziv);
 
-    Raspored* raspored = m_rasporedData.getRaspored(naziv);
-
+    if (m_currentRaspored == nullptr) {
+        qCritical() << "No arrangement with name: " << naziv.toStdString();
+        return;
+    }
 
     this->ocistiTablu(tabla);
-    for(auto item : raspored->getItems()){
+    for(auto item : m_currentRaspored->getItems()){
         tabla->addItem(item);
     }
 }
@@ -266,24 +279,45 @@ void GlavniMeni::dodajRaspored(){
     connect(&cancelButton, &QPushButton::clicked, &saveInput, &QDialog::reject);
 
     int result = saveInput.exec();
+    QString naziv = textInput.text();
     if(result == QDialog::Accepted){
-        delete m_currentRaspored;
-        m_currentRaspored = new Raspored(textInput.text());
+        m_currentRaspored = new Raspored(naziv);
         m_currentRaspored->setMaxTables(numOfTablesInput.text().toInt());
         m_rasporedData.addRaspored(m_currentRaspored);
 
-        ui->cbDesign->addItem(m_currentRaspored->getNaziv());
+        ui->cbDesign->addItem(naziv);
+        ui->cbDesign->setCurrentIndex(ui->cbDesign->findText(naziv));
     }
     else if(result == QDialog::Rejected){
         saveInput.close();
     }
 }
 
-void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
-     for(auto item : tabla->items()){
-          tabla->removeItem(item);
-     }
-     Sto::resetNextId();
+void GlavniMeni::obrisiRaspored()
+{
+    QString naziv = m_currentRaspored->getNaziv();
+
+    QMessageBox messageBox;
+    messageBox.setText("Are you sure you want to delete arrangement '" + naziv + "'?");
+    messageBox.setWindowTitle("Confirm deletion");
+    messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                              "QMessageBox QLabel {color:red;min-width:400px;min-height:100px}");
+    messageBox.addButton(QMessageBox::Ok);
+    messageBox.addButton(QMessageBox::Cancel);
+
+    int result = messageBox.exec();
+    if(result == QMessageBox::Ok){
+        m_rasporedData.removeRaspored(naziv);
+        ui->cbDesign->removeItem(ui->cbDesign->findText(naziv));
+    }
+    else if(result == QMessageBox::Cancel){
+        messageBox.close();
+    }
 }
 
-
+void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
+    for(auto item : tabla->items()){
+        tabla->removeItem(item);
+    }
+    Sto::resetNextId();
+}

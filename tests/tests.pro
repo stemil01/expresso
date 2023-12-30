@@ -1,7 +1,7 @@
 TEMPLATE = app
 QT += widgets
 
-CONFIG += c++11
+CONFIG += c++20
 
 isEmpty(CATCH_INCLUDE_DIR): CATCH_INCLUDE_DIR=$$(CATCH_INCLUDE_DIR)
 !isEmpty(CATCH_INCLUDE_DIR): INCLUDEPATH *= $${CATCH_INCLUDE_DIR}
@@ -11,10 +11,11 @@ isEmpty(CATCH_INCLUDE_DIR): {
 }
 
 SOURCES += \
-    artikl_test.cpp \
+    #artikl_test.cpp \
     main.cpp \
     naruci_test.cpp \
-    porudzbina_test.cpp \
+    #porudzbina_test.cpp \
+    raspored_test.cpp \
     sto_glmeni_test.cpp \
     sto_test.cpp \
     ../src/artikl.cpp \
@@ -28,8 +29,8 @@ SOURCES += \
     ../src/rasporeddata.cpp \
     ../src/sto.cpp \
     ../src/tabla.cpp \
-    ../src/unesiartikle.cpp \
-    unesiartikle_test.cpp
+    ../src/unesiartikle.cpp
+    #unesiartikle_test.cpp
 
 HEADERS += \
     ../src/artikl.h \

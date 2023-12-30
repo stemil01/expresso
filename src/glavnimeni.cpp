@@ -147,6 +147,7 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
 
 
 void GlavniMeni::on_pbAddItemEMMenu_clicked() {
+    std::cout << "Usao" << std::endl;
     QString naziv = ui -> leNameEMMenu -> text();
     double cena = (ui -> lePriceEMMenu -> text()).toDouble();
 

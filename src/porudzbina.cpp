@@ -12,6 +12,7 @@ Porudzbina::~Porudzbina(){
 }
 
 void Porudzbina::printInTableWidget(QTableWidget *tw) {
+    tw -> setRowCount(0);
     int rowIndex = tw -> rowCount();
     for(auto artikl : artikli) {
         QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());

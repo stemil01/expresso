@@ -24,7 +24,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     ui(new Ui::GlavniMeni),
     tabla(new Tabla(this)),
     mainView(new Tabla(this)),
-    m_rasporedData("data")
+    m_rasporedData("data/arrangemets")
 {
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);
@@ -47,7 +47,8 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     m_rasporedData.executeLoad();
     m_currentRaspored = nullptr;
 
-    std::cout << "UPALJENA" << std::endl;
+    menu->executeLoad();
+
 }
 
 void GlavniMeni::setStyle() {
@@ -240,6 +241,8 @@ void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(0);
+
+    menu->executeSave();
 }
 
 void GlavniMeni::dodajNovSto()

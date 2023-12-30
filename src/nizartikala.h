@@ -2,7 +2,7 @@
 #define NIZARTIKALA_H
 
 #include "artikl.h"
-#include <Qvector>
+#include <QVector>
 #include <QString>
 #include <QTableWidget>
 #include <QTableWidgetItem>

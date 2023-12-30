@@ -97,7 +97,6 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
     connect(ui->pbAddItemEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
-
 }
 //------------------------------------------------------------------
 void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {

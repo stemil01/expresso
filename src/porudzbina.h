@@ -5,8 +5,8 @@
 #include <QVector>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <QListWidget>>
-#include <QListWidgetItem>>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 
 class Porudzbina : public Serializable
@@ -24,6 +24,7 @@ public:
     QVector<Artikl*> getArtikli();
     //void printInListWidget(QListWidget& lw)
     void printInTableWidget(QTableWidget *tw);
+    void printInListWidget(QListWidget *lw);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

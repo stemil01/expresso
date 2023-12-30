@@ -68,14 +68,16 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
         Porudzbina* porudzbina = new Porudzbina();
+        unesiartikle* ua=new unesiartikle();
         this->setPorudzbina(porudzbina);
-        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua);
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
             this->color = QColor::fromRgb(144,238,144);
             this->currentStatus = OCCUPIED;
         }
         delete dialogNarudzbine;
+        delete ua;
     }
     else{
         QDialog numOfSeatsInput;

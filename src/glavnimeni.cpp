@@ -47,7 +47,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     m_rasporedData.executeLoad();
     m_currentRaspored = nullptr;
 
-
+    std::cout << "UPALJENA" << std::endl;
 }
 
 void GlavniMeni::setStyle() {
@@ -93,17 +93,40 @@ void GlavniMeni::connectSlots() {
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
     connect(ui->pbRemovearrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiRaspored);
-    connect(ui->pbAddCategoryEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
+    connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
+
 }
 //------------------------------------------------------------------
 void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
+    std::cout << "Usao" << std::endl;
     QString kategorija = ui -> leTypeEMMenu -> displayText();
-    if(kategorija == "")
+    if(kategorija == ""){
+        QMessageBox messageBox;
+        messageBox.setText("Please enter category name");
+        messageBox.setWindowTitle("No name for category");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                 "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox.addButton(QMessageBox::Ok);
+        int result = messageBox.exec();
+        if (result == QMessageBox::Ok)
+            messageBox.close();
         return;
+    }
+
     for(auto naziv : menu -> getMeni() -> keys()) {
-        if (naziv == kategorija)
+        if (naziv == kategorija) {
+            QMessageBox messageBox;
+            messageBox.setText("Category name already exists!");
+            messageBox.setWindowTitle("Same category");
+            messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                     "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+            messageBox.addButton(QMessageBox::Ok);
+            int result = messageBox.exec();
+            if (result == QMessageBox::Ok)
+                messageBox.close();
             return;
+        }
     }
 
     menu -> addCategory(kategorija);
@@ -239,6 +262,7 @@ void GlavniMeni::dodajNovSto()
         messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                                    "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
         messageBox.addButton(QMessageBox::Ok);
+
         messageBox.exec();
         return;
     }
@@ -283,6 +307,7 @@ void GlavniMeni::sacuvajRaspored(){
     messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
                               "QMessageBox QLabel {color:green;min-width:200px;min-height:100px}");
     messageBox.addButton(QMessageBox::Ok);
+
 
     int result = messageBox.exec();
     if(result == QMessageBox::Ok){

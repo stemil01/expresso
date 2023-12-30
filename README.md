@@ -5,7 +5,7 @@ Korisnik moze da modelira raspored stolova u aplikaciji onako kako izgleda u kaf
 
 ![screenshot](resources/expresso_screenshot.png)
 
-## Okruženje
+## :computer: Okruženje
 
 - [![c_plus_plus](https://img.shields.io/badge/Language-C%2B%2B-red)](https://www.cplusplus.com/)<br>
 - [![qt6](https://img.shields.io/badge/Framework-Qt6-blue)](https://doc.qt.io/qt-6/) <br>
@@ -22,7 +22,7 @@ Potrebno je:
 
 [Snimak]() prikaza rada aplikacije.
 
-## Članovi:
+## :construction_worker_tone5: Članovi:
  - <a href="https://gitlab.com/Zicko01">Vladan Kozić 024/2020</a>
  - <a href="https://gitlab.com/stemil01">Stefan Milenković 007/2020</a>
  - <a href="https://gitlab.com/ivanadj">~~Ivana Đoković 114/2020~~</a>

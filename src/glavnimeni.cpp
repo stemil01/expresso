@@ -24,7 +24,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     ui(new Ui::GlavniMeni),
     tabla(new Tabla(this)),
     mainView(new Tabla(this)),
-    m_rasporedData("data")
+    m_rasporedData("data/arrangemets")
 {
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);

@@ -24,6 +24,7 @@ public:
     QVector<Artikl*> getArtikli();
     //void printInListWidget(QListWidget& lw)
     void printInTableWidget(QTableWidget *tw);
+    void printInListWidget(QListWidget *lw);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

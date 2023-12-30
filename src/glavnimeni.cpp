@@ -99,8 +99,6 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddDrinkEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
     connect(ui->pushButton, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveItemEMMenu_clicked);
     connect(ui->cbTypeEMMenu,&QComboBox::currentTextChanged,this,&GlavniMeni::cbTypeEMMenuChanged);
-
-
 }
 //------------------------------------------------------------------
 void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {

@@ -32,6 +32,10 @@ void Porudzbina::printInTableWidget(QTableWidget *tw) {
     }
 }
 
+void Porudzbina::printInListWidget(QListWidget *lw)
+{
+
+}
 
 int Porudzbina::dodajArtikl(Artikl* a){
     int prom=0;
@@ -120,7 +124,8 @@ void Porudzbina::fromVariant(const QVariant &variant)
     for (const auto& variantArtikl : variantArtikli) {
         Artikl *artikl = new Artikl();
         artikl->fromVariant(variantArtikl);
-        artikli.append(artikl);
+        // artikli.append(artikl);
+        dodajArtikl(artikl);
     }
 }
 

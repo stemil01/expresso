@@ -1,6 +1,8 @@
 #include <catch.hpp>
 #include "../src/artikl.h"
 #include "../src/porudzbina.h"
+
+
 TEST_CASE("Testing porudzbina","[class]"){
     SECTION("Testing obrisi po nazivu"){
         Artikl* a1=new Artikl("cocacola",250,"sokovi");

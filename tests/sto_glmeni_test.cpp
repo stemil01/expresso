@@ -24,6 +24,7 @@ TEST_CASE("Testing sto in glavnimeni","[class]"){
         qint32 expected = 1;
         auto scene = gl.tabla;
         Raspored* novi = new Raspored("novi");
+        novi->setMaxTables(5);
         gl.m_currentRaspored = novi;
         gl.dodajNovSto();
         qint32 result = (scene->items()).size();
@@ -41,6 +42,7 @@ TEST_CASE("Testing sto in glavnimeni","[class]"){
         bool expected = true;
         auto scene = gl.tabla;
         Raspored* novi = new Raspored("novi");
+        novi->setMaxTables(5);
         gl.m_currentRaspored = novi;
         gl.dodajNovSto();
         auto sto = (scene->items())[0];
@@ -60,6 +62,7 @@ TEST_CASE("Testing sto in glavnimeni","[class]"){
         qint32 expected = 0;
         auto scene = gl.tabla;
         Raspored* novi = new Raspored("novi");
+        novi->setMaxTables(5);
         gl.m_currentRaspored = novi;
         gl.dodajNovSto();
         auto sto = (scene->items())[0];
@@ -80,6 +83,7 @@ TEST_CASE("Testing sto in glavnimeni","[class]"){
         qint32 expected = 0;
         auto scene = gl.tabla;
         Raspored* novi = new Raspored("novi");
+        novi->setMaxTables(5);
         gl.m_currentRaspored = novi;
         gl.dodajNovSto();
         gl.dodajNovSto();

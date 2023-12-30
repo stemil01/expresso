@@ -7,6 +7,7 @@
 #include "binaryserializer.h"
 #include "naruci.h"
 #include "rasporeddata.h"
+#include "porudzbina.h"
 
 #include <QMessageBox>
 #include <QLineEdit>
@@ -16,7 +17,6 @@
 #include <QVariantMap>
 #include <QVariantList>
 #include <QGraphicsItem>
-#include "porudzbina.h"
 
 GlavniMeni::GlavniMeni(QWidget *parent) :
     QMainWindow(parent),
@@ -76,16 +76,16 @@ void setStyle() {
 
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
-    help *helpOpen = new help(this);
-    helpOpen -> setModal(true);
-    helpOpen -> exec();
-    delete helpOpen;
-    //unesiartikle* ua=new unesiartikle();
-    //Porudzbina* porudzbina = new Porudzbina();
-    //Naruci *naruci=new Naruci(this,porudzbina,ua);
-    //naruci->setModal(true);
-    //naruci->exec();
-    //delete naruci;
+    //help *helpOpen = new help(this);
+    //helpOpen -> setModal(true);
+    //helpOpen -> exec();
+    //delete helpOpen;
+    unesiartikle* ua=new unesiartikle();
+    Porudzbina* porudzbina = new Porudzbina();
+    Naruci *naruci=new Naruci(this,porudzbina,ua);
+    naruci->setModal(true);
+    naruci->exec();
+    delete naruci;
 }
 
 void GlavniMeni::on_pbQuitMainMenu_clicked()
@@ -162,7 +162,6 @@ void GlavniMeni::dodajNovSto()
     }
 
     Sto *sto = m_currentRaspored->addSto();
-    // m_currentRaspored->currentNumOfTables += 1;
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);

@@ -2,17 +2,6 @@
 #include "../src/sto.h"
 #include "../src/porudzbina.h"
 #include "../src/artikl.h"
-#include "../src/glavnimeni.h"
-#include <QGraphicsScene>
-
-class GlavniMeniTest : public GlavniMeni
-{
-public:
-    using GlavniMeni::dodajNovSto;
-    using GlavniMeni::obrisiSto;
-    using GlavniMeni::tabla;
-    using GlavniMeni::m_currentRaspored;
-};
 
 TEST_CASE("Testing Sto","[class]"){
     SECTION("Testing id"){

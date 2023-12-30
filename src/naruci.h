@@ -22,6 +22,9 @@ public:
     explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr, unesiartikle* unesiArtikle=nullptr);
     ~Naruci();
 
+    void addItemInTW(Artikl* a);
+    void updateItemInTW(const QString& str);
+
 
 public slots:
     void onPbAddItemOrderDialogClicked();
@@ -33,8 +36,6 @@ private:
     Ui::Naruci *ui;
     Porudzbina* p;
     unesiartikle* unesiArtikle;
-    void addItemInTW(Artikl* a);
-    void updateItemInTW(const QString& str);
 
 };
 

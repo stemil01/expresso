@@ -97,6 +97,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
     connect(ui->pbAddItemEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
+    connect(ui->cbTypeEMMenu,&QComboBox::currentTextChanged,this,&GlavniMeni::cbTypeEMMenuChanged);
 }
 //------------------------------------------------------------------
 void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
@@ -146,6 +147,7 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
 
 
 void GlavniMeni::on_pbAddItemEMMenu_clicked() {
+    std::cout << "Usao" << std::endl;
     QString naziv = ui -> leNameEMMenu -> text();
     double cena = (ui -> lePriceEMMenu -> text()).toDouble();
 
@@ -219,12 +221,19 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 }
 
 void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
-    ui -> stackedWidget -> setCurrentIndex(3);
-
     menu ->printNamesInComboBox(ui -> cbTypeEMMenu);
+    ui -> stackedWidget -> setCurrentIndex(3);
 }
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {
+    int rowCount = ui->twMenuEMMenu->rowCount();
+    for (int i = 0; i < rowCount; ++i) {
+        for (int j = 0; j < ui->twMenuEMMenu->columnCount(); ++j) {
+            QTableWidgetItem *item = ui->twMenuEMMenu->takeItem(i, j);
+            delete item;
+        }
+    }
+
     ui -> stackedWidget -> setCurrentIndex(0);
 
     menu->executeSave();
@@ -415,4 +424,12 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
     for(auto item : tabla->items()){
         tabla->removeItem(item);
     }
+}
+
+void GlavniMeni::cbTypeEMMenuChanged() {
+    if (ui -> cbTypeEMMenu -> count() == 0) {
+        return;
+    }
+    QString kategorija = ui -> cbTypeEMMenu -> currentText();
+    (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
 }

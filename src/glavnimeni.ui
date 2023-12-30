@@ -465,7 +465,13 @@ color: rgb(0, 0, 0);</string>
            <widget class="QTableWidget" name="twMenuEMMenu">
             <column>
              <property name="text">
-              <string>New Column</string>
+              <string>Item</string>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <bold>true</bold>
+              </font>
              </property>
              <property name="textAlignment">
               <set>AlignLeading|AlignVCenter</set>
@@ -474,6 +480,12 @@ color: rgb(0, 0, 0);</string>
             <column>
              <property name="text">
               <string>Price</string>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>16</pointsize>
+               <bold>true</bold>
+              </font>
              </property>
              <property name="textAlignment">
               <set>AlignTrailing|AlignVCenter</set>

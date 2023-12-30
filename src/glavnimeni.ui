@@ -694,14 +694,8 @@ color: rgb(0, 0, 0);</string>
                  </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pbAddItemEMMenu">
+                 <widget class="QPushButton" name="pbAddDrinkEMMenu">
                   <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
                    <size>
                     <width>200</width>
                     <height>50</height>

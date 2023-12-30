@@ -96,7 +96,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbRemovearrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiRaspored);
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
-    connect(ui->pbAddItemEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
+    connect(ui->pbAddDrinkEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
     connect(ui->cbTypeEMMenu,&QComboBox::currentTextChanged,this,&GlavniMeni::cbTypeEMMenuChanged);
 
 }
@@ -148,7 +148,6 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
 
 
 void GlavniMeni::on_pbAddItemEMMenu_clicked() {
-    std::cout << "Usao" << std::endl;
     QString naziv = ui -> leNameEMMenu -> text();
     double cena = (ui -> lePriceEMMenu -> text()).toDouble();
 
@@ -159,8 +158,18 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
 
     Artikl *pom = new Artikl(naziv, cena, kategorija);
     int res = (*(menu -> getMeni()))[kategorija] -> dodajArtikl(pom);
-    if(res == 0)
-        std::cout << "Postoji" << std::endl;
+    if(res == 1) {
+        QMessageBox messageBox;
+        messageBox.setText("Item already exists!");
+        messageBox.setWindowTitle("Same item");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                 "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox.addButton(QMessageBox::Ok);
+        int result = messageBox.exec();
+        if (result == QMessageBox::Ok)
+            messageBox.close();
+        return;
+    }
 
     (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
 }

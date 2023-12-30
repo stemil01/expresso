@@ -462,7 +462,24 @@ color: rgb(0, 0, 0);</string>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QTableWidget" name="twMenuEMMenu"/>
+           <widget class="QTableWidget" name="twMenuEMMenu">
+            <column>
+             <property name="text">
+              <string>New Column</string>
+             </property>
+             <property name="textAlignment">
+              <set>AlignLeading|AlignVCenter</set>
+             </property>
+            </column>
+            <column>
+             <property name="text">
+              <string>Price</string>
+             </property>
+             <property name="textAlignment">
+              <set>AlignTrailing|AlignVCenter</set>
+             </property>
+            </column>
+           </widget>
           </item>
           <item>
            <layout class="QVBoxLayout" name="verticalLayout_7">
@@ -545,14 +562,8 @@ color: rgb(0, 0, 0);</string>
                  </layout>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pbAddCategoryEMMenu">
+                 <widget class="QPushButton" name="pbAddTypeEMMenu">
                   <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
                    <size>
                     <width>200</width>
                     <height>50</height>

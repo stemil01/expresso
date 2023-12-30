@@ -1,6 +1,6 @@
 ### Opis slučaja upotrebe "Izdavanje računa": 
 - **Kratak opis:** Konobar koristi aplikaciju kako bi odabrao sto i izdao račun za njega, uz mogućnost izbora između plaćanja gotovinom ili karticom. U slučaju plaćanja gotovinom, automatski se generiše iznos kusura. Na kraju plaćanja, transakcija se čuva radi generisanja dnevnih/mesečnih izveštaja.
-- **Akter:** Konobar.
+- **Akter:** Konobar - interaguje sa aplikacijom
 - **Preduslov:** Aplikacija je uspešno pokrenuta prikazujući meni sa stolovima i njihovim narudžbinama.
 - **Postuslov:** Račun je uspesno plaćen i informacije o plaćanju su uspešno sačuvane u izveštajima.
 - **Osnovni tok:**

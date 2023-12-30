@@ -11,6 +11,19 @@ Porudzbina::~Porudzbina(){
     obrisiArtikle();
 }
 
+void Porudzbina::printInTableWidget(QTableWidget *tw) {
+    int rowIndex = tw -> rowCount();
+    for(auto artikl : artikli) {
+        QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
+        QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        tw->insertRow(rowIndex);
+        tw->setItem(rowIndex, 0, nameItem);
+        tw->setItem(rowIndex, 1, priceItem);
+        rowIndex ++;
+    }
+}
+
+
 int Porudzbina::dodajArtikl(Artikl* a){
     int prom=0;
     bool postoji=false;

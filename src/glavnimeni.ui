@@ -707,6 +707,19 @@ color: rgb(0, 0, 0);</string>
                  </widget>
                 </item>
                 <item>
+                 <widget class="QPushButton" name="pushButton">
+                  <property name="minimumSize">
+                   <size>
+                    <width>200</width>
+                    <height>50</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string>Remove Item</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
                  <widget class="QPushButton" name="pbRemoveItemEMMenu">
                   <property name="minimumSize">
                    <size>

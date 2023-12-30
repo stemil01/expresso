@@ -97,6 +97,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
     connect(ui->pbAddDrinkEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
+    connect(ui->pushButton, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveItemEMMenu_clicked);
     connect(ui->cbTypeEMMenu,&QComboBox::currentTextChanged,this,&GlavniMeni::cbTypeEMMenuChanged);
 }
 //------------------------------------------------------------------
@@ -171,6 +172,10 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     }
 
     (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+}
+
+void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
+    std::cout << "Usao" << std::endl;
 }
 
 //----------------------------------------------------------------

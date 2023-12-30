@@ -227,6 +227,14 @@ void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
 }
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {
+    int rowCount = ui->twMenuEMMenu->rowCount();
+    for (int i = 0; i < rowCount; ++i) {
+        for (int j = 0; j < ui->twMenuEMMenu->columnCount(); ++j) {
+            QTableWidgetItem *item = ui->twMenuEMMenu->takeItem(i, j);
+            delete item;
+        }
+    }
+
     ui -> stackedWidget -> setCurrentIndex(0);
 
     menu->executeSave();

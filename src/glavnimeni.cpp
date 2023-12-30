@@ -97,6 +97,7 @@ void GlavniMeni::connectSlots() {
     connect(ui->pbAddTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
     connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
     connect(ui->pbAddItemEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddItemEMMenu_clicked);
+    connect(ui->cbTypeEMMenu,&QComboBox::currentTextChanged,this,&GlavniMeni::cbTypeEMMenuChanged);
 
 }
 //------------------------------------------------------------------
@@ -221,9 +222,8 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 }
 
 void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
-    ui -> stackedWidget -> setCurrentIndex(3);
-
     menu ->printNamesInComboBox(ui -> cbTypeEMMenu);
+    ui -> stackedWidget -> setCurrentIndex(3);
 }
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {
@@ -425,4 +425,12 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
     for(auto item : tabla->items()){
         tabla->removeItem(item);
     }
+}
+
+void GlavniMeni::cbTypeEMMenuChanged() {
+    if (ui -> cbTypeEMMenu -> count() == 0) {
+        return;
+    }
+    QString kategorija = ui -> cbTypeEMMenu -> currentText();
+    (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
 }

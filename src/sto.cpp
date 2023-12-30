@@ -120,6 +120,7 @@ QVariant Sto::toVariant() const
     map.insert("id", _id);
     map.insert("nextId", _nextId);
     map.insert("position", pos());
+    map.insert("brojMesta", broj_mesta);
     return map;
 }
 
@@ -129,6 +130,7 @@ void Sto::fromVariant(const QVariant& variant)
     _id = map.value("id").toInt();
     _nextId = map.value("nextId").toInt();
     setPos(map.value("position").toPointF());
+    broj_mesta = map.value("brojMesta").toInt();
 }
 
 void Sto::setPorudzbina(Porudzbina* porudzbina){

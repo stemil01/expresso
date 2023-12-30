@@ -40,6 +40,7 @@ private slots:
     void ucitajRaspored();
     void ucitajRasporedDTA();
     void dodajRaspored();
+    void obrisiRaspored();
 
 private:
     void ocistiTablu(QGraphicsScene*);

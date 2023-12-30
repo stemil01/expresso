@@ -23,7 +23,6 @@ public:
     inline QString getNaziv() const { return m_naziv; }
 
     Sto* addSto();
-    // TODO: Implement these
     void removeSto(qint32 idStola);
     void clearSto();
 private:

@@ -27,7 +27,7 @@ public:
 
 private:
     QString m_dirPath;
-    QMap<QString, Raspored*>* m_rasporedi;
+    QMap<QString, Raspored*> *m_rasporedi;
     Serializer *m_binarySerializer;
 };
 

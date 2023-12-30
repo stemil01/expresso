@@ -24,6 +24,8 @@ QVariant Raspored::toVariant() const
 {
     QVariantMap map;
     map.insert("naziv", m_naziv);
+    map.insert("maxTables", m_max_tables);
+    map.insert("currentNumOfTables", currentNumOfTables);
     QVariantList raspored;
     for (const auto& sto : m_raspored) {
         raspored.append(sto->toVariant());
@@ -36,6 +38,8 @@ void Raspored::fromVariant(const QVariant& variant)
 {
     const auto map = variant.toMap();
     m_naziv = map.value("naziv").toString();
+    m_max_tables = map.value("maxTables").toInt();
+    currentNumOfTables = map.value("currentNumOfTables").toInt();
 
     qDeleteAll(m_raspored);
     m_raspored.clear();
@@ -53,6 +57,7 @@ Sto* Raspored::addSto()
 {
     Sto *sto = new Sto();
     m_raspored.append(sto);
+    currentNumOfTables += 1;
     return sto;
 }
 

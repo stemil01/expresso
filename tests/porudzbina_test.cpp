@@ -41,7 +41,7 @@ TEST_CASE("Testing porudzbina","[class]"){
         p->sacuvajPromenu("cocacola",5);
 
         QVector<Artikl*> artikli=p->getArtikli();
-        REQUIRE(artikli[0].getKolicina()==5);
+        REQUIRE(artikli[0]->getKolicina()==5);
 
     }
 

@@ -5,8 +5,8 @@
 #include <QVector>
 #include <QTableWidget>
 #include <QTableWidgetItem>
-#include <QListWidget>>
-#include <QListWidgetItem>>
+#include <QListWidget>
+#include <QListWidgetItem>
 
 
 class Porudzbina : public Serializable

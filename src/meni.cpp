@@ -1,8 +1,6 @@
 #include "meni.h"
 
 Meni::Meni() {
-    _meni["Alkohol"] = new Porudzbina();
-    _meni["Sokici"] = new Porudzbina();
 }
 
 Meni::~Meni() {

@@ -51,6 +51,7 @@ void Meni::fromVariant(const QVariant &variant)
         QString nazivKategorije = mapKategorija.value("naziv").toString();
         QVariant variantPorudzbina = mapKategorija.value("porudzbina");
 
+        _meni[nazivKategorije] = new Porudzbina();
         _meni[nazivKategorije]->fromVariant(variantPorudzbina);
     }
 }

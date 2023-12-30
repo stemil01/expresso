@@ -47,7 +47,7 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     m_rasporedData.executeLoad();
     m_currentRaspored = nullptr;
 
-
+    menu->executeLoad();
 }
 
 void GlavniMeni::setStyle() {
@@ -217,6 +217,8 @@ void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(0);
+
+    menu->executeSave();
 }
 
 void GlavniMeni::dodajNovSto()

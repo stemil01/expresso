@@ -27,7 +27,6 @@ private:
     double cena;
     QString kategorija;
     int kolicina;
-
 };
 
 

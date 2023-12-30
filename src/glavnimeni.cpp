@@ -1,4 +1,5 @@
 #include "glavnimeni.h"
+#include "meni.h"
 #include "help.h"
 #include "ui_glavnimeni.h"
 #include "tabla.h"
@@ -28,7 +29,9 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     ui -> setupUi(this);
     ui -> stackedWidget -> setCurrentIndex(0);
     connectSlots();
-    //setStyle();
+    setStyle();
+
+    menu = new Meni();
 
     //tabla za dizajn
     tabla->setSceneRect(ui->gvTabla->rect());
@@ -43,10 +46,32 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     // ucitavanje rasporeda
     m_rasporedData.executeLoad();
     m_currentRaspored = nullptr;
+
+
+}
+
+void GlavniMeni::setStyle() {
+   /* QHeaderView* header = ui -> twMenuEMMenu -> horizontalHeader();
+
+    int columnCount = ui -> twMenuEMMenu -> columnCount();
+    for (int i = 0; i < columnCount; ++i) {
+        header -> setSectionResizeMode(i, QHeaderView::Stretch);
+    }
+    ui -> twMenuEMMenu -> setShowGrid(false);
+    ui -> twMenuEMMenu -> verticalHeader() -> setVisible(false);
+
+    ui -> twMenuEMMenu -> horizontalHeaderItem(0)->setTextAlignment(Qt::AlignLeft);
+    ui -> twMenuEMMenu -> horizontalHeaderItem(1)->setTextAlignment(Qt::AlignRight);
+
+    ui -> twMenuEMMenu -> setSelectionMode(QAbstractItemView::SingleSelection);
+    ui -> twMenuEMMenu -> setSelectionBehavior(QAbstractItemView::SelectRows);
+    ui -> twMenuEMMenu -> setEditTriggers(QAbstractItemView::NoEditTriggers);*/
+    //-------------------------------------------------------------------------
 }
 
 GlavniMeni::~GlavniMeni()
 {
+    delete menu;
     delete ui;
 }
 
@@ -68,12 +93,67 @@ void GlavniMeni::connectSlots() {
     connect(ui -> pbFinishEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbFinishEMMenu_clicked);
     connect(ui->pbAddArrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::dodajRaspored);
     connect(ui->pbRemovearrangementTAMenu, &QPushButton::clicked, this, &GlavniMeni::obrisiRaspored);
+    connect(ui->pbAddCategoryEMMenu, &QPushButton::clicked, this, &GlavniMeni::on_pbAddCategoryEMMenu_clicked);
+    connect(ui->pbRemoveTypeEMMenu, &QPushButton::clicked, this, &GlavniMeni::GlavniMeni::on_pbRemoveCategoryEMMenu_clicked);
+}
+//------------------------------------------------------------------
+void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
+    QString kategorija = ui -> leTypeEMMenu -> displayText();
+    if(kategorija == "")
+        return;
+    for(auto naziv : menu -> getMeni() -> keys()) {
+        if (naziv == kategorija)
+            return;
+    }
+
+    menu -> addCategory(kategorija);
+    ui -> cbTypeEMMenu -> addItem(kategorija);
+    ui -> cbTypeEMMenu -> setCurrentText(kategorija);
+    ui -> leTypeEMMenu -> clear();
 }
 
-void setStyle() {
-
+void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
+    QString kategorija = ui -> cbTypeEMMenu-> currentText();
+    delete (*(menu -> getMeni()))[kategorija];
+    menu -> getMeni() -> remove(kategorija);
+    ui -> cbTypeEMMenu -> removeItem(ui -> cbTypeEMMenu -> findText(kategorija));
 }
+/*
+void GlavniMeni::on_pbAddItemEMMenu_clicked() {
+    QString naziv = ui -> leNameEMMenu -> text();
+    double cena = (ui -> lePriceEMMenu -> text()).toDouble();
 
+    if(naziv == "" || cena <= 0)
+        return;
+
+    QString kategorija = ui -> cbTypeEMMenu -> currentText();
+
+
+    if(!(*(meni -> getMeni()))[kategorija] -> dodajArtikal(new Artikl(naziv, cena))) {
+        std::cout << "Vec postoji ime" << std::endl;
+        return;
+    }
+
+    int newRow = ui -> twMenuEMMenu->rowCount();
+    ui ->twMenuEMMenu->insertRow(newRow);
+
+    QFont itemFont;
+    itemFont.setPointSize(20);
+
+    QTableWidgetItem *itemNaziv = new QTableWidgetItem(naziv);
+    itemNaziv -> setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+    itemNaziv ->setFont(itemFont);
+    ui->twMenuEMMenu->setItem(newRow, 0, itemNaziv);
+    //delete itemNaziv;
+    QTableWidgetItem *itemCena = new QTableWidgetItem(QString::number(cena));
+    itemCena -> setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
+    itemCena ->setFont(itemFont);
+    ui->twMenuEMMenu->setItem(newRow, 1, itemCena);
+    //delete itemCena;
+}
+*/
+
+//----------------------------------------------------------------
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
     //help *helpOpen = new help(this);
@@ -131,6 +211,8 @@ void GlavniMeni::on_pbStartMainMenu_clicked() {
 
 void GlavniMeni::on_pbEditMenuMainMenu_clicked() {
     ui -> stackedWidget -> setCurrentIndex(3);
+
+    menu ->printNamesInComboBox(ui -> cbTypeEMMenu);
 }
 
 void GlavniMeni::on_pbFinishEMMenu_clicked() {

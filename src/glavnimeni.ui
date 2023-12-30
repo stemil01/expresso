@@ -27,7 +27,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="MainMenu">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -564,14 +564,8 @@ color: rgb(0, 0, 0);</string>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pbRemoveCategoryEMMenu">
+                 <widget class="QPushButton" name="pbRemoveTypeEMMenu">
                   <property name="minimumSize">
-                   <size>
-                    <width>200</width>
-                    <height>50</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
                    <size>
                     <width>200</width>
                     <height>50</height>

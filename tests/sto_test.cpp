@@ -6,21 +6,7 @@
 TEST_CASE("Testing Sto","[class]"){
     SECTION("Testing id"){
 
-        Sto* sto = new Sto();
-        qint32 expected = 1;
-
-
-        qint32 result = sto->getId();
-
-        REQUIRE(result == expected);
-
-        delete sto;
-    }
-    SECTION("Testing resetId"){
-
-        Sto::resetNextId();
-        Sto* sto = new Sto();
-
+        Sto* sto = new Sto(1);
         qint32 expected = 1;
 
 
@@ -32,7 +18,7 @@ TEST_CASE("Testing Sto","[class]"){
     }
     SECTION("Testing porudzbina in sto"){
 
-        Sto* sto = new Sto();
+        Sto* sto = new Sto(1);
         Artikl* artikl = new Artikl("Fanta",80.0,"Sokovi",10);
         Porudzbina* p = new Porudzbina();
 
@@ -48,7 +34,7 @@ TEST_CASE("Testing Sto","[class]"){
     }
     SECTION("Testing broj mesta"){
 
-        Sto* sto = new Sto();
+        Sto* sto = new Sto(1);
         Artikl* artikl = new Artikl("Fanta",80.0,"Sokovi",10);
         Porudzbina* p = new Porudzbina();
 

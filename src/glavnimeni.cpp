@@ -118,7 +118,7 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
     menu -> getMeni() -> remove(kategorija);
     ui -> cbTypeEMMenu -> removeItem(ui -> cbTypeEMMenu -> findText(kategorija));
 }
-
+/*
 void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     QString naziv = ui -> leNameEMMenu -> text();
     double cena = (ui -> lePriceEMMenu -> text()).toDouble();
@@ -151,7 +151,7 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     ui->twMenuEMMenu->setItem(newRow, 1, itemCena);
     //delete itemCena;
 }
-
+*/
 
 //----------------------------------------------------------------
 void GlavniMeni::on_pbHelpMainMenu_clicked()

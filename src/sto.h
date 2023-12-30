@@ -11,14 +11,12 @@ class Sto : public QGraphicsObject, public Serializable
     Q_OBJECT
 
 public:
-    Sto();
+    Sto(qint32 id);
     ~Sto();
 
     QRectF boundingRect() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    static qint32 getNextId();
     qint32 getId();
-    static void resetNextId();
     void setPorudzbina(Porudzbina* p);
     Porudzbina* getPorudzbina();
     qint32 broj_mesta = 4;
@@ -44,7 +42,6 @@ protected:
 private:
     Porudzbina* _p = nullptr;
     qint32 _id;
-    static qint32 _nextId;
     QPointF _lastPos;
 
 };

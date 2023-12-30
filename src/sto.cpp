@@ -12,11 +12,10 @@
 #include <QVariant>
 #include <QVariantMap>
 
-qint32 Sto::_nextId = 1;
 
-Sto::Sto()
+Sto::Sto(qint32 id)
     :QGraphicsObject() {
-    _id = _nextId++;
+    _id = id;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
@@ -104,23 +103,15 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     }
 }
 
-qint32 Sto::getNextId(){
-    return _nextId;
-}
 
 qint32 Sto::getId(){
     return _id;
-}
-
-void Sto::resetNextId(){
-    _nextId = 1;
 }
 
 QVariant Sto::toVariant() const
 {
     QVariantMap map;
     map.insert("id", _id);
-    map.insert("nextId", _nextId);
     map.insert("position", pos());
     map.insert("brojMesta", broj_mesta);
     return map;
@@ -130,7 +121,6 @@ void Sto::fromVariant(const QVariant& variant)
 {
     const auto map = variant.toMap();
     _id = map.value("id").toInt();
-    _nextId = map.value("nextId").toInt();
     setPos(map.value("position").toPointF());
     broj_mesta = map.value("brojMesta").toInt();
 }

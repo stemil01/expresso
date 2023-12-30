@@ -8,7 +8,7 @@
 Raspored::Raspored(const QString& rasporedName)
     : m_naziv(rasporedName)
 {
-
+    m_idstola = 1;
 }
 
 Raspored::~Raspored()
@@ -26,6 +26,7 @@ QVariant Raspored::toVariant() const
     map.insert("naziv", m_naziv);
     map.insert("maxTables", m_max_tables);
     map.insert("currentNumOfTables", currentNumOfTables);
+    map.insert("idStola", m_idstola);
     QVariantList raspored;
     for (const auto& sto : m_raspored) {
         raspored.append(sto->toVariant());
@@ -40,13 +41,17 @@ void Raspored::fromVariant(const QVariant& variant)
     m_naziv = map.value("naziv").toString();
     m_max_tables = map.value("maxTables").toInt();
     currentNumOfTables = map.value("currentNumOfTables").toInt();
+    m_idstola = map.value("idStola").toInt();
 
     qDeleteAll(m_raspored);
     m_raspored.clear();
+    qDebug()<<m_idstola;
+    qDebug()<<m_max_tables;
 
     const auto raspored = map.value("raspored").toList();
     for (const auto& stoVariant : raspored) {
-        Sto *sto = new Sto();
+        //qDebug()<<m_idstola;
+        Sto *sto = new Sto(m_idstola);
         sto->fromVariant(stoVariant);
         m_raspored.append(sto);
     }
@@ -55,7 +60,7 @@ void Raspored::fromVariant(const QVariant& variant)
 
 Sto* Raspored::addSto()
 {
-    Sto *sto = new Sto();
+    Sto *sto = new Sto(m_idstola++);
     m_raspored.append(sto);
     currentNumOfTables += 1;
     return sto;
@@ -66,7 +71,7 @@ void Raspored::removeSto(qint32 idStola)
     for(auto sto : m_raspored){
         if(sto->getId() == idStola){
             m_raspored.removeOne(sto);
-            this->currentNumOfTables -= 1;
+            currentNumOfTables -= 1;
             delete sto;
         }
     }
@@ -76,7 +81,8 @@ void Raspored::clearSto()
 {
     qDeleteAll(m_raspored);
     m_raspored.clear();
-    Sto::resetNextId();
+    currentNumOfTables = 0;
+    m_idstola = 1;
 }
 
 void Raspored::setMaxTables(qint32 num){

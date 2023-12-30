@@ -21,4 +21,22 @@ TEST_CASE("Testing Raspored","[class]"){
 
         delete primer;
     }
+    SECTION("Testing remove sto"){
+
+        Raspored* primer = new Raspored("raspored 1");
+        primer->setMaxTables(5);
+
+        qint32 expected = 1;
+
+        Sto *sto=primer->addSto();
+        primer->addSto();
+        qDebug()<<sto->getId();
+        primer->removeSto(2);
+
+        qint32 result = primer->currentNumOfTables;
+
+        REQUIRE(result == expected);
+
+        delete primer;
+    }
 }

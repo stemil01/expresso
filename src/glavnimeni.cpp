@@ -307,7 +307,7 @@ void GlavniMeni::sacuvajRaspored(){
         for(auto item : m_currentRaspored->getItems()){
             tabla->removeItem(item);
         }
-        Sto::resetNextId();
+        //Sto::resetNextId();
     }
     else if(result == QMessageBox::Cancel){
         messageBox.close();
@@ -351,8 +351,10 @@ void GlavniMeni::ucitajRasporedDTA(){
     }
 
     this->ocistiTablu(tabla);
-    for(auto item : m_currentRaspored->getItems()){
-        tabla->addItem(item);
+    for(auto sto : m_currentRaspored->getItems()){
+        sto->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,true);
+        sto->za_raspored = true;
+        tabla->addItem(sto);
     }
 }
 
@@ -415,5 +417,5 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
     for(auto item : tabla->items()){
         tabla->removeItem(item);
     }
-    Sto::resetNextId();
+    //m_curr
 }

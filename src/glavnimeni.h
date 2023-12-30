@@ -1,13 +1,18 @@
 #ifndef GLAVNIMENI_H
 #define GLAVNIMENI_H
 
-#include <QMainWindow>
 #include "serializable.h"
 #include "rasporeddata.h"
+#include "meni.h"
+#include <iostream>
+
+#include <QMainWindow>
+
 
 class Sto;
 class QGraphicsScene;
 class Raspored;
+class Meni;
 
 namespace Ui {
 class GlavniMeni;
@@ -33,6 +38,8 @@ private slots:
     void on_pbQuitMainMenu_clicked();
     void on_pbHelpMainMenu_clicked();
     void on_pbFinishEMMenu_clicked();
+    void on_pbAddCategoryEMMenu_clicked();
+    void on_pbRemoveCategoryEMMenu_clicked();
     void dodajNovSto();
     void obrisiSto();
     void obrisiSve();
@@ -53,6 +60,7 @@ private:
     QGraphicsScene *mainView;
     RasporedData m_rasporedData;
     Raspored *m_currentRaspored;
+    Meni *menu;
 
 friend class GlavniMeniTest;
 };

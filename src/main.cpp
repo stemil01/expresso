@@ -1,6 +1,7 @@
 #include "unesiartikle.h"
 #include <QApplication>
 #include "glavnimeni.h"
+#include "meni.h"
 
 int main(int argc, char *argv[])
 {

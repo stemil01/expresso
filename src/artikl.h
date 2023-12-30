@@ -1,12 +1,14 @@
 #ifndef ARTIKL_H
 #define ARTIKL_H
 
+#include "serializable.h"
 #include <QString>
 
-class Artikl{
+class Artikl : public Serializable {
 
 public:
 
+    Artikl() = default;
     Artikl(const QString& _naziv, double _cena,const QString& _kategorija, int _kolicina=1);
     ~Artikl();
 
@@ -22,12 +24,14 @@ public:
 
     bool operator==( Artikl& a) const;
 
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant& variant) override;
+
 private:
     QString naziv;
     double cena;
     QString kategorija;
     int kolicina;
-
 };
 
 

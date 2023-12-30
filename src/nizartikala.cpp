@@ -1,6 +1,6 @@
 #include "nizartikala.h"
 
-nizartikala::nizartikala()
+NizArtikala::NizArtikala()
 {
 
 }

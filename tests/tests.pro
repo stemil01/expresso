@@ -29,7 +29,8 @@ SOURCES += \
     ../src/rasporeddata.cpp \
     ../src/sto.cpp \
     ../src/tabla.cpp \
-    ../src/unesiartikle.cpp
+    ../src/unesiartikle.cpp \
+    ../src/meni.cpp
     #unesiartikle_test.cpp
 
 HEADERS += \
@@ -46,7 +47,8 @@ HEADERS += \
     ../src/serializer.h \
     ../src/sto.h \
     ../src/tabla.h \
-    ../src/unesiartikle.h
+    ../src/unesiartikle.h \
+    ../src/meni.h
 
 FORMS += \
     ../src/glavnimeni.ui \

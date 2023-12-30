@@ -77,3 +77,28 @@ QVector<Artikl*> Porudzbina::getArtikli(){
     return artikli;
 }
 
+QVariant Porudzbina::toVariant() const
+{
+    QVariantMap map;
+    QVariantList variantArtikl;
+    for (const auto& artikl : artikli) {
+        variantArtikl.append(artikl->toVariant());
+    }
+    map.insert("artikli", variantArtikl);
+    return map;
+}
+
+void Porudzbina::fromVariant(const QVariant &variant)
+{
+    const auto map = variant.toMap();
+    qDeleteAll(artikli);
+    artikli.clear();
+
+    const auto variantArtikli = map.value("artikli").toList();
+    for (const auto& variantArtikl : variantArtikli) {
+        Artikl *artikl = new Artikl();
+        artikl->fromVariant(variantArtikl);
+        artikli.append(artikl);
+    }
+}
+

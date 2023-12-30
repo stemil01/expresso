@@ -42,5 +42,24 @@ bool Artikl::operator==( Artikl& a) const{
     return a.getKategorija()==kategorija && a.getNaziv()==naziv && a.getCena()==cena;
 }
 
+QVariant Artikl::toVariant() const
+{
+    QVariantMap map;
+    map.insert("naziv", naziv);
+    map.insert("cena", cena);
+    map.insert("kategorija", kategorija);
+    map.insert("kolicina", kolicina);
+    return map;
+}
+
+void Artikl::fromVariant(const QVariant &variant)
+{
+    const auto map = variant.toMap();
+    naziv = map.value("naziv").toString();
+    cena = map.value("cena").toDouble();
+    kategorija = map.value("kategorija").toString();
+    kolicina = map.value("kolicina").toInt();
+}
+
 
 

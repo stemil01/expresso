@@ -3,6 +3,8 @@
 Aplikacija namenjena za upotrebu u kaficima.
 Korisnik moze da modelira raspored stolova u aplikaciji onako kako izgleda u kafiću, a nakon toga pristupi svakom stolu i tu zapisuje narudžbine i na taj nacin lako prati stanje svakog stola u svom kafiću.
 
+![screenshot](resources/expresso_screenshot.png)
+
 ## Okruženje
 
 - [![c_plus_plus](https://img.shields.io/badge/Language-C%2B%2B-red)](https://www.cplusplus.com/)<br>

@@ -4,9 +4,13 @@
 #include "serializable.h"
 #include "rasporeddata.h"
 #include "meni.h"
+#include "artikl.h"
+
 #include <iostream>
 
 #include <QMainWindow>
+#include <QList>
+#include <QString>
 
 
 class Sto;

@@ -102,7 +102,6 @@ void GlavniMeni::connectSlots() {
 }
 //------------------------------------------------------------------
 void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
-    std::cout << "Usao" << std::endl;
     QString kategorija = ui -> leTypeEMMenu -> displayText();
     if(kategorija == ""){
         QMessageBox messageBox;
@@ -175,7 +174,34 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
 }
 
 void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
-    std::cout << "Usao" << std::endl;
+    QList<QTableWidgetItem*> selectedItems = ui -> twMenuEMMenu ->selectedItems();
+
+    if (!selectedItems.isEmpty()) {
+        int rowToRemove = selectedItems.first()->row();
+
+        QString naziv = ui -> twMenuEMMenu->item(rowToRemove, 0)->text();
+        double cena = (ui -> twMenuEMMenu->item(rowToRemove, 1) -> text()).toDouble();
+        QString kategorija = ui -> cbTypeEMMenu-> currentText();
+
+        Artikl *pom = new Artikl(naziv, cena, kategorija);
+
+        (*(menu -> getMeni()))[kategorija] -> obrisiPoArtiklu(pom);
+
+        delete pom;
+
+        ui -> twMenuEMMenu->removeRow(rowToRemove);
+    } else {
+        QMessageBox messageBox;
+        messageBox.setText("No item has been selected!");
+        messageBox.setWindowTitle("No selected items");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                 "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox.addButton(QMessageBox::Ok);
+        int result = messageBox.exec();
+        if (result == QMessageBox::Ok)
+            messageBox.close();
+        return;
+    }
 }
 
 //----------------------------------------------------------------

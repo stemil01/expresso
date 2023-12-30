@@ -21,6 +21,7 @@ public:
     void sacuvajPromenu(const QString& naziv, int kolicina);
     QString racun();
     void obrisiPoNazivu(const QString& naziv);
+    void obrisiPoArtiklu(Artikl* artikal);
     QVector<Artikl*> getArtikli();
     //void printInListWidget(QListWidget& lw)
     void printInTableWidget(QTableWidget *tw);

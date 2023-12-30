@@ -98,6 +98,19 @@ void Porudzbina::obrisiPoNazivu(const QString& _naziv) {
     }
 }
 
+void Porudzbina::obrisiPoArtiklu(Artikl* artikal) {
+    QVector<Artikl*>::iterator it = artikli.begin();
+    while (it != artikli.end()) {
+        if (*(*it) == *artikal) {
+            delete *it;
+            it=artikli.erase(it);
+            return;
+        } else {
+            ++it;
+        }
+    }
+}
+
 
 QVector<Artikl*> Porudzbina::getArtikli(){
     return artikli;

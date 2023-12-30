@@ -27,7 +27,7 @@ public:
     void clearSto();
 private:
     QString m_naziv;
-    qint32 m_idstola=1;
+    qint32 m_idstola;
     qint32 m_max_tables;
     QList<Sto*> m_raspored;
 };

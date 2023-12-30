@@ -308,7 +308,6 @@ void GlavniMeni::sacuvajRaspored(){
         for(auto item : m_currentRaspored->getItems()){
             tabla->removeItem(item);
         }
-        //Sto::resetNextId();
     }
     else if(result == QMessageBox::Cancel){
         messageBox.close();
@@ -418,5 +417,4 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
     for(auto item : tabla->items()){
         tabla->removeItem(item);
     }
-    //m_curr
 }

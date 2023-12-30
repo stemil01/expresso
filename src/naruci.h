@@ -22,15 +22,14 @@ public:
     explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr, unesiartikle* unesiArtikle=nullptr);
     ~Naruci();
 
-    void addItemInTW(Artikl* a);
-    void updateItemInTW(const QString& str);
+    void addItemInTW(QTableWidget*tw,Artikl* a);
+    void updateItemInTW(QTableWidget* tw,const QString& str);
 
 
 public slots:
     void onPbAddItemOrderDialogClicked();
     void onPbReceiptOrderDialogClicked();
     void deleteSelectedRow();
-    void twItemActivated(QTableWidgetItem* item);
     void comboBoxTextChanged();
 private:
     Ui::Naruci *ui;

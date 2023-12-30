@@ -14,7 +14,7 @@ SOURCES += \
     #artikl_test.cpp \
     main.cpp \
     naruci_test.cpp \
-    #porudzbina_test.cpp \
+    porudzbina_test.cpp \
     raspored_test.cpp \
     sto_glmeni_test.cpp \
     sto_test.cpp \

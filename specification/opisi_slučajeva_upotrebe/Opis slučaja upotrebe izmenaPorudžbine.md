@@ -8,7 +8,7 @@
 
 - __Akteri__:
 
-    Konobar
+    Konobar- menja porudžbinu
 
 - __Preduslovi__:
 
@@ -46,8 +46,7 @@
 
 
 
-- __Alternativni tokovi__:/
-
+- __Alternativni tokovi__:A1:Ukoliko se u nekom od koraka zatvori aplikacija, nepotvrđene promene se ne čuvaju. 
 
 
 - __Podtokovi__:/

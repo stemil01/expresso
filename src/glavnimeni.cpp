@@ -280,12 +280,14 @@ void GlavniMeni::dodajRaspored(){
     connect(&cancelButton, &QPushButton::clicked, &saveInput, &QDialog::reject);
 
     int result = saveInput.exec();
+    QString naziv = textInput.text();
     if(result == QDialog::Accepted){
-        m_currentRaspored = new Raspored(textInput.text());
+        m_currentRaspored = new Raspored(naziv);
         m_currentRaspored->setMaxTables(numOfTablesInput.text().toInt());
         m_rasporedData.addRaspored(m_currentRaspored);
 
-        ui->cbDesign->addItem(m_currentRaspored->getNaziv());
+        ui->cbDesign->addItem(naziv);
+        ui->cbDesign->setCurrentIndex(ui->cbDesign->findText(naziv));
     }
     else if(result == QDialog::Rejected){
         saveInput.close();
@@ -294,7 +296,11 @@ void GlavniMeni::dodajRaspored(){
 
 void GlavniMeni::obrisiRaspored()
 {
+    // TODO: Confirmation pop-up
 
+    QString naziv = m_currentRaspored->getNaziv();
+    m_rasporedData.removeRaspored(naziv);
+    ui->cbDesign->removeItem(ui->cbDesign->findText(naziv));
 }
 
 void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){

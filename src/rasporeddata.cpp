@@ -48,6 +48,13 @@ void RasporedData::removeRaspored(const QString &rasporedName)
 {
     delete m_rasporedi->value(rasporedName);
     m_rasporedi->remove(rasporedName);
+
+    QDir dir(m_dirPath);
+    QString filePath = m_dirPath + "/" + rasporedName + ".bin";
+
+    if (!dir.remove(rasporedName + ".bin")) {
+        qWarning() << "file " + rasporedName + ".bin wasn't deleted";
+    }
 }
 
 Raspored* RasporedData::getRaspored(const QString& name) const

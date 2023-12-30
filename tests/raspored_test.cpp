@@ -9,8 +9,6 @@ TEST_CASE("Testing Raspored","[class]"){
 
         Raspored* primer = new Raspored("raspored 1");
         primer->setMaxTables(5);
-        //Sto* sto1 = new Sto();
-        //Sto* sto2 = new Sto();
 
         qint32 expected = 2;
 

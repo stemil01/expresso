@@ -8,7 +8,7 @@
 
 - __Akteri__:
 
-    Konobar
+    Konobar - bira sto, dodaje artikle u porudzbinu i aktivira izdavanje racuna
 
 - __Preduslovi__:
 

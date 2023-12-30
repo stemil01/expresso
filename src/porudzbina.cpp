@@ -72,16 +72,6 @@ void Porudzbina::obrisiPoNazivu(const QString& _naziv) {
     }
 }
 
-void Porudzbina::sacuvajPromenu(const QString& _naziv, int _kolicina){
-    QVector<Artikl*>::iterator it = artikli.begin();
-    while (it != artikli.end()) {
-        if ((*it)->getNaziv() == _naziv && (*it)->getKolicina() != _kolicina) {
-            (*it)->setKolicina(_kolicina);
-            qDebug()<<"Promjena u vektoru: ";
-            qDebug()<<QString::number(_kolicina);
-        }
-    }
-}
 
 QVector<Artikl*> Porudzbina::getArtikli(){
     return artikli;

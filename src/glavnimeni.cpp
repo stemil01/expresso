@@ -296,11 +296,24 @@ void GlavniMeni::dodajRaspored(){
 
 void GlavniMeni::obrisiRaspored()
 {
-    // TODO: Confirmation pop-up
-
     QString naziv = m_currentRaspored->getNaziv();
-    m_rasporedData.removeRaspored(naziv);
-    ui->cbDesign->removeItem(ui->cbDesign->findText(naziv));
+
+    QMessageBox messageBox;
+    messageBox.setText("Are you sure you want to delete arrangement '" + naziv + "'?");
+    messageBox.setWindowTitle("Confirm deletion");
+    messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                              "QMessageBox QLabel {color:red;min-width:400px;min-height:100px}");
+    messageBox.addButton(QMessageBox::Ok);
+    messageBox.addButton(QMessageBox::Cancel);
+
+    int result = messageBox.exec();
+    if(result == QMessageBox::Ok){
+        m_rasporedData.removeRaspored(naziv);
+        ui->cbDesign->removeItem(ui->cbDesign->findText(naziv));
+    }
+    else if(result == QMessageBox::Cancel){
+        messageBox.close();
+    }
 }
 
 void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
@@ -309,5 +322,3 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
     }
     Sto::resetNextId();
 }
-
-

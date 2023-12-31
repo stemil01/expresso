@@ -46,6 +46,17 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 
         painter->drawRect(boundingRect());
     }
+
+    if(za_raspored){
+        if(color != QColor::fromRgb(128,128,128)){
+            color = QColor::fromRgb(128,128,128);
+            update();
+        }
+    }
+    else if(currentStatus == OCCUPIED){
+            color = QColor::fromRgb(128,238,128);
+            update();
+     }
 }
 
 void Sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
@@ -72,6 +83,7 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         this->setPorudzbina(porudzbina);
         Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
+
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
             this->color = QColor::fromRgb(144,238,144);

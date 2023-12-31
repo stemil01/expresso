@@ -400,6 +400,8 @@ void GlavniMeni::ucitajRasporedDTA(){
     this->ocistiTablu(tabla);
     for(auto sto : m_currentRaspored->getItems()){
         sto->setFlag(QGraphicsItem::GraphicsItemFlag::ItemIsMovable,true);
+        if(sto->isSelected())
+            sto->setSelected(false);
         sto->za_raspored = true;
         tabla->addItem(sto);
     }

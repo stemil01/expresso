@@ -304,7 +304,7 @@ void GlavniMeni::dodajNovSto()
         return;
     }
 
-    Sto *sto = m_currentRaspored->addSto();
+    Sto *sto = m_currentRaspored->addSto(menu);
     tabla->addItem(sto);
 
     emit dodatNovSto(sto);

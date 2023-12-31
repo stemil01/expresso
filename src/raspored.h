@@ -5,6 +5,8 @@
 #include "sto.h"
 #include "serializable.h"
 
+class Meni;
+
 class Raspored : public Serializable
 {
 public:
@@ -22,7 +24,7 @@ public:
 
     inline QString getNaziv() const { return m_naziv; }
 
-    Sto* addSto();
+    Sto* addSto(Meni*);
     void removeSto(qint32 idStola);
     void clearSto();
 private:

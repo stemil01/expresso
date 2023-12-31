@@ -58,9 +58,10 @@ void Raspored::fromVariant(const QVariant& variant)
 }
 
 
-Sto* Raspored::addSto()
+Sto* Raspored::addSto(Meni* menu)
 {
     Sto *sto = new Sto(m_idstola++);
+    sto->setMeni(menu);
     m_raspored.append(sto);
     currentNumOfTables += 1;
     return sto;

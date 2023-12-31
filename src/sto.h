@@ -5,6 +5,7 @@
 #include "serializable.h"
 
 class Porudzbina;
+class Meni;
 
 class Sto : public QGraphicsObject, public Serializable
 {
@@ -24,6 +25,8 @@ public:
     QColor color = QColor::fromRgb(128,128,128);
     qreal width = 150;
     qreal height = 150;
+    void setMeni(Meni *);
+    Meni* getMeni();
     enum Status{
         AVAILABLE,
         OCCUPIED,
@@ -43,6 +46,7 @@ private:
     Porudzbina* _p = nullptr;
     qint32 _id;
     QPointF _lastPos;
+    Meni* _meni;
 
 };
 

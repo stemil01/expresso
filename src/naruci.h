@@ -25,6 +25,8 @@ public:
     void addItemInTW(QTableWidget*tw,Artikl* a);
     void updateItemInTW(QTableWidget* tw,const QString& str);
 
+    Ui::Naruci* getUi() const { return ui; }
+
 
 public slots:
     void onPbAddItemOrderDialogClicked();

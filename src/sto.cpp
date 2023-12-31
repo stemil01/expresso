@@ -1,5 +1,6 @@
 #include "sto.h"
 #include "naruci.h"
+#include "ui_naruci.h"
 #include "porudzbina.h"
 #include <string.h>
 #include <QPainter>
@@ -70,6 +71,7 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         unesiartikle* ua=new unesiartikle();
         this->setPorudzbina(porudzbina);
         Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua);
+        dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
             this->color = QColor::fromRgb(144,238,144);
@@ -131,4 +133,12 @@ void Sto::setPorudzbina(Porudzbina* porudzbina){
 
 Porudzbina* Sto::getPorudzbina(){
     return _p;
+}
+
+void Sto::setMeni(Meni *meni){
+    _meni = meni;
+}
+
+Meni* Sto::getMeni(){
+    return _meni;
 }

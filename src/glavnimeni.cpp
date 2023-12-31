@@ -207,16 +207,16 @@ void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
 //----------------------------------------------------------------
 void GlavniMeni::on_pbHelpMainMenu_clicked()
 {
-    //help *helpOpen = new help(this);
+    help *helpOpen = new help(this);
     //helpOpen -> setModal(true);
-    //helpOpen -> exec();
+    helpOpen -> exec();
     //delete helpOpen;
-    unesiartikle* ua=new unesiartikle();
-    Porudzbina* porudzbina = new Porudzbina();
-    Naruci *naruci=new Naruci(this,porudzbina,ua);
-    naruci->setModal(true);
-    naruci->exec();
-    delete naruci;
+//    unesiartikle* ua=new unesiartikle();
+//    Porudzbina* porudzbina = new Porudzbina();
+//    Naruci *naruci=new Naruci(this,porudzbina,ua);
+//    naruci->setModal(true);
+//    naruci->exec();
+//    delete naruci;
 }
 
 void GlavniMeni::on_pbQuitMainMenu_clicked()

@@ -156,6 +156,7 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     QString kategorija = ui -> cbTypeEMMenu -> currentText();
 
     Artikl *pom = new Artikl(naziv, cena, kategorija);
+    //Artikl *a1 = new Artikl(naziv, cena, kategorija);
     int res = (*(menu -> getMeni()))[kategorija] -> dodajArtikl(pom);
     if(res == 1) {
         QMessageBox messageBox;
@@ -171,6 +172,7 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
     }
 
     (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+    menu->addItem(kategorija,pom);
 }
 
 void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {

@@ -46,7 +46,7 @@ private:
     Porudzbina* _p = nullptr;
     qint32 _id;
     QPointF _lastPos;
-    Meni* _meni;
+    Meni* _meni = nullptr;
 
 };
 

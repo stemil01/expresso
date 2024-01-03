@@ -23,6 +23,8 @@ QMap<QString, Porudzbina*>* Meni::getMeni() {
 
 void Meni::addCategory(QString naziv) {
     _meni[naziv] = new Porudzbina();
+    Kategorija *kategorija = new Kategorija(naziv);
+    _kategorije[naziv] = kategorija;
 }
 
 QVariant Meni::toVariant() const
@@ -64,4 +66,12 @@ void Meni::executeLoad()
 void Meni::executeSave() const
 {
     _binarySerializer->save(*this, "meni.bin");
+}
+
+QMap<QString,Kategorija*> Meni::getKategorije(){
+    return _kategorije;
+}
+
+void Meni::addItem(const QString &naziv,Artikl* artikl){
+    _kategorije[naziv]->dodajArtikl(artikl);
 }

@@ -5,10 +5,12 @@
 
 #include <QDialog>
 #include <QTableWidgetItem>
+#include <QSet>
 
 class unesiartikle;
 class Porudzbina;
 class Artikl;
+class Meni;
 
 namespace Ui {
 class Naruci;
@@ -19,14 +21,14 @@ class Naruci : public QDialog
     Q_OBJECT
 
 public:
-    explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr, unesiartikle* unesiArtikle=nullptr);
+    explicit Naruci(QWidget *parent = nullptr,Porudzbina* porudzbina = nullptr, unesiartikle* unesiArtikle=nullptr,Meni* meni = nullptr);
     ~Naruci();
 
     void addItemInTW(QTableWidget*tw,Artikl* a);
     void updateItemInTW(QTableWidget* tw,const QString& str);
 
     Ui::Naruci* getUi() const { return ui; }
-
+    Meni* getMenu(){return _meni;};
 
 public slots:
     void onPbAddItemOrderDialogClicked();
@@ -37,7 +39,8 @@ private:
     Ui::Naruci *ui;
     Porudzbina* p;
     unesiartikle* unesiArtikle;
-
+    Meni* _meni;
+    QSet<QString> _artikli;
 };
 
 #endif // NARUCI_H

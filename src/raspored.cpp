@@ -1,5 +1,6 @@
 #include "raspored.h"
 #include "sto.h"
+#include "meni.h"
 
 #include <QVariant>
 #include <QVariantMap>
@@ -45,12 +46,9 @@ void Raspored::fromVariant(const QVariant& variant)
 
     qDeleteAll(m_raspored);
     m_raspored.clear();
-    qDebug()<<m_idstola;
-    qDebug()<<m_max_tables;
 
     const auto raspored = map.value("raspored").toList();
     for (const auto& stoVariant : raspored) {
-        //qDebug()<<m_idstola;
         Sto *sto = new Sto(m_idstola);
         sto->fromVariant(stoVariant);
         m_raspored.append(sto);

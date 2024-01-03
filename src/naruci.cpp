@@ -2,13 +2,16 @@
 #include "ui_naruci.h"
 
 #include "porudzbina.h"
+#include "kategorija.h"
+#include "meni.h"
 #include <QWidget>
 
-Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtikle) :
+Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtikle,Meni* meni) :
     QDialog(parent),
     ui(new Ui::Naruci),
     p(porudzbina),
-    unesiArtikle(_unesiArtikle)
+    unesiArtikle(_unesiArtikle),
+    _meni(meni)
 {
     ui->setupUi(this);
 
@@ -49,16 +52,22 @@ void Naruci::onPbAddItemOrderDialogClicked(){
         //double cena=unesiArtikle->cenaArtikla(kategorija,naziv);
 
         double cena=0;
-        Artikl* artikl=new Artikl(naziv,cena,kategorija);
-        int promena=p->dodajArtikl(artikl);
-        if(!promena){
+        Artikl* artikl = (_meni->getKategorije())[kategorija]->getArtiklByNaziv(naziv);
+        int promena;
+
+        Artikl* copy = new Artikl(naziv,artikl->getCena(),kategorija);
+        promena=p->dodajArtikl(copy);
+        if(!_artikli.contains(naziv)){
             addItemInTW(ui->twOrderOrderDialog,artikl);
+            _artikli.insert(naziv);
         }else{
             updateItemInTW(ui->twOrderOrderDialog,naziv);
         }
 
     }
 }
+
+
 void Naruci::addItemInTW(QTableWidget* tw,Artikl* artikl){
     QTableWidgetItem* itemNaziv = new QTableWidgetItem();
     itemNaziv->setText(artikl->getNaziv());
@@ -79,6 +88,7 @@ void Naruci::addItemInTW(QTableWidget* tw,Artikl* artikl){
     tw->setItem(row,2,itemCena);
 }
 void Naruci::updateItemInTW(QTableWidget* tw,const QString& naziv){
+
             QList<QTableWidgetItem *> foundItems = tw->findItems(naziv, Qt::MatchExactly);
 
             if (!foundItems.isEmpty()) {
@@ -91,6 +101,7 @@ void Naruci::updateItemInTW(QTableWidget* tw,const QString& naziv){
 }
 
 void Naruci::onPbReceiptOrderDialogClicked(){
+
     ui->teReceiptOrderDialog->setText(p->racun());
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
@@ -117,8 +128,16 @@ void Naruci::deleteSelectedRow() {
 
 
 void Naruci::comboBoxTextChanged(){
-
-    unesiArtikle->ispisiPoKategorijiListWidget(ui->lwMenuOrderDialog,ui->cbTypeOrderDialog->currentText());
+    //unesiArtikle->ispisiPoKategorijiListWidget(ui->lwMenuOrderDialog,ui->cbTypeOrderDialog->currentText());
+    ui->lwMenuOrderDialog->clear();
+    QString kategorija = ui->cbTypeOrderDialog->currentText();
+    auto kategorije = _meni->getKategorije();
+    if(kategorije.contains(kategorija)){
+        auto artikli = kategorije[kategorija]->getArtikli();
+        for(auto artikl : artikli){
+            ui->lwMenuOrderDialog->addItem(artikl->getNaziv());
+        }
+    }
 }
 
 

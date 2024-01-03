@@ -1,4 +1,5 @@
 #include "sto.h"
+#include "meni.h"
 #include "naruci.h"
 #include "ui_naruci.h"
 #include "porudzbina.h"
@@ -81,15 +82,18 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         Porudzbina* porudzbina = new Porudzbina();
         unesiartikle* ua=new unesiartikle();
         this->setPorudzbina(porudzbina);
-        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua,_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
-
+        for(auto kategorija : _meni->getKategorije()){
+            dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija->getNaziv());
+        }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
             this->color = QColor::fromRgb(144,238,144);
             this->currentStatus = OCCUPIED;
         }
         delete dialogNarudzbine;
+        delete porudzbina;
         delete ua;
     }
     else{

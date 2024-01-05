@@ -84,6 +84,13 @@ void Raspored::clearSto()
     m_idstola = 1;
 }
 
+void Raspored::setMeni(Meni *meni)
+{
+    for (auto& sto : m_raspored) {
+        sto->setMeni(meni);
+    }
+}
+
 void Raspored::setMaxTables(qint32 num){
     m_max_tables = num;
 }

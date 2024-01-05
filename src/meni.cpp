@@ -67,7 +67,6 @@ void Meni::fromVariant(const QVariant &variant)
 
     qDeleteAll(_meni);
     _meni.clear();
-
     const auto variantMeni = map.value("meni").toList();
     for (const auto& variantKategorija : variantMeni) {
         const auto mapKategorija = variantKategorija.toMap();

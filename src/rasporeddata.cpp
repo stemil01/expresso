@@ -62,6 +62,13 @@ Raspored* RasporedData::getRaspored(const QString& name) const
     return m_rasporedi->value(name);
 }
 
+void RasporedData::setMeni(Meni *meni)
+{
+    for (auto& raspored : *m_rasporedi) {
+        raspored->setMeni(meni);
+    }
+}
+
 void RasporedData::executeLoad()
 {
     QDir dir(m_dirPath);

@@ -14,7 +14,6 @@
 #include <QVariant>
 #include <QVariantMap>
 
-
 Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
@@ -132,6 +131,7 @@ QVariant Sto::toVariant() const
     map.insert("id", _id);
     map.insert("position", pos());
     map.insert("brojMesta", broj_mesta);
+    // map.insert("meni", _meni->toVariant());
     return map;
 }
 
@@ -141,6 +141,10 @@ void Sto::fromVariant(const QVariant& variant)
     _id = map.value("id").toInt();
     setPos(map.value("position").toPointF());
     broj_mesta = map.value("brojMesta").toInt();
+    // if (_meni == nullptr) {
+        // _meni = new Meni();
+    // }
+    // _meni->fromVariant(map.value("meni"));
 }
 
 void Sto::setPorudzbina(Porudzbina* porudzbina){

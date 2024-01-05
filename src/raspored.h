@@ -27,6 +27,7 @@ public:
     Sto* addSto(Meni*);
     void removeSto(qint32 idStola);
     void clearSto();
+    void setMeni(Meni *meni);
 private:
     QString m_naziv;
     qint32 m_idstola;

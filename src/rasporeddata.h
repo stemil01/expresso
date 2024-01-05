@@ -3,6 +3,7 @@
 
 #include "raspored.h"
 #include "serializer.h"
+#include "meni.h"
 
 #include <QMap>
 #include <QString>
@@ -21,6 +22,8 @@ public:
     Raspored* getRaspored(const QString& name) const;
 
     inline QMap<QString, Raspored*>* getRasporedi() const { return m_rasporedi; }
+
+    void setMeni(Meni *meni);
 
     void executeLoad();
     void executeSave() const;

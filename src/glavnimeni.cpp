@@ -43,12 +43,14 @@ GlavniMeni::GlavniMeni(QWidget *parent) :
     ui->gvMain->setScene(mainView);
     ui->gvMain->setAlignment(Qt::AlignLeft | Qt::AlignTop);
 
+    // ucitavanje menija
+    menu->executeLoad();
+
     // ucitavanje rasporeda
     m_rasporedData.executeLoad();
     m_currentRaspored = nullptr;
 
-    menu->executeLoad();
-
+    m_rasporedData.setMeni(menu);
 }
 
 void GlavniMeni::setStyle() {

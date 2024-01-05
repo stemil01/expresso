@@ -31,7 +31,8 @@ SOURCES += \
     ../src/sto.cpp \
     ../src/tabla.cpp \
     ../src/unesiartikle.cpp \
-    ../src/meni.cpp
+    ../src/meni.cpp \
+    ../src/kategorija.cpp
     #unesiartikle_test.cpp
 
 HEADERS += \
@@ -49,7 +50,8 @@ HEADERS += \
     ../src/sto.h \
     ../src/tabla.h \
     ../src/unesiartikle.h \
-    ../src/meni.h
+    ../src/meni.h \
+    ../src/kategorija.h
 
 FORMS += \
     ../src/glavnimeni.ui \

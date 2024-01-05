@@ -25,7 +25,8 @@ SOURCES += \
     src/rasporeddata.cpp \
     src/sto.cpp \
     src/tabla.cpp \
-    src/unesiartikle.cpp
+    src/unesiartikle.cpp \
+    src/kategorija.cpp
 
 HEADERS += \
     src/artikl.h \
@@ -43,7 +44,8 @@ HEADERS += \
     src/serializer.h \
     src/sto.h \
     src/tabla.h \
-    src/unesiartikle.h
+    src/unesiartikle.h \
+    src/kategorija.h
 
 
 FORMS += \

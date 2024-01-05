@@ -30,6 +30,15 @@ void Meni::addCategory(QString naziv) {
 QVariant Meni::toVariant() const
 {
     QVariantMap map;
+    QVariantList variantKategorije;
+    for (const auto& naziv : _kategorije.keys()) {
+        QVariantMap mapKategorija;
+        mapKategorija.insert("naziv", naziv);
+        mapKategorija.insert("kategorija", _kategorije[naziv]->toVariant());
+        variantKategorije.append(mapKategorija);
+    }
+    map.insert("kategorije", variantKategorije);
+
     QVariantList variantMeni;
     for (const auto& kategorija : _meni.keys()) {
         QVariantMap mapKategorija;
@@ -38,12 +47,24 @@ QVariant Meni::toVariant() const
         variantMeni.append(mapKategorija);
     }
     map.insert("meni", variantMeni);
+
     return map;
 }
 
 void Meni::fromVariant(const QVariant &variant)
 {
     const auto map = variant.toMap();
+
+    qDeleteAll(_kategorije);
+    _kategorije.clear();
+    const auto variantKategorije = map.value("kategorije").toList();
+    for (const auto& variantKategorija : variantKategorije) {
+        const auto mapKategorija = variantKategorija.toMap();
+        QString nazivKategorije = mapKategorija.value("naziv").toString();
+        _kategorije[nazivKategorije] = new Kategorija();
+        _kategorije[nazivKategorije]->fromVariant(mapKategorija.value("kategorija"));
+    }
+
     qDeleteAll(_meni);
     _meni.clear();
 

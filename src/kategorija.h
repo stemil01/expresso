@@ -1,11 +1,12 @@
 #ifndef KATEGORIJA_H
 #define KATEGORIJA_H
+#include "serializable.h"
 #include <QString>
 #include <QVector>
 
 class Artikl;
 
-class Kategorija
+class Kategorija : public Serializable
 {
 public:
     Kategorija(const QString&);
@@ -16,6 +17,8 @@ public:
     QVector<Artikl*> getArtikli();
     Artikl* getArtiklByNaziv(const QString &naziv);
 
+    QVariant toVariant() const override;
+    void fromVariant(const QVariant& variant) override;
 
 private:
     QString _naziv;

@@ -9,7 +9,7 @@
 #include <QString>
 #include <QComboBox>
 
-class Meni : Serializable
+class Meni : public Serializable
 {
 public:
     Meni();

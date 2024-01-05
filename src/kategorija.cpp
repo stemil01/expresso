@@ -25,3 +25,30 @@ Artikl* Kategorija::getArtiklByNaziv(const QString &naziv){
     }
     return nullptr;
 }
+
+QVariant Kategorija::toVariant() const
+{
+    QVariantMap map;
+    map.insert("naziv", _naziv);
+    QVariantList variantArtikl;
+    for (const auto& artikl : _artikli) {
+        variantArtikl.append(artikl->toVariant());
+    }
+    map.insert("artikli", variantArtikl);
+    return map;
+}
+
+void Kategorija::fromVariant(const QVariant &variant)
+{
+    const auto map = variant.toMap();
+    _naziv = map.value("naziv").toString();
+    qDeleteAll(_artikli);
+    _artikli.clear();
+
+    const auto variantArtikli = map.value("artikli").toList();
+    for (const auto& variantArtikl : variantArtikli) {
+        Artikl *artikl = new Artikl();
+        artikl->fromVariant(variantArtikl);
+        dodajArtikl(artikl);
+    }
+}

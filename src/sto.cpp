@@ -17,6 +17,7 @@
 Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
+    _p = new Porudzbina();
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
@@ -78,13 +79,18 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
-        Porudzbina* porudzbina = new Porudzbina();
+        if(this->currentStatus == AVAILABLE){
+            Porudzbina* porudzbina = new Porudzbina();
+            this->setPorudzbina(porudzbina);
+        }
         unesiartikle* ua=new unesiartikle();
-        this->setPorudzbina(porudzbina);
-        Naruci *dialogNarudzbine = new Naruci(nullptr,porudzbina,ua,_meni);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
         for(auto kategorija : _meni->getKategorije()){
             dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija->getNaziv());
+        }
+        for(auto artikl : _p->getArtikli()){
+            dialogNarudzbine->addItemInTW(dialogNarudzbine->getUi()->twOrderOrderDialog,artikl);
         }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
@@ -92,7 +98,6 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
             this->currentStatus = OCCUPIED;
         }
         delete dialogNarudzbine;
-        delete porudzbina;
         delete ua;
     }
     else{
@@ -131,6 +136,8 @@ QVariant Sto::toVariant() const
     map.insert("id", _id);
     map.insert("position", pos());
     map.insert("brojMesta", broj_mesta);
+    qDebug()<<(_p->getArtikli().size()) << " toVariant";
+    map.insert("porudzbina",_p->toVariant());
     // map.insert("meni", _meni->toVariant());
     return map;
 }
@@ -141,6 +148,9 @@ void Sto::fromVariant(const QVariant& variant)
     _id = map.value("id").toInt();
     setPos(map.value("position").toPointF());
     broj_mesta = map.value("brojMesta").toInt();
+    _p = new Porudzbina();
+    _p->fromVariant(map.value("porudzbina"));
+    qDebug()<<(_p->getArtikli().size());
     // if (_meni == nullptr) {
         // _meni = new Meni();
     // }

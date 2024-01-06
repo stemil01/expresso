@@ -4,6 +4,7 @@
 #include "porudzbina.h"
 #include "kategorija.h"
 #include "meni.h"
+#include "sto.h"
 #include <QWidget>
 
 Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtikle,Meni* meni) :
@@ -36,6 +37,7 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtik
 Naruci::~Naruci()
 {
     delete ui;
+    //delete copy;
 }
 
 void Naruci::onPbAddItemOrderDialogClicked(){
@@ -55,11 +57,10 @@ void Naruci::onPbAddItemOrderDialogClicked(){
         Artikl* artikl = (_meni->getKategorije())[kategorija]->getArtiklByNaziv(naziv);
         int promena;
 
-        Artikl* copy = new Artikl(naziv,artikl->getCena(),kategorija);
+        copy = new Artikl(naziv,artikl->getCena(),kategorija);
         promena=p->dodajArtikl(copy);
-        if(!_artikli.contains(naziv)){
+        if(!promena){
             addItemInTW(ui->twOrderOrderDialog,artikl);
-            _artikli.insert(naziv);
         }else{
             updateItemInTW(ui->twOrderOrderDialog,naziv);
         }

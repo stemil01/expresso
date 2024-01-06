@@ -5,7 +5,6 @@
 
 #include <QDialog>
 #include <QTableWidgetItem>
-#include <QSet>
 
 class unesiartikle;
 class Porudzbina;
@@ -29,6 +28,7 @@ public:
 
     Ui::Naruci* getUi() const { return ui; }
     Meni* getMenu(){return _meni;};
+    Artikl* copy;
 
 public slots:
     void onPbAddItemOrderDialogClicked();
@@ -40,7 +40,6 @@ private:
     Porudzbina* p;
     unesiartikle* unesiArtikle;
     Meni* _meni;
-    QSet<QString> _artikli;
 };
 
 #endif // NARUCI_H

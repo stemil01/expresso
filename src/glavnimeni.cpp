@@ -361,6 +361,10 @@ void GlavniMeni::sacuvajRaspored(){
 
         m_rasporedData.executeSave();
 
+        if (m_currentRaspored == nullptr) {
+            return;
+        }
+
         for(auto item : m_currentRaspored->getItems()){
             tabla->removeItem(item);
         }

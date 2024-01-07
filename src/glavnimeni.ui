@@ -27,7 +27,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="MainMenu">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -130,7 +130,7 @@ color: rgb(0, 0, 0);</string>
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pbHelpMainMenu">
+               <widget class="QPushButton" name="pbInstructionsMainMenu">
                 <property name="minimumSize">
                  <size>
                   <width>200</width>
@@ -383,6 +383,9 @@ color: rgb(0, 0, 0);</string>
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QLabel" name="label_6">
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;Select Arrangement:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -396,6 +399,10 @@ color: rgb(0, 0, 0);</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+              </property>
              </widget>
             </item>
             <item>
@@ -405,6 +412,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Add Arrangement</string>
@@ -418,6 +429,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Remove Arrangement</string>
@@ -448,6 +463,10 @@ color: rgb(0, 0, 0);</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+              </property>
               <property name="text">
                <string>Add Table</string>
               </property>
@@ -460,6 +479,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Remove Table</string>
@@ -487,6 +510,10 @@ color: rgb(0, 0, 0);</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+              </property>
               <property name="text">
                <string>Clear All</string>
               </property>
@@ -500,6 +527,10 @@ color: rgb(0, 0, 0);</string>
                 <height>50</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+              </property>
               <property name="text">
                <string>Save</string>
               </property>
@@ -512,6 +543,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Back</string>
@@ -538,6 +573,9 @@ color: rgb(0, 0, 0);</string>
                 <height>25</height>
                </size>
               </property>
+              <property name="styleSheet">
+               <string notr="true">color: rgb(255, 255, 255);</string>
+              </property>
               <property name="text">
                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;Select Arrangement:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
@@ -553,6 +591,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </item>
@@ -576,6 +618,10 @@ color: rgb(0, 0, 0);</string>
                 <width>200</width>
                 <height>50</height>
                </size>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
               </property>
               <property name="text">
                <string>Back</string>
@@ -642,7 +688,7 @@ color: rgb(0, 0, 0);</string>
                </size>
               </property>
               <property name="text">
-               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:72pt; font-weight:700;&quot;&gt;EDIT MENU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+               <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:72pt; font-weight:700; color:#ffffff;&quot;&gt;EDIT MENU&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
               </property>
              </widget>
             </item>
@@ -677,6 +723,10 @@ color: rgb(0, 0, 0);</string>
                     <height>50</height>
                    </size>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                  </property>
                  </widget>
                 </item>
                 <item>
@@ -701,6 +751,9 @@ color: rgb(0, 0, 0);</string>
                       <height>16777215</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
+                    </property>
                     <property name="text">
                      <string>Category:</string>
                     </property>
@@ -719,6 +772,10 @@ color: rgb(0, 0, 0);</string>
                     <height>50</height>
                    </size>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                  </property>
                   <property name="text">
                    <string>Add Category</string>
                   </property>
@@ -731,6 +788,10 @@ color: rgb(0, 0, 0);</string>
                     <width>200</width>
                     <height>50</height>
                    </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
                    <string>Remove Category</string>
@@ -789,6 +850,9 @@ color: rgb(0, 0, 0);</string>
                       <height>16777215</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
+                    </property>
                     <property name="text">
                      <string>Name</string>
                     </property>
@@ -821,6 +885,9 @@ color: rgb(0, 0, 0);</string>
                       <height>16777215</height>
                      </size>
                     </property>
+                    <property name="styleSheet">
+                     <string notr="true">color: rgb(255, 255, 255);</string>
+                    </property>
                     <property name="text">
                      <string>Price</string>
                     </property>
@@ -839,6 +906,10 @@ color: rgb(0, 0, 0);</string>
                     <height>50</height>
                    </size>
                   </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+                  </property>
                   <property name="text">
                    <string>Add Item</string>
                   </property>
@@ -851,6 +922,10 @@ color: rgb(0, 0, 0);</string>
                     <width>200</width>
                     <height>50</height>
                    </size>
+                  </property>
+                  <property name="styleSheet">
+                   <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="text">
                    <string>Remove Item</string>
@@ -929,6 +1004,10 @@ color: rgb(0, 0, 0);</string>
                   <width>200</width>
                   <height>50</height>
                  </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
                 </property>
                 <property name="text">
                  <string>Finish</string>

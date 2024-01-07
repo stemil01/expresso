@@ -60,6 +60,16 @@
        </item>
        <item>
         <widget class="QPushButton" name="pbReceiptOrderDialog">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+         </property>
          <property name="text">
           <string>Receipt</string>
          </property>
@@ -96,6 +106,9 @@ li.checked::marker { content: &quot;\2612&quot;; }
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="label">
+         <property name="styleSheet">
+          <string notr="true">color: rgb(255, 255, 255);</string>
+         </property>
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:14pt; font-weight:700;&quot;&gt;Select Drink:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -109,31 +122,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <height>50</height>
           </size>
          </property>
-         <item>
-          <property name="text">
-           <string>COFFEE AND HOT DRINKS</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>SOFT DRINKS</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>WINE</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>COCTAILS</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>SHOTS</string>
-          </property>
-         </item>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+         </property>
         </widget>
        </item>
        <item>
@@ -141,21 +133,6 @@ li.checked::marker { content: &quot;\2612&quot;; }
          <property name="selectionMode">
           <enum>QAbstractItemView::MultiSelection</enum>
          </property>
-         <item>
-          <property name="text">
-           <string>pice1</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>pice2</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>pice3</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item>
@@ -166,6 +143,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <height>50</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+         </property>
          <property name="text">
           <string>Add Item</string>
          </property>
@@ -173,6 +154,16 @@ li.checked::marker { content: &quot;\2612&quot;; }
        </item>
        <item>
         <widget class="QPushButton" name="pbDeleteOrderDialog">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>50</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+         </property>
          <property name="text">
           <string>Delete</string>
          </property>
@@ -198,6 +189,10 @@ li.checked::marker { content: &quot;\2612&quot;; }
            <width>200</width>
            <height>50</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
          </property>
          <property name="text">
           <string>Back</string>

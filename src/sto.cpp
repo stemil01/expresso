@@ -17,7 +17,6 @@
 Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
-    _p = new Porudzbina();
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
@@ -136,7 +135,6 @@ QVariant Sto::toVariant() const
     map.insert("id", _id);
     map.insert("position", pos());
     map.insert("brojMesta", broj_mesta);
-    qDebug()<<(_p->getArtikli().size()) << " toVariant";
     map.insert("porudzbina",_p->toVariant());
     // map.insert("meni", _meni->toVariant());
     return map;
@@ -150,7 +148,6 @@ void Sto::fromVariant(const QVariant& variant)
     broj_mesta = map.value("brojMesta").toInt();
     _p = new Porudzbina();
     _p->fromVariant(map.value("porudzbina"));
-    qDebug()<<(_p->getArtikli().size());
     // if (_meni == nullptr) {
         // _meni = new Meni();
     // }

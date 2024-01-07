@@ -24,6 +24,7 @@ public slots:
     void addItem(const QString&,Artikl*);
 
     QMap<QString,Kategorija*> getKategorije();
+    void deleteCategory(const QString& naziv);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

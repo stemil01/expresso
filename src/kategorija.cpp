@@ -18,6 +18,12 @@ QVector<Artikl*> Kategorija::getArtikli(){
     return _artikli;
 }
 
+void Kategorija::obrisiArtikl(const QString& naziv){
+    qDebug()<<_artikli.size() << " class";
+    _artikli.removeOne(this->getArtiklByNaziv(naziv));
+    qDebug()<<_artikli.size() << " class";
+}
+
 Artikl* Kategorija::getArtiklByNaziv(const QString &naziv){
     for(const auto artikl : _artikli){
         if(artikl->getNaziv() == naziv)

@@ -15,6 +15,7 @@ public:
     QString getNaziv();
 
     void dodajArtikl(Artikl*);
+    void obrisiArtikl(const QString& naziv);
     QVector<Artikl*> getArtikli();
     Artikl* getArtiklByNaziv(const QString &naziv);
 

@@ -144,6 +144,7 @@ void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
     delete (*(menu -> getMeni()))[kategorija];
     menu -> getMeni() -> remove(kategorija);
     ui -> cbTypeEMMenu -> removeItem(ui -> cbTypeEMMenu -> findText(kategorija));
+    menu->deleteCategory(kategorija);
 }
 
 
@@ -189,9 +190,13 @@ void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
 
         Artikl *pom = new Artikl(naziv, cena, kategorija);
 
-        (*(menu -> getMeni()))[kategorija] -> obrisiPoArtiklu(pom);
+        //(*(menu -> getMeni()))[kategorija] -> obrisiPoArtiklu(pom);
 
         delete pom;
+
+        qDebug()<<menu->getKategorije()[kategorija]->getArtikli().size();
+        menu->getKategorije()[kategorija]->obrisiArtikl(naziv);
+        qDebug()<<menu->getKategorije()[kategorija]->getArtikli().size();
 
         ui -> twMenuEMMenu->removeRow(rowToRemove);
     } else {

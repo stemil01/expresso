@@ -12,7 +12,7 @@ Meni::~Meni() {
 
 void Meni::printNamesInComboBox(QComboBox *cb) {
     cb -> clear();
-    for(const auto &kategorija : _meni.keys()) {
+    for(const auto &kategorija : _kategorije.keys()) {
         cb -> addItem(kategorija);
     }
 }
@@ -94,4 +94,8 @@ QMap<QString,Kategorija*> Meni::getKategorije(){
 
 void Meni::addItem(const QString &naziv,Artikl* artikl){
     _kategorije[naziv]->dodajArtikl(artikl);
+}
+
+void Meni::deleteCategory(const QString& naziv){
+    _kategorije.remove(naziv);
 }

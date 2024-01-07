@@ -22,16 +22,21 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtik
     connect(ui->pbBackOrderDialog,&QPushButton::clicked,this,&QDialog::accept);
     connect(ui->cbTypeOrderDialog,&QComboBox::currentTextChanged,this,&Naruci::comboBoxTextChanged);
 
+    setStyle();
+}
 
+void Naruci::setStyle() {
     QHeaderView* header = ui->twOrderOrderDialog->horizontalHeader();
     // Set the resizing mode for each column to Stretch
     int columnCount = ui->twOrderOrderDialog->columnCount();
     for (int i = 0; i < columnCount; ++i) {
         header->setSectionResizeMode(i, QHeaderView::Stretch);
     }
+    ui -> twOrderOrderDialog -> verticalHeader() -> setVisible(false);
     ui->twOrderOrderDialog->setShowGrid(false);
     ui->cbTypeOrderDialog->setCurrentIndex(-1);
 
+    ui -> lwMenuOrderDialog -> setSelectionMode(QAbstractItemView::SingleSelection);
 }
 
 Naruci::~Naruci()

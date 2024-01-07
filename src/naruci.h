@@ -36,6 +36,8 @@ public slots:
     void deleteSelectedRow();
     void comboBoxTextChanged();
 private:
+    void setStyle();
+
     Ui::Naruci *ui;
     Porudzbina* p;
     unesiartikle* unesiArtikle;

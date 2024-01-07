@@ -18,6 +18,7 @@ Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
+    _p = new Porudzbina();
 }
 
 Sto::~Sto(){
@@ -85,8 +86,8 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         unesiartikle* ua=new unesiartikle();
         Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
-        for(auto kategorija : _meni->getKategorije()){
-            dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija->getNaziv());
+        for(auto kategorija : (_meni->getKategorije()).keys()){
+            dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija);
         }
         for(auto artikl : _p->getArtikli()){
             dialogNarudzbine->addItemInTW(dialogNarudzbine->getUi()->twOrderOrderDialog,artikl);

@@ -1,6 +1,8 @@
 #ifndef KATEGORIJA_H
 #define KATEGORIJA_H
 #include "serializable.h"
+#include <QTableWidget>
+#include <QTableWidgetItem>
 #include <QString>
 #include <QVector>
 
@@ -14,13 +16,15 @@ public:
 
     QString getNaziv();
 
-    void dodajArtikl(Artikl*);
+    int dodajArtikl(Artikl*);
     void obrisiArtikl(const QString& naziv);
     QVector<Artikl*> getArtikli();
     Artikl* getArtiklByNaziv(const QString &naziv);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
+
+    void printInTableWidget(QTableWidget *tw);
 
 private:
     QString _naziv;

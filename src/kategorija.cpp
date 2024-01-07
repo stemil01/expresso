@@ -10,8 +10,25 @@ QString Kategorija::getNaziv(){
     return _naziv;
 }
 
-void Kategorija::dodajArtikl(Artikl* artikal){
-    _artikli.push_back(artikal);
+int Kategorija::dodajArtikl(Artikl* artikal){
+    int prom=0;
+    auto it = _artikli.begin();
+
+    while (it != _artikli.end())
+    {
+        if ((*it) -> getNaziv() == artikal -> getNaziv())
+        {
+            prom=1;
+            break;
+        }
+        ++it;
+    }
+
+    if(!prom){
+
+        _artikli.push_back(artikal);
+    }
+    return prom;
 }
 
 QVector<Artikl*> Kategorija::getArtikli(){
@@ -54,5 +71,26 @@ void Kategorija::fromVariant(const QVariant &variant)
         Artikl *artikl = new Artikl();
         artikl->fromVariant(variantArtikl);
         dodajArtikl(artikl);
+    }
+}
+
+void Kategorija::printInTableWidget(QTableWidget *tw) {
+    int rowCount = tw->rowCount();
+    for (int i = 0; i < rowCount; ++i) {
+        for (int j = 0; j < tw->columnCount(); ++j) {
+            QTableWidgetItem *item = tw->takeItem(i, j);
+            delete item;
+        }
+    }
+
+    tw->setRowCount(0);
+    int rowIndex = tw -> rowCount();
+    for(auto artikl : _artikli) {
+        QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
+        QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        tw->insertRow(rowIndex);
+        tw->setItem(rowIndex, 0, nameItem);
+        tw->setItem(rowIndex, 1, priceItem);
+        rowIndex ++;
     }
 }

@@ -19,12 +19,13 @@ public:
 
 public slots:
     void printNamesInComboBox(QComboBox *cb);
-    QMap<QString, Porudzbina*>* getMeni();
+   // QMap<QString, Porudzbina*>* getMeni();
     void addCategory(QString naziv);
-    void addItem(const QString&,Artikl*);
+    int addItem(const QString&,Artikl*);
 
     QMap<QString,Kategorija*> getKategorije();
     void deleteCategory(const QString& naziv);
+    void deleteItem(const QString&, Artikl*);
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
@@ -35,7 +36,7 @@ public slots:
 private:
     //QList<Kategorija*> _kategorije;
     QMap<QString,Kategorija*> _kategorije;
-    QMap<QString, Porudzbina*> _meni;
+    //QMap<QString, Porudzbina*> _meni;
     Serializer *_binarySerializer;
 };
 

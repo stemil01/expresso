@@ -5,9 +5,9 @@ Meni::Meni() {
 }
 
 Meni::~Meni() {
-    auto end = _meni.end();
+   /* auto end = _meni.end();
     for (auto it = _meni.begin(); it != end; ++it)
-        delete it.value();
+        delete it.value();*/
 }
 
 void Meni::printNamesInComboBox(QComboBox *cb) {
@@ -16,13 +16,13 @@ void Meni::printNamesInComboBox(QComboBox *cb) {
         cb -> addItem(kategorija);
     }
 }
-
+/*
 QMap<QString, Porudzbina*>* Meni::getMeni() {
-    return &_meni;
+    return nullptr;//&_meni;
 }
-
+*/
 void Meni::addCategory(QString naziv) {
-    _meni[naziv] = new Porudzbina();
+    //_meni[naziv] = new Porudzbina();
     Kategorija *kategorija = new Kategorija(naziv);
     _kategorije[naziv] = kategorija;
 }
@@ -38,7 +38,7 @@ QVariant Meni::toVariant() const
         variantKategorije.append(mapKategorija);
     }
     map.insert("kategorije", variantKategorije);
-
+/*
     QVariantList variantMeni;
     for (const auto& kategorija : _meni.keys()) {
         QVariantMap mapKategorija;
@@ -46,7 +46,7 @@ QVariant Meni::toVariant() const
         mapKategorija.insert("porudzbina", _meni[kategorija]->toVariant());
         variantMeni.append(mapKategorija);
     }
-    map.insert("meni", variantMeni);
+    map.insert("meni", variantMeni);*/
 
     return map;
 }
@@ -64,7 +64,7 @@ void Meni::fromVariant(const QVariant &variant)
         _kategorije[nazivKategorije] = new Kategorija();
         _kategorije[nazivKategorije]->fromVariant(mapKategorija.value("kategorija"));
     }
-
+/*
     qDeleteAll(_meni);
     _meni.clear();
     const auto variantMeni = map.value("meni").toList();
@@ -75,7 +75,7 @@ void Meni::fromVariant(const QVariant &variant)
 
         _meni[nazivKategorije] = new Porudzbina();
         _meni[nazivKategorije]->fromVariant(variantPorudzbina);
-    }
+    }*/
 }
 
 void Meni::executeLoad()
@@ -92,8 +92,8 @@ QMap<QString,Kategorija*> Meni::getKategorije(){
     return _kategorije;
 }
 
-void Meni::addItem(const QString &naziv,Artikl* artikl){
-    _kategorije[naziv]->dodajArtikl(artikl);
+int Meni::addItem(const QString &naziv,Artikl* artikl){
+    return _kategorije[naziv]->dodajArtikl(artikl);
 }
 
 void Meni::deleteCategory(const QString& naziv){

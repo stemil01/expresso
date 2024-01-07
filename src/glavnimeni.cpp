@@ -118,7 +118,7 @@ void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
         return;
     }
 
-    for(auto naziv : menu -> getMeni() -> keys()) {
+    for(auto naziv : (menu -> getKategorije()).keys()) {
         if (naziv == kategorija) {
             QMessageBox messageBox;
             messageBox.setText("Category name already exists!");
@@ -141,8 +141,8 @@ void GlavniMeni::on_pbAddCategoryEMMenu_clicked() {
 
 void GlavniMeni::on_pbRemoveCategoryEMMenu_clicked() {
     QString kategorija = ui -> cbTypeEMMenu-> currentText();
-    delete (*(menu -> getMeni()))[kategorija];
-    menu -> getMeni() -> remove(kategorija);
+   /* delete (*(menu -> getKategorije()))[kategorija];
+    menu -> getMeni() -> remove(kategorija);*/
     ui -> cbTypeEMMenu -> removeItem(ui -> cbTypeEMMenu -> findText(kategorija));
     menu->deleteCategory(kategorija);
 }
@@ -160,7 +160,7 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
 
     Artikl *pom = new Artikl(naziv, cena, kategorija);
     //Artikl *a1 = new Artikl(naziv, cena, kategorija);
-    int res = (*(menu -> getMeni()))[kategorija] -> dodajArtikl(pom);
+    int res = menu->addItem(kategorija,pom);
     if(res == 1) {
         QMessageBox messageBox;
         messageBox.setText("Item already exists!");
@@ -173,9 +173,11 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
             messageBox.close();
         return;
     }
-
-    (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
-    menu->addItem(kategorija,pom);
+    (menu -> getKategorije())[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+    ui -> leNameEMMenu -> clear();
+    ui -> lePriceEMMenu -> clear();
+    //(*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+    //menu->addItem(kategorija,pom);
 }
 
 void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
@@ -476,9 +478,17 @@ void GlavniMeni::ocistiTablu(QGraphicsScene* tabla){
 }
 
 void GlavniMeni::cbTypeEMMenuChanged() {
+    int rowCount = ui->twMenuEMMenu->rowCount();
+    for (int i = 0; i < rowCount; ++i) {
+        for (int j = 0; j < ui->twMenuEMMenu->columnCount(); ++j) {
+            QTableWidgetItem *item = ui->twMenuEMMenu->takeItem(i, j);
+            delete item;
+        }
+    }
     if (ui -> cbTypeEMMenu -> count() == 0) {
         return;
     }
     QString kategorija = ui -> cbTypeEMMenu -> currentText();
-    (*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+    (menu -> getKategorije())[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
+    //(*(menu -> getMeni()))[kategorija] -> printInTableWidget(ui -> twMenuEMMenu);
 }

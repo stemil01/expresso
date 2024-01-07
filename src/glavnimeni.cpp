@@ -157,6 +157,18 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
         return;
 
     QString kategorija = ui -> cbTypeEMMenu -> currentText();
+    if(kategorija == "") {
+        QMessageBox messageBox;
+        messageBox.setText("No category selected!");
+        messageBox.setWindowTitle("No category");
+        messageBox.setStyleSheet("QMessageBox{background-color:lightgray;font-weight:bold}"
+                                 "QMessageBox QLabel {color:red;min-width:200px;min-height:100px}");
+        messageBox.addButton(QMessageBox::Ok);
+        int result = messageBox.exec();
+        if (result == QMessageBox::Ok)
+            messageBox.close();
+        return;
+    }
 
     Artikl *pom = new Artikl(naziv, cena, kategorija);
     //Artikl *a1 = new Artikl(naziv, cena, kategorija);

@@ -8,6 +8,10 @@ Meni::~Meni() {
    /* auto end = _meni.end();
     for (auto it = _meni.begin(); it != end; ++it)
         delete it.value();*/
+
+   /*for(auto kategorija : _kategorije.values()){
+        delete kategorija;
+    }*/
 }
 
 void Meni::printNamesInComboBox(QComboBox *cb) {
@@ -97,5 +101,6 @@ int Meni::addItem(const QString &naziv,Artikl* artikl){
 }
 
 void Meni::deleteCategory(const QString& naziv){
+    //delete _kategorije[naziv];
     _kategorije.remove(naziv);
 }

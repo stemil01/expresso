@@ -98,8 +98,8 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
-            //this->color = QColor::fromRgb(144,238,144);
-           // this->currentStatus = OCCUPIED;
+            /*if(this -> currentStatus == AVAILABLE)
+                delete _p;*/
         }
         delete dialogNarudzbine;
         delete ua;

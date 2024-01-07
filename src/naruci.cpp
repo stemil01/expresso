@@ -63,13 +63,12 @@ void Naruci::onPbAddItemOrderDialogClicked(){
         int promena;
 
         copy = new Artikl(naziv,artikl->getCena(),kategorija);
-        promena=p->dodajArtikl(copy);
+        promena = p->dodajArtikl(copy);
         if(!promena){
             addItemInTW(ui->twOrderOrderDialog,artikl);
         }else{
             updateItemInTW(ui->twOrderOrderDialog,naziv);
         }
-
     }
 }
 
@@ -133,6 +132,10 @@ void Naruci::deleteSelectedRow() {
             }
         }
     }
+
+    if(ui -> twOrderOrderDialog -> rowCount() == 0)
+        p -> getSto() -> currentStatus = Sto::AVAILABLE;
+
 }
 
 

@@ -5,7 +5,11 @@ Kategorija::Kategorija(const QString& naziv)
     :_naziv(naziv)
 {
 }
-
+/*
+Kategorija::~Kategorija() {
+    qDeleteAll(_artikli);
+}
+*/
 QString Kategorija::getNaziv(){
     return _naziv;
 }

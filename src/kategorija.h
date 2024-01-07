@@ -13,6 +13,7 @@ class Kategorija : public Serializable
 public:
     Kategorija() = default;
     Kategorija(const QString&);
+   // ~Kategorija();
 
     QString getNaziv();
 

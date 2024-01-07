@@ -32,7 +32,7 @@ public:
         OCCUPIED,
         RESERVED
     };
-    Status currentStatus;
+    Status currentStatus = AVAILABLE;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;

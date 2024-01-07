@@ -25,9 +25,11 @@ void Porudzbina::printInTableWidget(QTableWidget *tw) {
     for(auto artikl : artikli) {
         QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
         QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        QTableWidgetItem* quantityItem = new QTableWidgetItem(QString::number(artikl->getKolicina()));
         tw->insertRow(rowIndex);
         tw->setItem(rowIndex, 0, nameItem);
-        tw->setItem(rowIndex, 1, priceItem);
+        tw->setItem(rowIndex, 1, quantityItem);
+        tw->setItem(rowIndex, 2, priceItem);
         rowIndex ++;
     }
 }

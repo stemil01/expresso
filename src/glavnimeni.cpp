@@ -194,9 +194,7 @@ void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
 
         delete pom;
 
-        qDebug()<<menu->getKategorije()[kategorija]->getArtikli().size();
         menu->getKategorije()[kategorija]->obrisiArtikl(naziv);
-        qDebug()<<menu->getKategorije()[kategorija]->getArtikli().size();
 
         ui -> twMenuEMMenu->removeRow(rowToRemove);
     } else {

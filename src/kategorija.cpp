@@ -36,9 +36,7 @@ QVector<Artikl*> Kategorija::getArtikli(){
 }
 
 void Kategorija::obrisiArtikl(const QString& naziv){
-    qDebug()<<_artikli.size() << " class";
     _artikli.removeOne(this->getArtiklByNaziv(naziv));
-    qDebug()<<_artikli.size() << " class";
 }
 
 Artikl* Kategorija::getArtiklByNaziv(const QString &naziv){

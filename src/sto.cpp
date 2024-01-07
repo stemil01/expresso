@@ -18,7 +18,7 @@ Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
-    _p = new Porudzbina();
+    _p = new Porudzbina(this);
 }
 
 Sto::~Sto(){
@@ -57,7 +57,11 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     else if(currentStatus == OCCUPIED){
             color = QColor::fromRgb(128,238,128);
             update();
-     }
+    }
+    else if(currentStatus == AVAILABLE){
+        color = QColor::fromRgb(128,128,128);
+        update();
+    }
 }
 
 void Sto::mousePressEvent(QGraphicsSceneMouseEvent* event) {
@@ -80,7 +84,7 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
         if(this->currentStatus == AVAILABLE){
-            Porudzbina* porudzbina = new Porudzbina();
+            Porudzbina* porudzbina = new Porudzbina(this);
             this->setPorudzbina(porudzbina);
         }
         unesiartikle* ua=new unesiartikle();
@@ -94,8 +98,8 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
-            this->color = QColor::fromRgb(144,238,144);
-            this->currentStatus = OCCUPIED;
+            //this->color = QColor::fromRgb(144,238,144);
+           // this->currentStatus = OCCUPIED;
         }
         delete dialogNarudzbine;
         delete ua;

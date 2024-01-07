@@ -7,8 +7,17 @@ Porudzbina::Porudzbina(){
     artikli = QVector<Artikl*>();
 }
 
+Porudzbina::Porudzbina(Sto *sto){
+    _sto = sto;
+    artikli = QVector<Artikl*>();
+}
+
 Porudzbina::~Porudzbina(){
     obrisiArtikle();
+}
+
+Sto* Porudzbina::getSto() {
+    return _sto;
 }
 
 void Porudzbina::printInTableWidget(QTableWidget *tw) {

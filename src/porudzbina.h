@@ -2,6 +2,7 @@
 #define PORUDZBINA_H
 
 #include "artikl.h"
+#include "sto.h"
 #include <QVector>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -13,6 +14,7 @@ class Porudzbina : public Serializable
 {
 public:
     Porudzbina();
+    Porudzbina(Sto *sto);
     ~Porudzbina();
 
 
@@ -26,11 +28,13 @@ public:
     //void printInListWidget(QListWidget& lw)
     void printInTableWidget(QTableWidget *tw);
     void printInListWidget(QListWidget *lw);
+    Sto* getSto();
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
 
 private:
+    Sto *_sto;
     QVector<Artikl*> artikli;
 };
 

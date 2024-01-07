@@ -92,6 +92,8 @@ void Naruci::addItemInTW(QTableWidget* tw,Artikl* artikl){
     tw->setItem(row,0,itemNaziv);
     tw->setItem(row,1,itemKolicina);
     tw->setItem(row,2,itemCena);
+
+    p -> getSto() -> currentStatus = Sto::OCCUPIED;
 }
 void Naruci::updateItemInTW(QTableWidget* tw,const QString& naziv){
 
@@ -112,6 +114,7 @@ void Naruci::onPbReceiptOrderDialogClicked(){
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
     p->obrisiArtikle();
+    p -> getSto() -> currentStatus = Sto::AVAILABLE;
 }
 
 void Naruci::deleteSelectedRow() {

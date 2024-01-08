@@ -27,7 +27,7 @@
        </size>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="MainMenu">
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -417,7 +417,9 @@ color: rgb(0, 0, 0);</string>
               </property>
               <property name="styleSheet">
                <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 18px;
+font-weight: bold;</string>
               </property>
              </widget>
             </item>
@@ -610,7 +612,9 @@ color: rgb(0, 0, 0);</string>
               </property>
               <property name="styleSheet">
                <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 18px;
+font-weight: bold;</string>
               </property>
              </widget>
             </item>
@@ -663,6 +667,11 @@ color: rgb(0, 0, 0);</string>
          <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
            <widget class="QTableWidget" name="twMenuEMMenu">
+            <property name="styleSheet">
+             <string notr="true">font-size: 16px;
+background-color: rgb(255, 255, 255);
+outline: 0;</string>
+            </property>
             <column>
              <property name="text">
               <string>Item</string>
@@ -741,7 +750,9 @@ color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 18px;
+font-weight: bold;</string>
                   </property>
                  </widget>
                 </item>
@@ -757,7 +768,7 @@ color: rgb(0, 0, 0);</string>
                     </property>
                     <property name="minimumSize">
                      <size>
-                      <width>50</width>
+                      <width>70</width>
                       <height>0</height>
                      </size>
                     </property>
@@ -771,12 +782,16 @@ color: rgb(0, 0, 0);</string>
                      <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
-                     <string>Category:</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Category:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="leTypeEMMenu"/>
+                   <widget class="QLineEdit" name="leTypeEMMenu">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -790,7 +805,8 @@ color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 12px;</string>
                   </property>
                   <property name="text">
                    <string>Add Category</string>
@@ -807,7 +823,8 @@ color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 12px;</string>
                   </property>
                   <property name="text">
                    <string>Remove Category</string>
@@ -870,12 +887,16 @@ color: rgb(0, 0, 0);</string>
                      <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
-                     <string>Name</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="leNameEMMenu"/>
+                   <widget class="QLineEdit" name="leNameEMMenu">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -905,12 +926,16 @@ color: rgb(0, 0, 0);</string>
                      <string notr="true">color: rgb(255, 255, 255);</string>
                     </property>
                     <property name="text">
-                     <string>Price</string>
+                     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:12pt; font-weight:700;&quot;&gt;Price&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                     </property>
                    </widget>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lePriceEMMenu"/>
+                   <widget class="QLineEdit" name="lePriceEMMenu">
+                    <property name="styleSheet">
+                     <string notr="true">background-color: rgb(255, 255, 255);</string>
+                    </property>
+                   </widget>
                   </item>
                  </layout>
                 </item>
@@ -924,7 +949,8 @@ color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 12px;</string>
                   </property>
                   <property name="text">
                    <string>Add Item</string>
@@ -941,7 +967,8 @@ color: rgb(0, 0, 0);</string>
                   </property>
                   <property name="styleSheet">
                    <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
+color: rgb(0, 0, 0);
+font-size: 12px;</string>
                   </property>
                   <property name="text">
                    <string>Remove Item</string>

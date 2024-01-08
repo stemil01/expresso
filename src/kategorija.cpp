@@ -92,6 +92,8 @@ void Kategorija::printInTableWidget(QTableWidget *tw) {
     for(auto artikl : _artikli) {
         QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
         QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        nameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
+        priceItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
         tw->insertRow(rowIndex);
         tw->setItem(rowIndex, 0, nameItem);
         tw->setItem(rowIndex, 1, priceItem);

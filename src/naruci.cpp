@@ -77,14 +77,17 @@ void Naruci::addItemInTW(QTableWidget* tw,Artikl* artikl){
     QTableWidgetItem* itemNaziv = new QTableWidgetItem();
     itemNaziv->setText(artikl->getNaziv());
     itemNaziv->setFlags(itemNaziv->flags() & ~Qt::ItemIsEditable);
+    itemNaziv->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
     QTableWidgetItem* itemKolicina = new QTableWidgetItem();
     itemKolicina->setText(QString::number(artikl->getKolicina()));
     itemKolicina->setFlags(itemKolicina->flags() & ~Qt::ItemIsEditable);
+    itemKolicina->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
     QTableWidgetItem* itemCena = new QTableWidgetItem();
     itemCena->setText(QString::number(artikl->getCena()));
     itemCena->setFlags(itemCena->flags() & ~Qt::ItemIsEditable);
+    itemCena->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
 
     int row=tw->rowCount();
     tw->insertRow(row);

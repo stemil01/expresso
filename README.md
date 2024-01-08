@@ -20,7 +20,7 @@ Potrebno je:
 
 ## :movie_camera: Demo snimak
 
-[Snimak]() prikaza rada aplikacije.
+Demo snimak se nalazi na početku stranice pod nazivom DemoExpresso.mp4
 
 ## :construction_worker_tone5: Članovi:
  - <a href="https://gitlab.com/Zicko01">Vladan Kozić 024/2020</a>

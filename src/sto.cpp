@@ -18,7 +18,6 @@ Sto::Sto(qint32 id)
     :QGraphicsObject() {
     _id = id;
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
-    _p = new Porudzbina(this);
 }
 
 Sto::~Sto(){

@@ -9,9 +9,10 @@ Meni::~Meni() {
     for (auto it = _meni.begin(); it != end; ++it)
         delete it.value();*/
 
-   /*for(auto kategorija : _kategorije.values()){
+    auto kategorije = _kategorije.values();
+    for(auto kategorija : kategorije){
         delete kategorija;
-    }*/
+    }
 }
 
 void Meni::printNamesInComboBox(QComboBox *cb) {

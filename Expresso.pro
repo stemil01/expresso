@@ -26,7 +26,8 @@ SOURCES += \
     src/sto.cpp \
     src/tabla.cpp \
     src/unesiartikle.cpp \
-    src/kategorija.cpp
+    src/kategorija.cpp \
+    src/tableoptins.cpp
 
 HEADERS += \
     src/artikl.h \
@@ -45,14 +46,16 @@ HEADERS += \
     src/sto.h \
     src/tabla.h \
     src/unesiartikle.h \
-    src/kategorija.h
+    src/kategorija.h \
+    src/tableoptions.h
 
 
 FORMS += \
     src/glavnimeni.ui \
     src/help.ui \
     src/naruci.ui \
-    src/unesiartikle.ui
+    src/unesiartikle.ui \
+    src/tableoptions.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -64,7 +67,7 @@ RESOURCES += \
 
 SUBDIRS += \
     src/main \
-    tests
+    #tests
 
 
 

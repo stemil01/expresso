@@ -15,24 +15,36 @@ public:
     Sto(qint32 id);
     ~Sto();
 
-    QRectF boundingRect() const override;
-    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
-    qint32 getId();
-    void setPorudzbina(Porudzbina* p);
-    Porudzbina* getPorudzbina();
-    qint32 broj_mesta = 4;
-    bool za_raspored = true;
-    QColor color = QColor::fromRgb(128,128,128);
-    qreal width = 150;
-    qreal height = 150;
-    void setMeni(Meni *);
-    Meni* getMeni();
     enum Status{
         AVAILABLE,
         OCCUPIED,
         RESERVED
     };
-    Status currentStatus = AVAILABLE;
+
+    QRectF boundingRect() const override;
+    void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) override;
+    qint32 getId();
+    void setPorudzbina(Porudzbina* p);
+    Porudzbina* getPorudzbina();
+    bool za_raspored = true;
+    void setMeni(Meni *);
+    Meni* getMeni();
+    Status getStatus();
+    void setStatus(Status);
+
+    qint32 getNumSeats();
+    void setNumSeats(qint32);
+    qint32 getDegree();
+    void setDegree(qint32);
+    qint32 getWidth();
+    qint32 getHeight();
+    void setWidth(qint32);
+    void setHeight(qint32);
+    void setColor(QColor);
+    QColor getColor();
+
+    qint32 xRadius;
+    qint32 yRadius;
 
     QVariant toVariant() const override;
     void fromVariant(const QVariant& variant) override;
@@ -45,9 +57,14 @@ protected:
 private:
     Porudzbina* _p = nullptr;
     qint32 _id;
+    qint32 m_degree;
     QPointF _lastPos;
     Meni* _meni = nullptr;
-
+    Status currentStatus = AVAILABLE;
+    qreal m_width;
+    qreal m_height;
+    qint32 numSeats;
+    QColor m_color;
 };
 
 #endif // STO_H

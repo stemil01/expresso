@@ -56,14 +56,14 @@ protected:
     void mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event) override;
 private:
     Porudzbina* _p = nullptr;
-    qint32 _id;
+    qint32 m_id;
     qint32 m_degree;
     QPointF _lastPos;
-    Meni* _meni = nullptr;
-    Status currentStatus = AVAILABLE;
+    Meni* m_meni = nullptr;
+    Status m_currentStatus = AVAILABLE;
     qreal m_width;
     qreal m_height;
-    qint32 numSeats;
+    qint32 m_numSeats;
     QColor m_color;
 };
 

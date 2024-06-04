@@ -18,10 +18,10 @@
 
 Sto::Sto(qint32 id)
     :QGraphicsObject() {
-    _id = id;
+    m_id = id;
     m_width = 150;
     m_height = 150;
-    numSeats = 4;
+    m_numSeats = 4;
     m_degree = 0;
     xRadius = 0;
     yRadius = 0;
@@ -49,13 +49,13 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     painter->setPen(Qt::white);
     QFont font("Arial", 10);
     painter->setFont(font);
-    painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(numSeats) + " chairs");
-    if(currentStatus == Sto::RESERVED)
+    painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(m_numSeats) + " chairs");
+    if(m_currentStatus == Sto::RESERVED)
         painter->drawText(boundingRect(),Qt::AlignRight | Qt::AlignTop,"Reserved ");
 
     font.setPointSize(15);
     painter->setFont(font);
-    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(_id));
+    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
 
     if(this->isSelected() && this->za_raspored){
 //        painter->setPen(QPen(Qt::black, 3));
@@ -65,14 +65,14 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
         painter->setPen(Qt::yellow);
         font.setPointSize(10);
         painter->setFont(font);
-        painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(numSeats) + " chairs");
-        if(currentStatus == Sto::RESERVED)
+        painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(m_numSeats) + " chairs");
+        if(m_currentStatus == Sto::RESERVED)
             painter->drawText(boundingRect(),Qt::AlignRight | Qt::AlignTop,"Reserved ");
 
 
         font.setPointSize(15);
         painter->setFont(font);
-        painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(_id));
+        painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
     }
 
     if(za_raspored){
@@ -81,11 +81,11 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
 //            update();
 //        }
     }
-    else if(currentStatus == OCCUPIED){
+    else if(m_currentStatus == OCCUPIED){
             m_color = QColor::fromRgb(128,238,128);
             update();
     }
-    else if(currentStatus == AVAILABLE){
+    else if(m_currentStatus == AVAILABLE){
         m_color = QColor::fromRgb(128,128,128);
         update();
     }
@@ -110,14 +110,14 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
-        if(this->currentStatus == AVAILABLE){
+        if(this->m_currentStatus == AVAILABLE){
             Porudzbina* porudzbina = new Porudzbina(this);
             this->setPorudzbina(porudzbina);
         }
         unesiartikle* ua=new unesiartikle();
-        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,_meni);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,m_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
-        for(auto kategorija : (_meni->getKategorije()).keys()){
+        for(auto kategorija : (m_meni->getKategorije()).keys()){
             dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija);
         }
         for(auto artikl : _p->getArtikli()){
@@ -125,7 +125,7 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
-            /*if(this -> currentStatus == AVAILABLE)
+            /*if(this -> m_currentStatustatus == AVAILABLE)
                 delete _p;*/
         }
         delete dialogNarudzbine;
@@ -136,38 +136,37 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         this->setSelected(false);
         to->exec();
         delete to;
-        //this->setSelected(false);
     }
 }
 
 
 qint32 Sto::getId(){
-    return _id;
+    return m_id;
 }
 
 QVariant Sto::toVariant() const
 {
     QVariantMap map;
-    map.insert("id", _id);
+    map.insert("id", m_id);
     map.insert("position", pos());
-    map.insert("NumSeats", numSeats);
+    map.insert("m_numSeats", m_numSeats);
     //map.insert("porudzbina",_p->toVariant());
-    // map.insert("meni", _meni->toVariant());
+    map.insert("meni", m_meni->toVariant());
     return map;
 }
 
 void Sto::fromVariant(const QVariant& variant)
 {
     const auto map = variant.toMap();
-    _id = map.value("id").toInt();
+    m_id = map.value("id").toInt();
     setPos(map.value("position").toPointF());
-    numSeats = map.value("NumSeats").toInt();
-    _p = new Porudzbina();
-    _p->fromVariant(map.value("porudzbina"));
-    // if (_meni == nullptr) {
-        // _meni = new Meni();
-    // }
-    // _meni->fromVariant(map.value("meni"));
+    m_numSeats = map.value("m_numSeats").toInt();
+    //_p = new Porudzbina();
+    //_p->fromVariant(map.value("porudzbina"));
+     if (m_meni == nullptr) {
+         m_meni = new Meni();
+     }
+     m_meni->fromVariant(map.value("meni"));
 }
 
 void Sto::setPorudzbina(Porudzbina* porudzbina){
@@ -179,31 +178,31 @@ Porudzbina* Sto::getPorudzbina(){
 }
 
 void Sto::setMeni(Meni *meni){
-    _meni = meni;
+    m_meni = meni;
 }
 
 Meni* Sto::getMeni(){
-    return _meni;
+    return m_meni;
 }
 
 Sto::Status Sto::getStatus()
 {
-    return currentStatus;
+    return m_currentStatus;
 }
 
 void Sto::setStatus(Sto::Status status)
 {
-    currentStatus = status;
+    m_currentStatus = status;
 }
 
 qint32 Sto::getNumSeats()
 {
-    return numSeats;
+    return m_numSeats;
 }
 
 void Sto::setNumSeats(qint32 broj)
 {
-    numSeats = broj;
+    m_numSeats = broj;
 }
 
 qint32 Sto::getDegree()

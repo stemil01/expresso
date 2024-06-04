@@ -122,7 +122,7 @@ void TableOptions::connectSlots()
     connect(ui->hsbWidth,&QSlider::valueChanged,this,&TableOptions::onHSliderWidthChanged);
     connect(ui->hsbHeight,&QSlider::valueChanged,this,&TableOptions::onHSliderHeightChanged);
     connect(ui->pbDefault, &QPushButton::clicked, this, &TableOptions::onDefaultClicked);
-    connect(ui->pbRotate, &QPushButton::clicked, this, &TableOptions::onApplyClicked);
+    connect(ui->pbApply, &QPushButton::clicked, this, &TableOptions::onApplyClicked);
     connect(this,&QDialog::rejected,this,&TableOptions::restoreValues);
     connect(ui->pbOk,&QPushButton::clicked,this,&QDialog::accept);
 }
@@ -183,12 +183,21 @@ void TableOptions::onDefaultClicked()
     m_sto->setHeight(150);
     m_sto->setDegree(0);
     m_sto->setRotation(0);
+    ui->leDegrees->clear();
+    ui->leScale->clear();
     m_sto->setStatus(Sto::AVAILABLE);
     m_sto->xRadius = 0;
     m_sto->yRadius = 0;
     m_sto->setColor(QColor::fromRgb(128,128,128));
     if(ui->cbRound->isChecked()){
         ui->cbRound->setChecked(false);
+    }
+    if(ui->cbReserved->isChecked()){
+        ui->cbReserved->setChecked(false);
+        ui->cbAvailable->setChecked(true);
+    }
+    if(!ui->rbGray->isChecked()){
+        ui->rbGray->setChecked(true);
     }
 
     m_sto->setNumSeats(4);

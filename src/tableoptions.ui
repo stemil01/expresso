@@ -419,6 +419,9 @@ background: rgb(0, 170, 255);
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QPushButton" name="pbDefault">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Default</string>
        </property>
@@ -439,13 +442,19 @@ background: rgb(0, 170, 255);
      </item>
      <item>
       <widget class="QPushButton" name="pbOk">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Ok</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pbRotate">
+      <widget class="QPushButton" name="pbApply">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Apply</string>
        </property>
@@ -453,6 +462,9 @@ background: rgb(0, 170, 255);
      </item>
      <item>
       <widget class="QPushButton" name="pbCancel">
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>

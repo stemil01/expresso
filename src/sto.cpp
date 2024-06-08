@@ -58,10 +58,6 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
     painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
 
     if(this->isSelected() && this->za_raspored){
-//        painter->setPen(QPen(Qt::black, 3));
-//        painter->setBrush(Qt::NoBrush);
-
-//        painter->drawRect(boundingRect());
         painter->setPen(Qt::yellow);
         font.setPointSize(10);
         painter->setFont(font);
@@ -75,19 +71,14 @@ void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidg
         painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
     }
 
-    if(za_raspored){
-//        if(m_color != QColor::fromRgb(128,128,128)){
-//            m_color = QColor::fromRgb(128,128,128);
-//            update();
-//        }
-    }
-    else if(m_currentStatus == OCCUPIED){
+
+    if(!za_raspored && m_currentStatus == OCCUPIED){
             m_color = QColor::fromRgb(128,238,128);
             update();
     }
-    else if(m_currentStatus == AVAILABLE){
-        m_color = QColor::fromRgb(128,128,128);
-        update();
+    else if(!za_raspored && m_currentStatus == AVAILABLE){
+            m_color = QColor::fromRgb(128,128,128);
+            update();
     }
 }
 

@@ -227,6 +227,7 @@ void TableOptions::onApplyClicked()
         m_sto->setDegree(degree + m_sto->getDegree());
         m_sto->setDegree(m_sto->getDegree());
         m_sto->setRotation(m_sto->getDegree());
+        ui->leDegrees->clear();
     }
 
     if(!ui->leScale->text().isEmpty()){
@@ -239,6 +240,7 @@ void TableOptions::onApplyClicked()
         ui->lHeight->setText(QString::number(newHeight));
         ui->hsbWidth->setValue(newWidth);
         ui->hsbHeight->setValue(newHeight);
+        ui->leScale->clear();
     }
 
     if(ui->cbReserved->isChecked()){

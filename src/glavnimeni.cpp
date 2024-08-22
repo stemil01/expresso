@@ -9,6 +9,7 @@
 #include "naruci.h"
 #include "rasporeddata.h"
 #include "porudzbina.h"
+#include "tableoptions.h"
 
 #include <QMessageBox>
 #include <QLineEdit>
@@ -255,7 +256,8 @@ void GlavniMeni::on_pbDTAMainMenu_clicked() {
             m_currentRaspored = raspored;
             addedFirst = true;
         }
-        ui->cbDesign->addItem(raspored->getNaziv());
+        if(raspored->getNaziv() != "")
+            ui->cbDesign->addItem(raspored->getNaziv());
     }
 }
 

@@ -21,7 +21,8 @@ SOURCES += \
     ../sto.cpp \
     ../tabla.cpp \
     ../unesiartikle.cpp \
-    ../kategorija.cpp
+    ../kategorija.cpp \
+    ../tableoptions.cpp
 
 HEADERS += \
     ../artikl.h \
@@ -39,12 +40,14 @@ HEADERS += \
     ../sto.h \
     ../tabla.h \
     ../unesiartikle.h \
-    ../kategorija.h
+    ../kategorija.h \
+    ../tableoptions.h
 
 
 FORMS += \
     ../glavnimeni.ui \
     ../help.ui \
     ../naruci.ui \
-    ../unesiartikle.ui
+    ../unesiartikle.ui \
+    ../tableoptions.ui
 

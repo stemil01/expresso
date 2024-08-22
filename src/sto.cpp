@@ -2,6 +2,8 @@
 #include "meni.h"
 #include "naruci.h"
 #include "ui_naruci.h"
+#include "tableoptions.h"
+#include "ui_tableoptions.h"
 #include "porudzbina.h"
 #include <string.h>
 #include <QPainter>
@@ -16,7 +18,14 @@
 
 Sto::Sto(qint32 id)
     :QGraphicsObject() {
-    _id = id;
+    m_id = id;
+    m_width = 150;
+    m_height = 150;
+    m_numSeats = 4;
+    m_degree = 0;
+    xRadius = 0;
+    yRadius = 0;
+    m_color = QColor::fromRgb(128,128,128);
     setFlags(GraphicsItemFlag::ItemIsSelectable | GraphicsItemFlag::ItemIsMovable);
 }
 
@@ -26,40 +35,50 @@ Sto::~Sto(){
 
 QRectF Sto::boundingRect() const
 {
-    return QRectF(0,0,this->width,this->height);
+    return QRectF(0,0,m_width,m_height);
 }
 void Sto::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
     Q_UNUSED(option)
     Q_UNUSED(widget)
 
-    painter->fillRect(boundingRect(), this->color);
-    painter->setPen(Qt::white);
+    QPainterPath path;
+    path.addRoundedRect(boundingRect(),xRadius,yRadius);
+    painter->fillPath(path,m_color);
 
-    QString tekst;
-    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, tekst.number(_id));
-    painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, tekst.number(broj_mesta) + QString(" seats"));
+    painter->setPen(Qt::white);
+    QFont font("Arial", 10);
+    painter->setFont(font);
+    painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(m_numSeats) + " chairs");
+    if(m_currentStatus == Sto::RESERVED)
+        painter->drawText(boundingRect(),Qt::AlignRight | Qt::AlignTop,"Reserved ");
+
+    font.setPointSize(15);
+    painter->setFont(font);
+    painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
 
     if(this->isSelected() && this->za_raspored){
-        painter->setPen(QPen(Qt::yellow, 3));
-        painter->setBrush(Qt::NoBrush);
+        painter->setPen(Qt::yellow);
+        font.setPointSize(10);
+        painter->setFont(font);
+        painter->drawText(boundingRect(), Qt::AlignLeft | Qt::AlignTop, " "+ QString::number(m_numSeats) + " chairs");
+        if(m_currentStatus == Sto::RESERVED)
+            painter->drawText(boundingRect(),Qt::AlignRight | Qt::AlignTop,"Reserved ");
 
-        painter->drawRect(boundingRect());
+
+        font.setPointSize(15);
+        painter->setFont(font);
+        painter->drawText(boundingRect(), Qt::AlignHCenter | Qt::AlignVCenter, QString::number(m_id));
     }
 
-    if(za_raspored){
-        if(color != QColor::fromRgb(128,128,128)){
-            color = QColor::fromRgb(128,128,128);
-            update();
-        }
-    }
-    else if(currentStatus == OCCUPIED){
-            color = QColor::fromRgb(128,238,128);
+
+    if(!za_raspored && m_currentStatus == OCCUPIED){
+            m_color = QColor::fromRgb(128,238,128);
             update();
     }
-    else if(currentStatus == AVAILABLE){
-        color = QColor::fromRgb(128,128,128);
-        update();
+    else if(!za_raspored && m_currentStatus == AVAILABLE){
+            m_color = QColor::fromRgb(128,128,128);
+            update();
     }
 }
 
@@ -82,14 +101,14 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
-        if(this->currentStatus == AVAILABLE){
+        if(this->m_currentStatus == AVAILABLE){
             Porudzbina* porudzbina = new Porudzbina(this);
             this->setPorudzbina(porudzbina);
         }
         unesiartikle* ua=new unesiartikle();
-        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,_meni);
+        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,m_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
-        for(auto kategorija : (_meni->getKategorije()).keys()){
+        for(auto kategorija : (m_meni->getKategorije()).keys()){
             dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija);
         }
         for(auto artikl : _p->getArtikli()){
@@ -97,65 +116,48 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         }
         int result = dialogNarudzbine->exec();
         if(result == QDialog::Accepted){
-            /*if(this -> currentStatus == AVAILABLE)
+            /*if(this -> m_currentStatustatus == AVAILABLE)
                 delete _p;*/
         }
         delete dialogNarudzbine;
         delete ua;
     }
     else{
-        QDialog numOfSeatsInput;
-        QPushButton okButton("OK");
-        QPushButton cancelButton("Cancel");
-        numOfSeatsInput.setWindowTitle("Number of seats");
-        numOfSeatsInput.setStyleSheet("QDialog{background-color:lightgray;font-weight:bold}");
-
-        QFormLayout layout(&numOfSeatsInput);
-        QLineEdit textInput(&numOfSeatsInput);
-
-        layout.addRow("Enter number of seats:", &textInput);
-        layout.addRow(&okButton, &cancelButton);
-        connect(&okButton, &QPushButton::clicked, &numOfSeatsInput, &QDialog::accept);
-        connect(&cancelButton, &QPushButton::clicked, &numOfSeatsInput, &QDialog::reject);
-
-        int result = numOfSeatsInput.exec();
-        if(result == QDialog::Accepted){
-            this->broj_mesta = textInput.text().toInt();
-        }
-        else if(result == QDialog::Rejected){
-            numOfSeatsInput.close();
-        }
+        TableOptions* to = new TableOptions(nullptr,this);
+        this->setSelected(false);
+        to->exec();
+        delete to;
     }
 }
 
 
 qint32 Sto::getId(){
-    return _id;
+    return m_id;
 }
 
 QVariant Sto::toVariant() const
 {
     QVariantMap map;
-    map.insert("id", _id);
+    map.insert("id", m_id);
     map.insert("position", pos());
-    map.insert("brojMesta", broj_mesta);
-    map.insert("porudzbina",_p->toVariant());
-    // map.insert("meni", _meni->toVariant());
+    map.insert("m_numSeats", m_numSeats);
+    //map.insert("porudzbina",_p->toVariant());
+    map.insert("meni", m_meni->toVariant());
     return map;
 }
 
 void Sto::fromVariant(const QVariant& variant)
 {
     const auto map = variant.toMap();
-    _id = map.value("id").toInt();
+    m_id = map.value("id").toInt();
     setPos(map.value("position").toPointF());
-    broj_mesta = map.value("brojMesta").toInt();
-    _p = new Porudzbina();
-    _p->fromVariant(map.value("porudzbina"));
-    // if (_meni == nullptr) {
-        // _meni = new Meni();
-    // }
-    // _meni->fromVariant(map.value("meni"));
+    m_numSeats = map.value("m_numSeats").toInt();
+    //_p = new Porudzbina();
+    //_p->fromVariant(map.value("porudzbina"));
+     if (m_meni == nullptr) {
+         m_meni = new Meni();
+     }
+     m_meni->fromVariant(map.value("meni"));
 }
 
 void Sto::setPorudzbina(Porudzbina* porudzbina){
@@ -167,9 +169,67 @@ Porudzbina* Sto::getPorudzbina(){
 }
 
 void Sto::setMeni(Meni *meni){
-    _meni = meni;
+    m_meni = meni;
 }
 
 Meni* Sto::getMeni(){
-    return _meni;
+    return m_meni;
+}
+
+Sto::Status Sto::getStatus()
+{
+    return m_currentStatus;
+}
+
+void Sto::setStatus(Sto::Status status)
+{
+    m_currentStatus = status;
+}
+
+qint32 Sto::getNumSeats()
+{
+    return m_numSeats;
+}
+
+void Sto::setNumSeats(qint32 broj)
+{
+    m_numSeats = broj;
+}
+
+qint32 Sto::getDegree()
+{
+    return m_degree;
+}
+
+void Sto::setDegree(qint32 degree){
+    m_degree = degree;
+}
+
+qint32 Sto::getWidth()
+{
+    return m_width;
+}
+
+qint32 Sto::getHeight()
+{
+    return m_height;
+}
+
+void Sto::setWidth(qint32 width)
+{
+    m_width = width;
+}
+
+void Sto::setHeight(qint32 height)
+{
+    m_height = height;
+}
+
+void Sto::setColor(QColor color)
+{
+    m_color = color;
+}
+
+QColor Sto::getColor(){
+    return m_color;
 }

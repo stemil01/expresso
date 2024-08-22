@@ -21,7 +21,8 @@ public:
     int dodajArtikl(Artikl* a);
     void obrisiArtikle();
     void sacuvajPromenu(const QString& naziv, int kolicina);
-    QString racun();
+    QString racun(const QVector<Artikl*>& artikliZaIspis);
+    QString ispisiCeoRacun();
     void obrisiPoNazivu(const QString& naziv);
     void obrisiPoArtiklu(Artikl* artikal);
     QVector<Artikl*> getArtikli();

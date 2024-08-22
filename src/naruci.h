@@ -33,6 +33,7 @@ public:
 public slots:
     void onPbAddItemOrderDialogClicked();
     void onPbReceiptOrderDialogClicked();
+    void onPbSplitBillOrderDialogClicked();
     void deleteSelectedRow();
     void comboBoxTextChanged();
 private:

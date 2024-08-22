@@ -6,6 +6,8 @@
 #include "meni.h"
 #include "sto.h"
 #include <QWidget>
+#include <QMessageBox>
+
 
 Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtikle,Meni* meni) :
     QDialog(parent),
@@ -21,6 +23,7 @@ Naruci::Naruci(QWidget *parent,Porudzbina* porudzbina, unesiartikle* _unesiArtik
     connect(ui->pbDeleteOrderDialog,&QPushButton::clicked,this,&Naruci::deleteSelectedRow);
     connect(ui->pbBackOrderDialog,&QPushButton::clicked,this,&QDialog::accept);
     connect(ui->cbTypeOrderDialog,&QComboBox::currentTextChanged,this,&Naruci::comboBoxTextChanged);
+    connect(ui->pbSplitBillOrderDialog,&QPushButton::clicked,this,&Naruci::onPbSplitBillOrderDialogClicked);
 
     setStyle();
 }
@@ -56,9 +59,7 @@ void Naruci::onPbAddItemOrderDialogClicked(){
     for(const auto& item :selectedItems){
         QString naziv=item->text();
 
-        //double cena=unesiArtikle->cenaArtikla(kategorija,naziv);
 
-        double cena=0;
         Artikl* artikl = (_meni->getKategorije())[kategorija]->getArtiklByNaziv(naziv);
         int promena;
 
@@ -112,7 +113,7 @@ void Naruci::updateItemInTW(QTableWidget* tw,const QString& naziv){
 
 void Naruci::onPbReceiptOrderDialogClicked(){
 
-    ui->teReceiptOrderDialog->setText(p->racun());
+    ui->teReceiptOrderDialog->setText(p->ispisiCeoRacun());
     ui->twOrderOrderDialog->clearContents();
     ui->twOrderOrderDialog->model()->removeRows(0, ui->twOrderOrderDialog->rowCount());
     p->obrisiArtikle();
@@ -143,7 +144,7 @@ void Naruci::deleteSelectedRow() {
 
 
 void Naruci::comboBoxTextChanged(){
-    //unesiArtikle->ispisiPoKategorijiListWidget(ui->lwMenuOrderDialog,ui->cbTypeOrderDialog->currentText());
+
     ui->lwMenuOrderDialog->clear();
     QString kategorija = ui->cbTypeOrderDialog->currentText();
     auto kategorije = _meni->getKategorije();
@@ -155,6 +156,45 @@ void Naruci::comboBoxTextChanged(){
     }
 }
 
+
+void Naruci::onPbSplitBillOrderDialogClicked() {
+    auto selectedRanges = ui->twOrderOrderDialog->selectedRanges();
+
+    if (selectedRanges.isEmpty()) {
+        QMessageBox::warning(this, "Warning",
+                             "If you want to split the bill, please select the desired items from the order.");
+        return;
+    }
+
+    QVector<Artikl*> odabraniArtikli;
+
+    for (const auto& range : selectedRanges) {
+        int startRow = range.topRow();
+        int endRow = range.bottomRow();
+
+        for (int row = endRow; row >= startRow; --row) {
+            QTableWidgetItem *itemName = ui->twOrderOrderDialog->item(row, 0);
+            QTableWidgetItem *itemQuantity = ui->twOrderOrderDialog->item(row, 1);
+            QTableWidgetItem *itemPrice= ui->twOrderOrderDialog->item(row, 2);
+
+            QString kategorija=ui->cbTypeOrderDialog->currentText();
+
+            if (itemName && itemPrice && itemQuantity) {
+                QString naziv = itemName->text();
+                int kolicina = itemQuantity->text().toInt();
+                double cena = itemPrice->text().toDouble();
+                Artikl* artikl = new Artikl(naziv,cena,kategorija,kolicina);
+                if (artikl) {
+                    odabraniArtikli.append(artikl);
+                }
+                p->obrisiPoNazivu(naziv);
+                ui->twOrderOrderDialog->removeRow(row);
+            }
+            ui->teReceiptOrderDialog->setText(p->racun(odabraniArtikli));
+
+        }
+    }
+}
 
 
 

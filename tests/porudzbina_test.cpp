@@ -109,7 +109,7 @@ TEST_CASE("Porudzbina","[class]"){
         QString ocekivanIzlaz="\nTotal....................................................0\n";
 
         //Act
-        QString opis=p->racun();
+        QString opis=p->ispisiCeoRacun();
 
         //Assert
         REQUIRE(ocekivanIzlaz==opis);
@@ -133,7 +133,7 @@ TEST_CASE("Porudzbina","[class]"){
         QString ocekivanIzlaz="CocaCola..................................................250x1\nFANTA..................................................200x2\n\nTotal....................................................650\n";
 
         // Act
-        QString izlaz =p->racun();
+        QString izlaz =p->ispisiCeoRacun();
 
         // Assert
         REQUIRE(ocekivanIzlaz==izlaz);

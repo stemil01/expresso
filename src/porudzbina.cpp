@@ -43,10 +43,7 @@ void Porudzbina::printInTableWidget(QTableWidget *tw) {
     }
 }
 
-void Porudzbina::printInListWidget(QListWidget *lw)
-{
 
-}
 
 int Porudzbina::dodajArtikl(Artikl* a){
     int prom=0;
@@ -75,10 +72,10 @@ int Porudzbina::dodajArtikl(Artikl* a){
     return prom;
 }
 
-QString Porudzbina::racun() {
+QString Porudzbina::racun(const QVector<Artikl*>& artikliZaIspis) {
     double ukupno = 0;
     QString opis;
-    for (const Artikl* a : artikli) {
+    for (const Artikl* a : artikliZaIspis) {
         opis += a->getNaziv() + ".................................................." +
                 QString::number(a->getCena()) + "x" + QString::number(a->getKolicina()) + "\n";
         ukupno += a->getCena() * a->getKolicina();
@@ -86,6 +83,9 @@ QString Porudzbina::racun() {
 
     opis += "\nTotal...................................................." + QString::number(ukupno) + "\n";
     return opis;
+}
+QString Porudzbina::ispisiCeoRacun() {
+    return racun(artikli);
 }
 
 void Porudzbina::obrisiArtikle(){
@@ -121,6 +121,7 @@ void Porudzbina::obrisiPoArtiklu(Artikl* artikal) {
         }
     }
 }
+
 
 
 QVector<Artikl*> Porudzbina::getArtikli(){

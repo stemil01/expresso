@@ -1,99 +1,90 @@
-#include <catch.hpp>
-#include "../src/sto.h"
-#include "../src/porudzbina.h"
 #include "../src/artikl.h"
 #include "../src/glavnimeni.h"
+#include "../src/porudzbina.h"
+#include "../src/sto.h"
 #include <QGraphicsScene>
+#include <catch.hpp>
 
-class GlavniMeniTest : public GlavniMeni
-{
+class GlavniMeniTest : public GlavniMeni {
 public:
-    using GlavniMeni::dodajNovSto;
-    using GlavniMeni::obrisiSto;
-    using GlavniMeni::obrisiSve;
-    using GlavniMeni::tabla;
-    using GlavniMeni::m_currentRaspored;
+  using GlavniMeni::dodajNovSto;
+  using GlavniMeni::m_currentRaspored;
+  using GlavniMeni::obrisiSto;
+  using GlavniMeni::obrisiSve;
+  using GlavniMeni::tabla;
 };
 
-TEST_CASE("Testing sto in glavnimeni","[class]"){
-    SECTION("Testing add table"){
+TEST_CASE("Testing sto in glavnimeni", "[class]") {
+  SECTION("Testing add table") {
 
-        GlavniMeniTest gl;
+    GlavniMeniTest gl;
 
+    qint32 expected = 1;
+    auto scene = gl.tabla;
+    Raspored *novi = new Raspored("novi");
+    novi->setMaxTables(5);
+    gl.m_currentRaspored = novi;
+    gl.dodajNovSto();
+    qint32 result = (scene->items()).size();
 
-        qint32 expected = 1;
-        auto scene = gl.tabla;
-        Raspored* novi = new Raspored("novi");
-        novi->setMaxTables(5);
-        gl.m_currentRaspored = novi;
-        gl.dodajNovSto();
-        qint32 result = (scene->items()).size();
+    REQUIRE(expected == result);
 
-        REQUIRE(expected == result);
+    delete novi;
+  }
+  SECTION("Testing select table") {
 
-        delete novi;
+    GlavniMeniTest gl;
 
-    }
-    SECTION("Testing select table"){
+    bool expected = true;
+    auto scene = gl.tabla;
+    Raspored *novi = new Raspored("novi");
+    novi->setMaxTables(5);
+    gl.m_currentRaspored = novi;
+    gl.dodajNovSto();
+    auto sto = (scene->items())[0];
+    sto->setSelected(true);
+    bool result = sto->isSelected();
 
-        GlavniMeniTest gl;
+    REQUIRE(expected == result);
 
+    delete novi;
+  }
+  SECTION("Testing remove table") {
 
-        bool expected = true;
-        auto scene = gl.tabla;
-        Raspored* novi = new Raspored("novi");
-        novi->setMaxTables(5);
-        gl.m_currentRaspored = novi;
-        gl.dodajNovSto();
-        auto sto = (scene->items())[0];
-        sto->setSelected(true);
-        bool result = sto->isSelected();
+    GlavniMeniTest gl;
 
-        REQUIRE(expected == result);
+    qint32 expected = 0;
+    auto scene = gl.tabla;
+    Raspored *novi = new Raspored("novi");
+    novi->setMaxTables(5);
+    gl.m_currentRaspored = novi;
+    gl.dodajNovSto();
+    auto sto = (scene->items())[0];
+    sto->setSelected(true);
+    gl.obrisiSto();
+    qint32 result = (scene->items()).size();
 
-        delete novi;
+    REQUIRE(expected == result);
 
-    }
-    SECTION("Testing remove table"){
+    delete novi;
+  }
+  SECTION("Testing clear all") {
 
-        GlavniMeniTest gl;
+    GlavniMeniTest gl;
 
+    qint32 expected = 0;
+    auto scene = gl.tabla;
+    Raspored *novi = new Raspored("novi");
+    novi->setMaxTables(5);
+    gl.m_currentRaspored = novi;
+    gl.dodajNovSto();
+    gl.dodajNovSto();
+    gl.dodajNovSto();
+    gl.obrisiSve();
+    qint32 result = (scene->items()).size();
 
-        qint32 expected = 0;
-        auto scene = gl.tabla;
-        Raspored* novi = new Raspored("novi");
-        novi->setMaxTables(5);
-        gl.m_currentRaspored = novi;
-        gl.dodajNovSto();
-        auto sto = (scene->items())[0];
-        sto->setSelected(true);
-        gl.obrisiSto();
-        qint32 result = (scene->items()).size();
+    REQUIRE(expected == result);
 
-        REQUIRE(expected == result);
-
-        delete novi;
-
-    }
-    SECTION("Testing clear all"){
-
-        GlavniMeniTest gl;
-
-
-        qint32 expected = 0;
-        auto scene = gl.tabla;
-        Raspored* novi = new Raspored("novi");
-        novi->setMaxTables(5);
-        gl.m_currentRaspored = novi;
-        gl.dodajNovSto();
-        gl.dodajNovSto();
-        gl.dodajNovSto();
-        gl.obrisiSve();
-        qint32 result = (scene->items()).size();
-
-        REQUIRE(expected == result);
-
-        delete novi;
-
-    }
+    delete novi;
+  }
 }

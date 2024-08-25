@@ -1,37 +1,36 @@
 #ifndef RASPOREDDATA_H
 #define RASPOREDDATA_H
 
+#include "meni.h"
 #include "raspored.h"
 #include "serializer.h"
-#include "meni.h"
 
 #include <QMap>
 #include <QString>
 
 class GlavniMeni;
 
-class RasporedData
-{
+class RasporedData {
 public:
-    RasporedData(const QString& dirPath);
-    ~RasporedData();
+  RasporedData(const QString &dirPath);
+  ~RasporedData();
 
-    void addRaspored(Raspored *raspored);
-    void updateRaspored(const Raspored& raspored);
-    void removeRaspored(const QString& rasporedName);
-    Raspored* getRaspored(const QString& name) const;
+  void addRaspored(Raspored *raspored);
+  void updateRaspored(const Raspored &raspored);
+  void removeRaspored(const QString &rasporedName);
+  Raspored *getRaspored(const QString &name) const;
 
-    inline QMap<QString, Raspored*>* getRasporedi() const { return m_rasporedi; }
+  inline QMap<QString, Raspored *> *getRasporedi() const { return m_rasporedi; }
 
-    void setMeni(Meni *meni);
+  void setMeni(Meni *meni);
 
-    void executeLoad();
-    void executeSave() const;
+  void executeLoad();
+  void executeSave() const;
 
 private:
-    QString m_dirPath;
-    QMap<QString, Raspored*> *m_rasporedi;
-    Serializer *m_binarySerializer;
+  QString m_dirPath;
+  QMap<QString, Raspored *> *m_rasporedi;
+  Serializer *m_binarySerializer;
 };
 
 #endif // RASPOREDDATA_H

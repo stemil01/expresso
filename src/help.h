@@ -7,17 +7,17 @@ namespace Ui {
 class help;
 }
 
-class help : public QDialog
-{
-    Q_OBJECT
+class help : public QDialog {
+  Q_OBJECT
 
 public:
-    explicit help(QWidget *parent = nullptr);
-    ~help();
+  explicit help(QWidget *parent = nullptr);
+  ~help();
 
-    void write();
+  void write();
+
 private:
-    Ui::help *ui;
+  Ui::help *ui;
 };
 
 #endif // HELP_H

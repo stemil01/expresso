@@ -72,7 +72,7 @@ void Kategorija::fromVariant(const QVariant &variant)
 
     const auto variantArtikli = map.value("artikli").toList();
     for (const auto& variantArtikl : variantArtikli) {
-        Artikl *artikl = new Artikl();
+        auto *artikl = new Artikl();
         artikl->fromVariant(variantArtikl);
         dodajArtikl(artikl);
     }
@@ -90,8 +90,8 @@ void Kategorija::printInTableWidget(QTableWidget *tw) {
     tw->setRowCount(0);
     int rowIndex = tw -> rowCount();
     for(auto artikl : _artikli) {
-        QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
-        QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        auto* nameItem = new QTableWidgetItem(artikl->getNaziv());
+        auto* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
         nameItem->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
         priceItem->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
         tw->insertRow(rowIndex);

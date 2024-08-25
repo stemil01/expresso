@@ -28,7 +28,7 @@ QMap<QString, Porudzbina*>* Meni::getMeni() {
 */
 void Meni::addCategory(QString naziv) {
     //_meni[naziv] = new Porudzbina();
-    Kategorija *kategorija = new Kategorija(naziv);
+    auto *kategorija = new Kategorija(naziv);
     _kategorije[naziv] = kategorija;
 }
 

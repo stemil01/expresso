@@ -127,8 +127,8 @@ void unesiartikle::ispisiPoKategorijama(const QString &odabranaKategorija)
 
     for(const auto& artikal: skladisteArtikala){
         if(artikal.getKategorija()==odabranaKategorija){
-            QTableWidgetItem* naziv=new QTableWidgetItem (artikal.getNaziv());
-            QTableWidgetItem* cena=new QTableWidgetItem(QString::number(artikal.getCena()));
+            auto* naziv=new QTableWidgetItem (artikal.getNaziv());
+            auto* cena=new QTableWidgetItem(QString::number(artikal.getCena()));
 
 
 
@@ -148,7 +148,7 @@ void unesiartikle::ispisiPoKategorijiListWidget(QListWidget* lw,const QString &o
     if(lw){
         for(const auto& artikl: skladisteArtikala){
             if(artikl.getKategorija()==odabranaKategorija){
-                QListWidgetItem* item=new QListWidgetItem(artikl.getNaziv());
+                auto* item=new QListWidgetItem(artikl.getNaziv());
                 lw->addItem(item);
             }
         }

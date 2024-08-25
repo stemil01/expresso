@@ -32,9 +32,9 @@ void Porudzbina::printInTableWidget(QTableWidget *tw) {
     tw->setRowCount(0);
     int rowIndex = tw -> rowCount();
     for(auto artikl : artikli) {
-        QTableWidgetItem* nameItem = new QTableWidgetItem(artikl->getNaziv());
-        QTableWidgetItem* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
-        QTableWidgetItem* quantityItem = new QTableWidgetItem(QString::number(artikl->getKolicina()));
+        auto* nameItem = new QTableWidgetItem(artikl->getNaziv());
+        auto* priceItem = new QTableWidgetItem(QString::number(artikl->getCena()));
+        auto* quantityItem = new QTableWidgetItem(QString::number(artikl->getKolicina()));
         tw->insertRow(rowIndex);
         tw->setItem(rowIndex, 0, nameItem);
         tw->setItem(rowIndex, 1, quantityItem);
@@ -147,7 +147,7 @@ void Porudzbina::fromVariant(const QVariant &variant)
 
     const auto variantArtikli = map.value("artikli").toList();
     for (const auto& variantArtikl : variantArtikli) {
-        Artikl *artikl = new Artikl();
+        auto *artikl = new Artikl();
         artikl->fromVariant(variantArtikl);
         // artikli.append(artikl);
         dodajArtikl(artikl);

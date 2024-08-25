@@ -102,11 +102,11 @@ void Sto::mouseReleaseEvent(QGraphicsSceneMouseEvent* event) {
 void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
     if(!za_raspored){
         if(this->m_currentStatus == AVAILABLE){
-            Porudzbina* porudzbina = new Porudzbina(this);
+            auto* porudzbina = new Porudzbina(this);
             this->setPorudzbina(porudzbina);
         }
-        unesiartikle* ua=new unesiartikle();
-        Naruci *dialogNarudzbine = new Naruci(nullptr,_p,ua,m_meni);
+        auto* ua=new unesiartikle();
+        auto *dialogNarudzbine = new Naruci(nullptr,_p,ua,m_meni);
         dialogNarudzbine->getUi()->cbTypeOrderDialog->clear();
         for(auto kategorija : (m_meni->getKategorije()).keys()){
             dialogNarudzbine->getUi()->cbTypeOrderDialog->addItem(kategorija);
@@ -123,7 +123,7 @@ void Sto::mouseDoubleClickEvent(QGraphicsSceneMouseEvent* event) {
         delete ua;
     }
     else{
-        TableOptions* to = new TableOptions(nullptr,this);
+        auto* to = new TableOptions(nullptr,this);
         this->setSelected(false);
         to->exec();
         delete to;

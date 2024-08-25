@@ -210,6 +210,15 @@ void TableOptions::onDefaultClicked()
 
 }
 
+void TableOptions::onHSliderWidthChanged()
+{
+    qint32 newWidth = ui->hsbWidth->value();
+    m_sto->setWidth(newWidth);
+    ui->lWidth->setText(QString::number(newWidth));
+
+    refresh();
+}
+
 void TableOptions::onHSliderHeightChanged()
 {
     qint32 newHeight = ui->hsbHeight->value();
@@ -253,11 +262,4 @@ void TableOptions::onApplyClicked()
     refresh();
 }
 
-void TableOptions::onHSliderWidthChanged()
-{
-    qint32 newWidth = ui->hsbWidth->value();
-    m_sto->setWidth(newWidth);
-    ui->lWidth->setText(QString::number(newWidth));
 
-    refresh();
-}

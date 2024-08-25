@@ -171,7 +171,7 @@ void GlavniMeni::on_pbAddItemEMMenu_clicked() {
         return;
     }
 
-    Artikl *pom = new Artikl(naziv, cena, kategorija);
+    auto *pom = new Artikl(naziv, cena, kategorija);
     //Artikl *a1 = new Artikl(naziv, cena, kategorija);
     int res = menu->addItem(kategorija,pom);
     if(res == 1) {
@@ -203,7 +203,7 @@ void GlavniMeni::on_pbRemoveItemEMMenu_clicked() {
         double cena = (ui -> twMenuEMMenu->item(rowToRemove, 1) -> text()).toDouble();
         QString kategorija = ui -> cbTypeEMMenu-> currentText();
 
-        Artikl *pom = new Artikl(naziv, cena, kategorija);
+        auto *pom = new Artikl(naziv, cena, kategorija);
 
         //(*(menu -> getMeni()))[kategorija] -> obrisiPoArtiklu(pom);
 

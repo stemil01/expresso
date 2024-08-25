@@ -75,17 +75,17 @@ void Naruci::onPbAddItemOrderDialogClicked(){
 
 
 void Naruci::addItemInTW(QTableWidget* tw,Artikl* artikl){
-    QTableWidgetItem* itemNaziv = new QTableWidgetItem();
+    auto* itemNaziv = new QTableWidgetItem();
     itemNaziv->setText(artikl->getNaziv());
     itemNaziv->setFlags(itemNaziv->flags() & ~Qt::ItemIsEditable);
     itemNaziv->setTextAlignment(Qt::AlignLeft | Qt::AlignVCenter);
 
-    QTableWidgetItem* itemKolicina = new QTableWidgetItem();
+    auto* itemKolicina = new QTableWidgetItem();
     itemKolicina->setText(QString::number(artikl->getKolicina()));
     itemKolicina->setFlags(itemKolicina->flags() & ~Qt::ItemIsEditable);
     itemKolicina->setTextAlignment(Qt::AlignCenter | Qt::AlignVCenter);
 
-    QTableWidgetItem* itemCena = new QTableWidgetItem();
+    auto* itemCena = new QTableWidgetItem();
     itemCena->setText(QString::number(artikl->getCena()));
     itemCena->setFlags(itemCena->flags() & ~Qt::ItemIsEditable);
     itemCena->setTextAlignment(Qt::AlignRight | Qt::AlignVCenter);
@@ -184,7 +184,7 @@ void Naruci::onPbSplitBillOrderDialogClicked() {
                 QString naziv = itemName->text();
                 int kolicina = itemQuantity->text().toInt();
                 double cena = itemPrice->text().toDouble();
-                Artikl* artikl = new Artikl(naziv,cena,kategorija,kolicina);
+                auto* artikl = new Artikl(naziv,cena,kategorija,kolicina);
                 if (artikl) {
                     odabraniArtikli.append(artikl);
                 }

@@ -8,7 +8,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -Wall -Wextra")
 
-set(CMAKE_PREFIX_PATH "/home/jelena/Qt/6.6.3")
+set(CMAKE_PREFIX_PATH "/home/jelena/Qt/6.6.3/gcc_64/lib/cmake")
 set(Qt6_DIR "/home/jelena/Qt/6.6.3/gcc_64/lib/cmake")
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -26,7 +26,7 @@ include_directories("/home/jelena/Qt/6.6.3/gcc_64/include")
 
 
 
-set(SOURCE
+set(SOURCES
 	src/artikl.cpp
 	src/binaryserializer.cpp
 	src/glavnimeni.cpp
@@ -41,6 +41,7 @@ set(SOURCE
 	src/rasporeddata.cpp
 	src/sto.cpp
 	src/tabla.cpp
+	src/tableoptions.cpp
 	src/unesiartikle.cpp
 )
 

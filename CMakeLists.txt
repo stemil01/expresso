@@ -87,3 +87,30 @@ install(TARGETS ${PROJECT_NAME} DESTINATION /opt/${PROJECT_NAME}/bin)
 
 
 
+include_directories(/home/jelena/Expresso/tests)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Coverage")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage")
+    set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} --coverage")
+endif()
+
+set(TEST_SOURCES
+    tests/artikl_test.cpp
+    tests/tmain.cpp
+    tests/naruci_test.cpp
+    tests/porudzbina_test.cpp
+    tests/rasporeddata_test.cpp
+    tests/raspored_test.cpp
+    tests/sto_glmeni_test.cpp
+    tests/sto_test.cpp
+    tests/unesiartikle_test.cpp
+)
+
+add_executable(tests ${TEST_SOURCES} ${SOURCES} ${HEADERS})
+target_link_libraries(tests Qt6::Core Qt6::Gui Qt6::Widgets)
+
+set_target_properties(tests PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/bin/tests
+)
+
+

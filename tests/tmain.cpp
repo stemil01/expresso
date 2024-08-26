@@ -2,7 +2,7 @@
 #include <QApplication>
 #include <catch.hpp>
 
-int main(int argc, char **argv) {
+int tmain(int argc, char **argv) {
   QApplication app(argc, argv);
   return Catch::Session().run(argc, argv);
 }
